@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [ShopRite]">
+  <parameter name="environment" value="staging"/>
+  <parameter name="browser" value="chrome"/>
+  <test name="Regression test(failed)">
+    <parameter name="environment" value="staging"/>
+    <parameter name="browser" value="chrome"/>
+    <classes>
+      <class name="regressionTests.LoginTest">
+        <methods>
+          <include name="openBrowser"/>
+          <include name="couponDetailsVerification" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- regressionTests.LoginTest -->
+    </classes>
+  </test> <!-- Regression test(failed) -->
+</suite> <!-- Failed suite [ShopRite] -->
