@@ -7,16 +7,26 @@
 	<!-- Suite -->
 
 	<test name="Regression test" thread-count="1">
-		<!-- <class name="regressionTests.LoginTest" /> 
-		<class name="regressionTests.ProductDetailsTest" /><packages> <package name="regressionTests"></package> 
-			</packages> -->
-			
-			
+		<!-- <class name="regressionTests.LoginTest" /> <class name="regressionTests.PrintClippedCoupons_CheckShowImg_Test" 
+			/> <class name="regressionTests.CategoryAlphabeticalOrderTest"/> <class name="regressionTests.ValidateSingleCategoryUnderCategoriesListedTest" 
+			/> <class name="regressionTests.ProductDetailsTest" /><packages> <package 
+			name="regressionTests"></package> </packages> <class name="regressionTests.CategoriesTest" 
+			/> <class name="regressionTests.ClippedCouponExistsTest" /> <class name="regressionTests.PrintClippedCoupons_CheckShowImg_Test" 
+			/> <class name="regressionTests.PrintClippedCoupons_UnCheckShowImg_Test" 
+			/> -->
+
+
 		<parameter name="browser" value="chrome"></parameter>
 		<parameter name="environment" value="staging"></parameter>
-		
+
 		<classes>
-			<class name="regressionTests.CouponDetailsTest" />
+			<class name="regressionTests.BrandsTest" />
+			<class name="regressionTests.CategoriesTest" />
+			<class name="regressionTests.ClippedCouponExistsTest" />
+			<class name="regressionTests.PrintClippedCoupons_CheckShowImg_Test" />
+			<class name="regressionTests.PrintClippedCoupons_UnCheckShowImg_Test" />
+			<class
+				name="regressionTests.ValidateSingleCategoryUnderCategoriesListedTest" />
 		</classes>
 
 

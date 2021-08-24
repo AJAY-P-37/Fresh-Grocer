@@ -48,7 +48,7 @@ public class ReadExcelDataFile {
 	public int getRowCount(String sheetName) {
 		int index = workbook.getSheetIndex(sheetName);
 		if (index == -1)
-			return 0;
+			return -1;
 		else {
 			sheet = workbook.getSheetAt(index);
 			int number = sheet.getLastRowNum() + 1;
@@ -89,7 +89,7 @@ public class ReadExcelDataFile {
 				return "";
 			// System.out.println(cell.getCellType());
 			if (cell.getCellType() == Cell.CELL_TYPE_STRING)
-				return cell.getStringCellValue();
+				return cell.toString();
 			else if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC
 					|| cell.getCellType() == Cell.CELL_TYPE_FORMULA) {
 
@@ -145,7 +145,7 @@ public class ReadExcelDataFile {
 				return "";
 
 			if (cell.getCellType() == Cell.CELL_TYPE_STRING)
-				return cell.getStringCellValue();
+				return cell.toString();
 			else if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC
 					|| cell.getCellType() == Cell.CELL_TYPE_FORMULA) {
 

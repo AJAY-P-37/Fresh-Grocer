@@ -5,6 +5,7 @@ public class RandomUtil {
 	public static int getRandomNumberBetween(int startInt, int endInt) {
 
 		int randomNumber = (int) (Math.random() * (endInt - startInt + 1) + (startInt));
+		System.out.println("The random number is " + randomNumber);
 		return randomNumber;
 	}
 

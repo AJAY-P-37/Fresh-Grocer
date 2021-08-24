@@ -12,22 +12,21 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.interactions.Coordinates;
+import org.openqa.selenium.interactions.Locatable;
 import org.testng.Assert;
 
 import utilities.DateUtil;
 import utilities.ReadExcelDataFile;
-import PageClasses.LandingPage;
 
 public class PageBaseClass extends BaseTestClass {
 
 	public PageBaseClass(WebDriver driver) {
 		super.driver = driver;
-		// super.logger = logger;
 	}
 
 	/****************** OpenApplication ***********************/
-	public LandingPage openApplication(String environment) {
+	public void openApplication(String environment) {
 		try {
 			ReadExcelDataFile readData = new ReadExcelDataFile(
 					System.getProperty("user.dir")
@@ -41,14 +40,16 @@ public class PageBaseClass extends BaseTestClass {
 
 		} catch (TimeoutException e) {
 
-			System.out.println("Page refereshed due to Time Out Exception");
-			driver.navigate().refresh();
+			try {
+				System.out.println("Page refereshed due to Time Out Exception");
+				driver.navigate().refresh();
+			} catch (Exception e1) {
+				reportFail(e.getMessage());
+			}		
+			
 		} catch (Exception e) {
 			reportFail(e.getMessage());
 		}
-		LandingPage landingPage = new LandingPage(driver);
-		PageFactory.initElements(driver, landingPage);
-		return landingPage;
 	}
 
 	/****************** Get Page Title ***********************/
@@ -77,16 +78,16 @@ public class PageBaseClass extends BaseTestClass {
 					"locators value", index + 1);
 			String locatorsType = readData.getCellData(sheetName,
 					"locators type", index + 1);
-			
+
 			String locatorsKey = locatorsName + "_" + locatorsType;
 			locators.put(locatorsKey, locatorsValue);
 
 		}
 		return locators;
 	}
-	
+
 	/******** Get the By class from the locator name ******/
-	public By getByLocator(Hashtable<String, String> locator,String locatorKey) {
+	public By getByLocator(Hashtable<String, String> locator, String locatorKey) {
 		By by = null;
 		String temp = locatorKey.toLowerCase();
 		String locatorValue = locator.get(locatorKey);
@@ -110,78 +111,27 @@ public class PageBaseClass extends BaseTestClass {
 		return by;
 	}
 
-//	/****************** Identify Element ***********************/
-//	public WebElement getElement(String locatorKey) {
-//		WebElement element = null;
-//
-//		try {
-//			if (locatorKey.endsWith("_Id")) {
-//				element = driver
-//						.findElement(By.id(prop.getProperty(locatorKey)));
-//				// logger.log(Status.INFO, "Locator Identidied : " +
-//				// locatorKey);
-//			} else if (locatorKey.endsWith("_Xpath")) {
-//				element = driver.findElement(By.xpath(prop
-//						.getProperty(locatorKey)));
-//				// /logger.log(Status.INFO, "Locator Identidied : " +
-//				// locatorKey);
-//			} else if (locatorKey.endsWith("_ClassName")) {
-//				element = driver.findElement(By.className(prop
-//						.getProperty(locatorKey)));
-//				// logger.log(Status.INFO, "Locator Identidied : " +
-//				// locatorKey);
-//			} else if (locatorKey.endsWith("_CSS")) {
-//				element = driver.findElement(By.cssSelector(prop
-//						.getProperty(locatorKey)));
-//				// logger.log(Status.INFO, "Locator Identidied : " +
-//				// locatorKey);
-//			} else if (locatorKey.endsWith("_LinkText")) {
-//				element = driver.findElement(By.linkText(prop
-//						.getProperty(locatorKey)));
-//				// logger.log(Status.INFO, "Locator Identidied : " +
-//				// locatorKey);
-//			} else if (locatorKey.endsWith("_PartialLinkText")) {
-//				element = driver.findElement(By.partialLinkText(prop
-//						.getProperty(locatorKey)));
-//				// logger.log(Status.INFO, "Locator Identidied : " +
-//				// locatorKey);
-//			} else if (locatorKey.endsWith("_Name")) {
-//				element = driver.findElement(By.name(prop
-//						.getProperty(locatorKey)));
-//				// logger.log(Status.INFO, "Locator Identidied : " +
-//				// locatorKey);
-//			} else {
-//				// reportFail("Failing the Testcase, Invalid Locator " +
-//				// locatorKey);
-//			}
-//		} catch (Exception e) {
-//
-//			// Fail the TestCase and Report the error
-//			// reportFail(e.getMessage());
-//			e.printStackTrace();
-//		}
-//
-//		return element;
-//	}
-
-	
-
 	/****** Scroll the the Web page *********/
 	public void scrollToElement(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView()", element);
 	}
 
+	/**** Scroll to the Elements in Frame *****/
+	public void scrollToView(WebElement element) {
+		Coordinates coord = ((Locatable) element).getCoordinates();
+		coord.onPage();
+		coord.inViewPort();
+	}
+
 	/****************** Reporting Functions ***********************/
 	public void reportFail(String reportString) {
-		// logger.log(Status.FAIL, reportString);
 		takeScreenShotOnFailure();
 		Assert.fail(reportString);
 	}
 
 	public void reportPass(String reportString) {
 		Assert.assertTrue(true);
-		// logger.log(Status.PASS, reportString);
 	}
 
 	/****************** Capture Screen Shot ***********************/
@@ -196,14 +146,10 @@ public class PageBaseClass extends BaseTestClass {
 				+ "/ScreenShots/" + DateUtil.getTimeStamp() + ".png");
 		try {
 			FileUtils.copyFile(sourceFile, destFile);
-			// logger.addScreenCaptureFromPath(
-			// System.getProperty("user.dir") + "/test-output/ScreenShots/" +
-			// DateUtil.getTimeStamp() + ".png");
 
 		} catch (IOException e) {
 			reportFail(e.getMessage());
 		}
-
 	}
 
 }

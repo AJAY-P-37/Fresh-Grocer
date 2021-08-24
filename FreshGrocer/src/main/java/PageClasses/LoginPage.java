@@ -4,7 +4,6 @@ import java.util.Hashtable;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 
 import utilities.ReadExcelDataFile;
 import baseClasses.PageBaseClass;
@@ -32,7 +31,7 @@ public class LoginPage extends PageBaseClass {
 
 	}
 
-	public LandingPage enterCredentials(String environment) {
+	public void enterCredentials(String environment) {
 		try {
 
 			ReadExcelDataFile readData = new ReadExcelDataFile(
@@ -52,10 +51,6 @@ public class LoginPage extends PageBaseClass {
 		} catch (Exception e) {
 			reportFail(e.getMessage());
 		}
-
-		LandingPage landPage = new LandingPage(driver);
-		PageFactory.initElements(driver, landPage);
-		return landPage;
 
 	}
 

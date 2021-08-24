@@ -19,10 +19,6 @@ public class BaseTestClass {
 
 	public WebDriver driver;
 
-	// public ExtentReports report = ExtentReportManager.getReportInstance();
-	// public ExtentTest logger;
-	// public Properties prop;
-
 	/****************** Invoke Browser ***********************/
 	public void invokeBrowser(String browserName) {
 
@@ -117,6 +113,11 @@ public class BaseTestClass {
 		driver.switchTo().window(mainTab);
 	}
 
+	/*******Switch to Parent Frame********/
+	public void switchToParentFrame(){
+		driver.switchTo().parentFrame();
+	}
+	
 	/***************** Wait Functions in Framework *****************/
 	public void waitForPageLoad() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
