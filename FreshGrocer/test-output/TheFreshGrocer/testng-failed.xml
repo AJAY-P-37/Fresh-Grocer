@@ -7,13 +7,13 @@
     <parameter name="environment" value="staging"/>
     <parameter name="browser" value="chrome"/>
     <classes>
-      <class name="regressionTests.ValidateSingleCategoryUnderCategoriesListedTest">
+      <class name="regressionTests.BrandsTest">
         <methods>
-          <include name="clippingCoupons" invocation-numbers="0"/>
           <include name="closeAllTheBrowser"/>
+          <include name="brandsExtraction" invocation-numbers="0"/>
           <include name="openBrowser"/>
         </methods>
-      </class> <!-- regressionTests.ValidateSingleCategoryUnderCategoriesListedTest -->
+      </class> <!-- regressionTests.BrandsTest -->
     </classes>
   </test> <!-- Regression test(failed) -->
 </suite> <!-- Failed suite [TheFreshGrocer] -->

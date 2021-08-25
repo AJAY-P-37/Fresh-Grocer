@@ -1,5 +1,7 @@
 package PageClasses;
 
+import java.io.File;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Hashtable;
@@ -89,10 +91,11 @@ public class CategoriesElements extends PageBaseClass {
 	/***** Reading all the Category from Excel ********/
 	public String[] readAllCategoriesFromExcel() {
 
-		System.out.println("*****Reading all the Category from Excel*******");
-		ReadExcelDataFile readData = new ReadExcelDataFile(
-				System.getProperty("user.dir")
-						+ "/src/main/resources/TestData/" + "categories.xlsx");
+		String dir = System.getProperty("user.dir")+ "/src/main/resources/TestData";
+		String fileNamePrefix = "categories";
+		String path = readFileWithPrefix(dir, fileNamePrefix);
+		ReadExcelDataFile readData = new ReadExcelDataFile(path);
+		
 		int rowCount = readData.getRowCount("categories") - 1;
 		if (rowCount == -1) {
 			System.out.println("Sheet Categories NOT found");
@@ -111,10 +114,12 @@ public class CategoriesElements extends PageBaseClass {
 				System.out.println(categoriesText[index] + " <= is in Excel");
 
 			}
+			renameFileWithDateTime(path);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
 		}
+		
 		return categoriesText;
 
 	}
@@ -241,15 +246,17 @@ public class CategoriesElements extends PageBaseClass {
 
 	}
 
-	public void updatingInExcel(String fileName, String sheetName,
+	public void updatingInExcel(String fileNamePrefix, String sheetName,
 			String colName, int fromRowNum, List<String> data) {
 
 		System.out.println("*****Updating the " + sheetName + "******");
 
 		try {
-			ReadExcelDataFile readData = new ReadExcelDataFile(
-					System.getProperty("user.dir")
-							+ "/src/main/resources/TestData/" + fileName);
+			String dir = System.getProperty("user.dir")+ "/src/main/resources/TestData";
+
+			String path = readFileWithPrefix(dir, fileNamePrefix);
+			
+			ReadExcelDataFile readData = new ReadExcelDataFile(path);
 
 			readData.clearExistingDataInSheet(sheetName, 2);
 
@@ -262,30 +269,33 @@ public class CategoriesElements extends PageBaseClass {
 						index + 2, data.get(index));
 				Assert.assertEquals(true, flag);
 				System.out.println(data.get(index) + " updated in Excel");
+				
 			}
+			renameFileWithDateTime(path);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
 		}
+		
 	}
 
 	public void updateCategoriesNotSorted(List<String> categoriesNotSorted) {
 
-		updatingInExcel("categories.xlsx", "categories_not_sorted",
+		updatingInExcel("categories", "categories_not_sorted",
 				"Not Sorted Category Name", 2, categoriesNotSorted);
 
 	}
 
 	public void updateCategoriesNotInPage(List<String> categoriesNotInPage) {
 
-		updatingInExcel("categories.xlsx", "categories_not_in_page",
+		updatingInExcel("categories", "categories_not_in_page",
 				"Not in Page Category Name", 2, categoriesNotInPage);
 
 	}
 
 	public void updateCategoriesNotInExcel(List<String> categoriesNotInExcel) {
 
-		updatingInExcel("categories.xlsx", "categories_not_in_excel",
+		updatingInExcel("categories", "categories_not_in_excel",
 				"Not in Excel Category Name", 2, categoriesNotInExcel);
 
 	}

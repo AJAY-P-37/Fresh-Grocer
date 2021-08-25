@@ -33,7 +33,7 @@ public class PrintClippedCoupons_CheckShowImg_Test extends BaseTestClass {
 
 	@Test
 	@Parameters("environment")
-	public void clippingCoupons(String environment) {
+	public void printingClippedCouponsWithShowImgaesChecked(String environment) {
 
 		basePage.openApplication(environment);
 
@@ -57,15 +57,12 @@ public class PrintClippedCoupons_CheckShowImg_Test extends BaseTestClass {
 
 		int numberOfCoupons = digitalCouponsPage.getNumberOfCoupons();
 
-		int randomNumber = RandomUtil.getRandomNumberBetween(0,
-				numberOfCoupons - 1);
-
-		String[] randomCouponClipped = digitalCouponsPage
-				.getDetailsOfRandomCoupon(randomNumber);
-
-		digitalCouponsPage.clickLoadToCardOfRandomCoupon(randomNumber);
+		int randomNumber = digitalCouponsPage.clickLoadToCardOfRandomCoupon();
 
 		digitalCouponsPage.verifyChangesInLoadCardBtn(randomNumber);
+		
+		String[] randomCouponClipped = digitalCouponsPage
+				.getDetailsOfRandomCoupon(randomNumber);
 
 		digitalCouponsPage.clickPrintClippedCouponsButton();
 

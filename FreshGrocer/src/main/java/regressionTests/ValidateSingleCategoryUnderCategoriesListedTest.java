@@ -36,7 +36,7 @@ public class ValidateSingleCategoryUnderCategoriesListedTest extends
 
 	@Test
 	@Parameters("environment")
-	public void clippingCoupons(String environment) {
+	public void ValidateSingleCategoryUnderCategoriesListed(String environment) {
 
 
 		basePage.openApplication(environment);

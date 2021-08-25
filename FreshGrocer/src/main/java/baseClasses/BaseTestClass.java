@@ -74,19 +74,6 @@ public class BaseTestClass {
 		driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 
-		// prop = new Properties();
-		// try {
-		// FileInputStream fis = new FileInputStream(
-		// System.getProperty("user.dir")
-		// + "/src/main/resources/propertiesFile/config.properties");
-		// prop.load(fis);
-		// } catch (FileNotFoundException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
-
 	}
 
 	/******* Closing the Web driver *********/

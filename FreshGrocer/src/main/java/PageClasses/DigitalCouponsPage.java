@@ -1,5 +1,7 @@
 package PageClasses;
 
+import java.io.File;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Hashtable;
@@ -15,6 +17,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import utilities.RandomUtil;
 import utilities.ReadExcelDataFile;
 import baseClasses.PageBaseClass;
 
@@ -38,6 +41,8 @@ public class DigitalCouponsPage extends PageBaseClass {
 	public By couponExpiryDate;
 	public By couponDescription;
 	public By loadToCardBtn;
+	public By modalContent;
+	public By modalContentCloseBtn;
 	public By loadedText;
 	public By unClipBtn;
 	public By clippedLink;
@@ -78,6 +83,9 @@ public class DigitalCouponsPage extends PageBaseClass {
 		couponExpiryDate = getByLocator(locators, "couponExpiryDate_xpath");
 		couponDescription = getByLocator(locators, "couponDescription_xpath");
 		loadToCardBtn = getByLocator(locators, "loadToCardBtn_xpath");
+		modalContent = getByLocator(locators, "modalContent_xpath");
+		modalContentCloseBtn = getByLocator(locators,
+				"modalContentCloseBtn_xpath");
 		loadedText = getByLocator(locators, "loadedText_xpath");
 		unClipBtn = getByLocator(locators, "unClipBtn_xpath");
 		clippedLink = getByLocator(locators, "clippedLink_xpath");
@@ -205,9 +213,22 @@ public class DigitalCouponsPage extends PageBaseClass {
 	public String[] readAllCategoriesFromExcel() {
 
 		System.out.println("*****Reading all the Category from Excel*******");
-		ReadExcelDataFile readData = new ReadExcelDataFile(
-				System.getProperty("user.dir")
-						+ "/src/main/resources/TestData/" + "categories.xlsx");
+
+		File dir = new File(System.getProperty("user.dir")
+				+ "/src/main/resources/TestData");
+
+		File[] foundFiles = dir.listFiles(new FilenameFilter() {
+			public boolean accept(File dir, String name) {
+				return name.startsWith("categories ");
+			}
+		});
+		String path = "";
+		for (File file : foundFiles) {
+			path = file.getAbsolutePath();
+		}
+		System.out.println(path);
+		ReadExcelDataFile readData = new ReadExcelDataFile(path);
+		
 		int rowCount = readData.getRowCount("categories") - 1;
 		if (rowCount == -1) {
 			System.out.println("Sheet Categories NOT found");
@@ -230,6 +251,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
 		}
+		renameFileWithDateTime(path);
 		return categoriesText;
 
 	}
@@ -434,8 +456,14 @@ public class DigitalCouponsPage extends PageBaseClass {
 	}
 
 	/*********** Click Load to Card Button ********/
-	public void clickLoadToCardOfRandomCoupon(int randomNumber) {
+	public int clickLoadToCardOfRandomCoupon() {
+
+		int numberOfCoupons = getNumberOfCoupons();
+		int randomNumber = RandomUtil.getRandomNumberBetween(0,
+				numberOfCoupons - 1);
+
 		try {
+
 			List<WebElement> couponsContainer = driver
 					.findElements(couponsList);
 			WebElement randomCoupon = couponsContainer.get(randomNumber);
@@ -447,10 +475,50 @@ public class DigitalCouponsPage extends PageBaseClass {
 			WebElement loadToCard = randomCoupon.findElement(loadToCardBtn);
 			loadToCard.click();
 			System.out.println("Load to Card Clicked");
+
+			randomNumber = checkIfCouponClickingHasErrors(randomNumber);
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
 		}
+		return randomNumber;
+
+	}
+
+	/****** Wait for Modal Content (Error) in Page ****/
+	public int checkIfCouponClickingHasErrors(int randomNumber) {
+
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			wait.until(ExpectedConditions
+					.visibilityOfElementLocated(modalContent));
+
+			System.out
+					.println("Error Occured While Clicking the Load To Card of the Coupon");
+
+			scrollToElement(driver.findElement(printClippedCouponBtn));
+
+			wait = new WebDriverWait(driver, 10);
+			WebElement closeModalBtn = wait.until(ExpectedConditions
+					.elementToBeClickable(modalContentCloseBtn));
+			closeModalBtn.click();
+			System.out
+					.println("Close Button Clicked. Clicking another random Coupon");
+
+			randomNumber = clickLoadToCardOfRandomCoupon();
+		} catch (TimeoutException e) {
+			System.out
+					.println("No Error Occured While Clicking the Load To Card of Coupon. Waited");
+
+		} catch (NoSuchElementException e) {
+			System.out
+					.println("No Error Occured While Clicking the Load To Card of Coupon");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			reportFail(e.getMessage());
+		}
+		return randomNumber;
 
 	}
 
@@ -867,6 +935,10 @@ public class DigitalCouponsPage extends PageBaseClass {
 			int expectedNumberOfCouponsInRandomCategory) {
 
 		try {
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			wait.until(ExpectedConditions.numberOfElementsToBe(couponsList,
+					expectedNumberOfCouponsInRandomCategory));
+
 			List<WebElement> coupons = driver.findElements(couponsList);
 			scrollToView(coupons.get(0));
 
@@ -933,12 +1005,13 @@ public class DigitalCouponsPage extends PageBaseClass {
 
 		try {
 
-			ReadExcelDataFile readData = new ReadExcelDataFile(
-					System.getProperty("user.dir")
-							+ "/src/main/resources/TestData/"
-							+ "couponsInCategories.xlsx");
+			String dir = System.getProperty("user.dir")
+					+ "/src/main/resources/TestData";
+			String fileNamePrefix = "couponsInCategories";
+			String path = readFileWithPrefix(dir, fileNamePrefix);
+			ReadExcelDataFile readData = new ReadExcelDataFile(path);
 
-			readData.clearExistingDataInSheet("name_discount_expiry", 2);
+			readData.clearExistingDataInSheet("coupon_details", 2);
 			System.out.println("All data cleared in the sheet");
 
 			for (int index = 0; index < couponsArray.length; index++) {
@@ -978,6 +1051,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 						+ " updated: " + brandName + ", " + discountPrice
 						+ ", " + expiryDate + ", " + description);
 			}
+			renameFileWithDateTime(path);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());

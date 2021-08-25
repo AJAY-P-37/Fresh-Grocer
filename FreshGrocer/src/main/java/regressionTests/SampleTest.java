@@ -12,12 +12,13 @@ import PageClasses.LoginPage;
 import baseClasses.BaseTestClass;
 import baseClasses.PageBaseClass;
 
-public class PrintClippedCoupons_UnCheckShowImg_Test extends BaseTestClass {
+public class SampleTest extends BaseTestClass {
 
 	PageBaseClass basePage;
 	LoginPage logPage;
 	LandingPage landPage;
 	DigitalCouponsPage digitalCouponsPage;
+
 	@BeforeClass
 	@Parameters("browser")
 	public void openBrowser(String browser) {
@@ -33,7 +34,7 @@ public class PrintClippedCoupons_UnCheckShowImg_Test extends BaseTestClass {
 
 	@Test
 	@Parameters("environment")
-	public void printingClippedCouponsWithShowImagesUnChecked(String environment) {
+	public void clippingCoupons(String environment) {
 
 		basePage.openApplication(environment);
 
@@ -53,33 +54,30 @@ public class PrintClippedCoupons_UnCheckShowImg_Test extends BaseTestClass {
 
 		digitalCouponsPage.clickShowAll();
 
-		digitalCouponsPage.checkCouponsLoadToCardText();
+		String[] categoriesInPage = digitalCouponsPage
+				.getAllCategoriesFromPage();
 
+		String randomCategoryName = digitalCouponsPage.clickRandomCategoryAndGetCategoyName(2);
+
+		
+
+		String[][] couponsArray = digitalCouponsPage
+				.getCouponsInCheckedCategoryFromPage();
+		
 		int numberOfCoupons = digitalCouponsPage.getNumberOfCoupons();
+
 
 		int randomNumber = digitalCouponsPage.clickLoadToCardOfRandomCoupon();
 
+		System.out.println(randomNumber);
 		digitalCouponsPage.verifyChangesInLoadCardBtn(randomNumber);
 		
 		String[] randomCouponClipped = digitalCouponsPage
 				.getDetailsOfRandomCoupon(randomNumber);
 
-		digitalCouponsPage.clickPrintClippedCouponsButton();
-
-		digitalCouponsPage
-				.checkClippedCouponIsPresentInPrintTab(randomCouponClipped[0]);
-
-		digitalCouponsPage.unCheckShowImagesCheckBoxIfChecked();
-
-		digitalCouponsPage.checkIfImageIsNotDisplayed();
-
-		digitalCouponsPage.checkIfCouponDetailsIsDisplayedForUnchecked(randomCouponClipped);
-		
-		digitalCouponsPage.checkIfDiscountIsNotDisplayed();
-
-		digitalCouponsPage.clickCloseInPrintTab();
-
 		digitalCouponsPage.clickClippedLink();
+
+		digitalCouponsPage.verifyCouponExistsInClipped(randomCouponClipped);
 
 		digitalCouponsPage.clickUnClipBtn();
 
@@ -97,5 +95,4 @@ public class PrintClippedCoupons_UnCheckShowImg_Test extends BaseTestClass {
 
 		flushReports();
 	}
-
 }

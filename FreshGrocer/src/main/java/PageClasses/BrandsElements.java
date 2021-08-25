@@ -88,9 +88,13 @@ public class BrandsElements extends PageBaseClass {
 	public String[] readAllBrandsFromExcel() {
 
 		System.out.println("*****Reading all the Brands from Excel*******");
-		ReadExcelDataFile readData = new ReadExcelDataFile(
-				System.getProperty("user.dir")
-						+ "/src/main/resources/TestData/" + "brands.xlsx");
+
+		String dir = System.getProperty("user.dir")
+				+ "/src/main/resources/TestData";
+		String fileNamePrefix = "brands";
+		String path = readFileWithPrefix(dir, fileNamePrefix);
+		ReadExcelDataFile readData = new ReadExcelDataFile(path);
+
 		int rowCount = readData.getRowCount("brands") - 1;
 		if (rowCount == -1) {
 			System.out.println("Sheet brands NOT found");
@@ -109,6 +113,7 @@ public class BrandsElements extends PageBaseClass {
 				System.out.println(brandsText[index] + " <= is in Excel");
 
 			}
+			renameFileWithDateTime(path);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
@@ -237,44 +242,53 @@ public class BrandsElements extends PageBaseClass {
 
 	}
 
-	public void updatingInExcel(String fileName, String sheetName,
+	public void updatingInExcel(String fileNamePrefix, String sheetName,
 			String colName, int fromRowNum, List<String> data) {
 		System.out.println("*****Updating the " + sheetName + "******");
+		try {
+			String dir = System.getProperty("user.dir")
+					+ "/src/main/resources/TestData";
 
-		ReadExcelDataFile readData = new ReadExcelDataFile(
-				System.getProperty("user.dir")
-						+ "/src/main/resources/TestData/" + fileName);
+			String path = readFileWithPrefix(dir, fileNamePrefix);
 
-		readData.clearExistingDataInSheet(sheetName, 2);
+			ReadExcelDataFile readData = new ReadExcelDataFile(path);
 
-		for (int index = 0; index < data.size(); index++) {
+			readData.clearExistingDataInSheet(sheetName, 2);
 
-			readData.setCellData(sheetName, "S.No", index + 2, "" + (index + 1));
+			for (int index = 0; index < data.size(); index++) {
 
-			boolean flag = readData.setCellData(sheetName, colName, index + 2,
-					data.get(index));
-			Assert.assertEquals(true, flag);
-			System.out.println(data.get(index) + " updated in Excel");
+				readData.setCellData(sheetName, "S.No", index + 2, ""
+						+ (index + 1));
+
+				boolean flag = readData.setCellData(sheetName, colName,
+						index + 2, data.get(index));
+				Assert.assertEquals(true, flag);
+				System.out.println(data.get(index) + " updated in Excel");
+			}
+			renameFileWithDateTime(path);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			reportFail(e.getMessage());
 		}
 	}
 
 	public void updateBrandsNotSorted(List<String> brandsNotSorted) {
 
-		updatingInExcel("brands.xlsx", "brands_not_sorted",
-				"Not Sorted Brand Name", 2, brandsNotSorted);
+		updatingInExcel("brands", "brands_not_sorted", "Not Sorted Brand Name",
+				2, brandsNotSorted);
 
 	}
 
 	public void updateBrandsNotInPage(List<String> brandsNotInPage) {
 
-		updatingInExcel("brands.xlsx", "brands_not_in_page",
+		updatingInExcel("brands", "brands_not_in_page",
 				"Not in Page Brand Name", 2, brandsNotInPage);
 
 	}
 
 	public void updateBrandsNotInExcel(List<String> brandsNotInExcel) {
 
-		updatingInExcel("brands.xlsx", "brands_not_in_excel",
+		updatingInExcel("brands", "brands_not_in_excel",
 				"Not in Excel Brand Name", 2, brandsNotInExcel);
 
 	}

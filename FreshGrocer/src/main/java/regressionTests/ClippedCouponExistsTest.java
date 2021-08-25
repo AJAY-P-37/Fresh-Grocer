@@ -58,15 +58,12 @@ public class ClippedCouponExistsTest extends BaseTestClass {
 
 		int numberOfCoupons = digitalCouponsPage.getNumberOfCoupons();
 
-		int randomNumber = RandomUtil.getRandomNumberBetween(0,
-				numberOfCoupons - 1);
-
-		String[] randomCouponClipped = digitalCouponsPage
-				.getDetailsOfRandomCoupon(randomNumber);
-
-		digitalCouponsPage.clickLoadToCardOfRandomCoupon(randomNumber);
+		int randomNumber = digitalCouponsPage.clickLoadToCardOfRandomCoupon();
 
 		digitalCouponsPage.verifyChangesInLoadCardBtn(randomNumber);
+		
+		String[] randomCouponClipped = digitalCouponsPage
+				.getDetailsOfRandomCoupon(randomNumber);
 
 		digitalCouponsPage.clickClippedLink();
 
