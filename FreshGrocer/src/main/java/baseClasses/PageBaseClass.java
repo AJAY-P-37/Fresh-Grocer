@@ -1,7 +1,6 @@
 package baseClasses;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -48,8 +47,8 @@ public class PageBaseClass extends BaseTestClass {
 				driver.navigate().refresh();
 			} catch (Exception e1) {
 				reportFail(e.getMessage());
-			}		
-			
+			}
+
 		} catch (Exception e) {
 			reportFail(e.getMessage());
 		}
@@ -154,49 +153,58 @@ public class PageBaseClass extends BaseTestClass {
 			reportFail(e.getMessage());
 		}
 	}
-	
-	
-	/*********Reading files with Prefix************/
-	public String readFileWithPrefix(String dirPath, String fileNamePrefix){
-		
+
+	/********* Reading files with Prefix ************/
+	public String readFileWithPrefix(String dirPath, String fileNamePrefix) {
+
 		File dir = new File(dirPath);
 
 		File[] foundFiles = dir.listFiles();
 		List<String> matchedFiles = new ArrayList<String>();
 		String path = "";
-		for(File file: foundFiles){
-			if(file.getName().startsWith(fileNamePrefix +  " ")){
+		for (File file : foundFiles) {
+			if (file.getName().startsWith(fileNamePrefix + " ")) {
 				matchedFiles.add(file.getAbsolutePath());
 			}
 		}
-		
-		if(matchedFiles.size()>1){
-			System.out.println("More than one file found for the prefix " + fileNamePrefix + " in directory " + dirPath);
-			reportFail("More than one file found for the prefix " + fileNamePrefix + " in directory " + dirPath);
-		}else{
+
+		if (matchedFiles.size() > 1) {
+			System.out.println("More than one file found for the prefix "
+					+ fileNamePrefix + " in directory " + dirPath);
+			reportFail("More than one file found for the prefix "
+					+ fileNamePrefix + " in directory " + dirPath);
+			
+		} else if (matchedFiles.size() == 0) {
+			System.out.println("No matched file found for Prefix "
+					+ fileNamePrefix + " in directory " + dirPath);
+			reportFail("No matched file found for Prefix " + fileNamePrefix
+					+ " in directory " + dirPath);
+			
+		} else if (matchedFiles.size() == 1) {
 			path = matchedFiles.get(0);
 			System.out.println("File prefix matched with " + path);
 		}
-		
+
 		return path;
 	}
-	
-	/***********Updating Name of the Files*************/
-	public void renameFileWithDateTime(String path){
-		
+
+	/*********** Updating Name of the Files *************/
+	public void renameFileWithDateTime(String path) {
+
 		File oldFile = new File(path);
-		
+
 		String[] fileName = path.split(" ");
-		
-		String newPath = fileName[0] +  " " +  DateUtil.getTimeStamp() + ".xslx";
+
+		String newPath = fileName[0] + " " + DateUtil.getTimeStamp() + ".xslx";
 		File newFile = new File(newPath);
-		
-		if(oldFile.renameTo(newFile)){
-            System.out.println("File renamed to " + newPath);
-        }else{
-            System.out.println("Sorry! the" + path + "can't be renamed. Error oocured");
-            reportFail("Sorry! the" + path + "can't be renamed. Error oocured");
-        }
+
+		if (oldFile.renameTo(newFile)) {
+			System.out.println("File renamed to " + newPath);
+		} else {
+			System.out.println("Sorry! the" + path
+					+ "can't be renamed. Error oocured");
+			reportFail("Sorry! the" + path + "can't be renamed. Error oocured");
+		}
 	}
 
 }

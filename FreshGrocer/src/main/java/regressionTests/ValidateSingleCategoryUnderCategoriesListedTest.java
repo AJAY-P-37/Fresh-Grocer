@@ -6,6 +6,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import utilities.RandomUtil;
+import PageClasses.CategoriesElements;
 import PageClasses.DigitalCouponsPage;
 import PageClasses.LandingPage;
 import PageClasses.LoginPage;
@@ -20,6 +21,7 @@ public class ValidateSingleCategoryUnderCategoriesListedTest extends
 	LoginPage logPage;
 	LandingPage landPage;
 	DigitalCouponsPage digitalCouponsPage;
+	CategoriesElements categoryPage;
 	
 	@BeforeClass
 	@Parameters("browser")
@@ -31,6 +33,7 @@ public class ValidateSingleCategoryUnderCategoriesListedTest extends
 		basePage = new PageBaseClass(driver);
 		landPage = new LandingPage(driver);
 		digitalCouponsPage = new DigitalCouponsPage(driver);
+		categoryPage = new CategoriesElements(driver);
 
 	}
 
@@ -62,7 +65,7 @@ public class ValidateSingleCategoryUnderCategoriesListedTest extends
 
 		digitalCouponsPage.checkCouponsLoadToCardText();
 
-		String[] categoriesInPage = digitalCouponsPage
+		String[] categoriesInPage = categoryPage
 				.getAllCategoriesFromPage();
 
 		int randomCategoryNumber = RandomUtil.getRandomNumberBetween(0,

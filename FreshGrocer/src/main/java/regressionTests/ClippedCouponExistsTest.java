@@ -5,7 +5,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import utilities.RandomUtil;
 import PageClasses.DigitalCouponsPage;
 import PageClasses.LandingPage;
 import PageClasses.LoginPage;
@@ -56,7 +55,7 @@ public class ClippedCouponExistsTest extends BaseTestClass {
 
 		digitalCouponsPage.checkCouponsLoadToCardText();
 
-		int numberOfCoupons = digitalCouponsPage.getNumberOfCoupons();
+		digitalCouponsPage.getNumberOfCoupons();
 
 		int randomNumber = digitalCouponsPage.clickLoadToCardOfRandomCoupon();
 

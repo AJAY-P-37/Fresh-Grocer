@@ -7,13 +7,13 @@
     <parameter name="environment" value="staging"/>
     <parameter name="browser" value="chrome"/>
     <classes>
-      <class name="regressionTests.BrandsTest">
+      <class name="regressionTests.PrintClippedCoupons_CheckShowImg_Test">
         <methods>
           <include name="closeAllTheBrowser"/>
-          <include name="brandsExtraction" invocation-numbers="0"/>
           <include name="openBrowser"/>
+          <include name="printingClippedCouponsWithShowImagesChecked" invocation-numbers="0"/>
         </methods>
-      </class> <!-- regressionTests.BrandsTest -->
+      </class> <!-- regressionTests.PrintClippedCoupons_CheckShowImg_Test -->
     </classes>
   </test> <!-- Regression test(failed) -->
 </suite> <!-- Failed suite [TheFreshGrocer] -->

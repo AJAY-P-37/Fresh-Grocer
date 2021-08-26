@@ -1,7 +1,5 @@
 package PageClasses;
 
-import java.io.File;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Hashtable;
@@ -267,10 +265,11 @@ public class CategoriesElements extends PageBaseClass {
 
 				boolean flag = readData.setCellData(sheetName, colName,
 						index + 2, data.get(index));
-				Assert.assertEquals(true, flag);
+				Assert.assertEquals(true, flag, "Excel Data NOT set for" + data.get(index));
 				System.out.println(data.get(index) + " updated in Excel");
 				
 			}
+			
 			renameFileWithDateTime(path);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

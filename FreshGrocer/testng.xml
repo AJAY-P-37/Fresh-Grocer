@@ -15,6 +15,7 @@
 			<class name="regressionTests.PrintClippedCoupons_UnCheckShowImg_Test" />
 			<class
 				name="regressionTests.ValidateSingleCategoryUnderCategoriesListedTest" /> -->
+				
 		<parameter name="browser" value="chrome"></parameter>
 		<parameter name="environment" value="staging"></parameter>
 

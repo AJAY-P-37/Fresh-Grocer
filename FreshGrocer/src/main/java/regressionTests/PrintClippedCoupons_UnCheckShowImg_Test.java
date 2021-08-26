@@ -5,7 +5,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import utilities.RandomUtil;
 import PageClasses.DigitalCouponsPage;
 import PageClasses.LandingPage;
 import PageClasses.LoginPage;
@@ -54,8 +53,6 @@ public class PrintClippedCoupons_UnCheckShowImg_Test extends BaseTestClass {
 		digitalCouponsPage.clickShowAll();
 
 		digitalCouponsPage.checkCouponsLoadToCardText();
-
-		int numberOfCoupons = digitalCouponsPage.getNumberOfCoupons();
 
 		int randomNumber = digitalCouponsPage.clickLoadToCardOfRandomCoupon();
 
