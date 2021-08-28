@@ -153,7 +153,7 @@ public class CategoriesElements extends PageBaseClass {
 				}
 			}
 			if (notSortedCategories.size() == 0) {
-				System.out.println("===All the categories are Sorted===");
+				System.out.println("===Success: All the categories are Sorted===");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

@@ -3,11 +3,11 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="regressionTests.ClippedCouponExistsTest">
+      <class name="regressionTests.ValidateSingleCategoryUnderCategoriesListedTest">
         <methods>
-          <include name="clippingCoupons"/>
+          <include name="ValidateSingleCategoryUnderCategoriesListed"/>
         </methods>
-      </class> <!-- regressionTests.ClippedCouponExistsTest -->
+      </class> <!-- regressionTests.ValidateSingleCategoryUnderCategoriesListedTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

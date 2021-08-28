@@ -9,6 +9,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -42,6 +43,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 	public By loadedText;
 	public By unClipBtn;
 	public By clippedLink;
+	public By noClippedCouponsText;
 	public By printClippedCouponBtn;
 	public By clippedCouponName;
 	public By clippedCouponDiscount;
@@ -85,6 +87,8 @@ public class DigitalCouponsPage extends PageBaseClass {
 		loadedText = getByLocator(locators, "loadedText_xpath");
 		unClipBtn = getByLocator(locators, "unClipBtn_xpath");
 		clippedLink = getByLocator(locators, "clippedLink_xpath");
+		noClippedCouponsText = getByLocator(locators,
+				"noClippedCouponsText_xpath");
 		printClippedCouponBtn = getByLocator(locators,
 				"printClippedCouponBtn_xpath");
 		clippedCouponName = getByLocator(locators, "clippedCouponName_xpath");
@@ -100,14 +104,65 @@ public class DigitalCouponsPage extends PageBaseClass {
 
 	}
 
+	/******* Clicking UnClip for all the Coupons which are clicked already *******/
+	public void clickUnClipForAllClippedCoupons() {
+
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+
+			WebElement noClippedCoupons = wait.until(ExpectedConditions
+					.visibilityOfElementLocated(noClippedCouponsText));
+
+			System.out.println("No clipped coupons found. It shows '"
+					+ noClippedCoupons.getText() + "'");
+
+		} catch (TimeoutException e) {
+
+			System.out.println("Clipped coupons found");
+
+			try {
+
+				List<WebElement> clippedCouponsList = driver
+						.findElements(couponsList);
+
+				for (int index = 0; index < clippedCouponsList.size(); index++) {
+
+					WebElement clippedCoupon = clippedCouponsList.get(index);
+
+					WebDriverWait wait = new WebDriverWait(driver, 10);
+					List<WebElement> unClipButton = wait
+							.until(ExpectedConditions
+									.visibilityOfNestedElementsLocatedBy(
+											clippedCoupon, unClipBtn));
+
+					scrollToView(unClipButton.get(0));
+					clippedCoupon.findElement(unClipBtn).click();
+
+					System.out.println("Coupon UnClip clicked for coupon "
+							+ clippedCoupon.findElement(couponName).getText());
+				}
+
+				if (clippedCouponsList.size() == 0) {
+					System.out.println("There were no already clipped coupons");
+				}
+			} catch (Exception e1) {
+				System.out.println(e1.getMessage());
+				reportFail(e1.getMessage());
+			}
+		}
+
+	}
+
 	/******** Click Show All Button *************/
 	public void clickShowAll() {
 
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, 20);
-			wait.until(ExpectedConditions.elementToBeClickable(showAllBtn));
-			driver.findElement(showAllBtn).click();
-			System.out.println("Show All Button Clicked");
+			WebElement showAll = wait.until(ExpectedConditions
+					.elementToBeClickable(showAllBtn));
+			scrollToView(showAll);
+			showAll.click();
+			System.out.println("Success: Show All Button Clicked");
 
 			wait = new WebDriverWait(driver, 5);
 			wait.until(ExpectedConditions.textToBePresentInElementLocated(
@@ -115,7 +170,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 			String expectedText = "Reset";
 			String actualText = driver.findElement(resetBtn).getText();
 			Assert.assertEquals(actualText, expectedText);
-			System.out.println("Text Changed to Reset");
+			System.out.println("Success: Text Changed to Reset");
 		} catch (Exception e) {
 			reportFail(e.getMessage());
 		}
@@ -131,8 +186,9 @@ public class DigitalCouponsPage extends PageBaseClass {
 
 				String loadTocardString = couponContainer.get(index)
 						.findElement(By.tagName("a")).getText().trim();
-				System.out.println("Load to card is present at coupon number "
-						+ (index + 1));
+				System.out
+						.println("Success: Load to card is present at coupon number "
+								+ (index + 1));
 
 				Assert.assertEquals(loadTocardString, "Load To Card");
 			}
@@ -196,7 +252,8 @@ public class DigitalCouponsPage extends PageBaseClass {
 
 			WebElement loadToCard = randomCoupon.findElement(loadToCardBtn);
 			loadToCard.click();
-			System.out.println("Load to Card Clicked");
+			System.out
+					.println("Success: Load to Card Clicked for random coupon");
 
 			randomNumber = checkIfCouponClickingHasErrors(randomNumber);
 
@@ -231,11 +288,11 @@ public class DigitalCouponsPage extends PageBaseClass {
 			randomNumber = clickLoadToCardOfRandomCoupon();
 		} catch (TimeoutException e) {
 			System.out
-					.println("No Error Occured While Clicking the Load To Card of Coupon. Waited");
+					.println("Success: No Error Occured While Clicking the Load To Card of Coupon.");
 
 		} catch (NoSuchElementException e) {
 			System.out
-					.println("No Error Occured While Clicking the Load To Card of Coupon");
+					.println("Success: No Error Occured While Clicking the Load To Card of Coupon");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
@@ -263,7 +320,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 			String actualText = randomCoupon.findElement(loadedText).getText()
 					+ randomCoupon.findElement(unClipBtn).getText();
 
-			System.out.println("Text changed to " + actualText);
+			System.out.println("Success: Text changed to " + actualText);
 
 			Assert.assertEquals(actualText, expectedText,
 					"The expected Text is not present in the Load To Card Button");
@@ -279,15 +336,21 @@ public class DigitalCouponsPage extends PageBaseClass {
 
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, 10);
-			WebElement clipped = wait.until(ExpectedConditions.visibilityOfElementLocated(clippedLink));
-			
-			scrollToView(clipped);
+			WebElement clipped = wait.until(ExpectedConditions
+					.visibilityOfElementLocated(clippedLink));
+
+			// scrollToView(clipped);
 
 			wait = new WebDriverWait(driver, 10);
 			wait.until(ExpectedConditions.elementToBeClickable(clipped));
 
-			clipped.click();
-			System.out.println("Clipped Link clicked");
+			Actions actions = new Actions(driver);
+			actions.moveToElement(clipped).click().build().perform();
+
+			// JavascriptExecutor jse = (JavascriptExecutor)driver;
+			// jse.executeScript("arguments[0].click()", clipped);
+
+			System.out.println("Success: Clipped Link clicked");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
@@ -306,7 +369,8 @@ public class DigitalCouponsPage extends PageBaseClass {
 			wait.until(ExpectedConditions.numberOfElementsToBe(couponsList, 1));
 
 			WebElement clippedCoupon = driver.findElement(couponsList);
-			scrollToElement(clippedCoupon);
+
+			scrollToElement(clippedCoupon.findElement(couponExpiryDate));
 
 			String actualBrandName = clippedCoupon.findElement(couponName)
 					.getText();
@@ -340,7 +404,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 			WebElement clippedCoupon = driver.findElement(couponsList);
 			scrollToElement(clippedCoupon);
 			clippedCoupon.findElement(unClipBtn).click();
-			System.out.println("Coupon UnClip clicked");
+			System.out.println("Success: Coupon UnClip clicked");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
@@ -360,7 +424,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 					.elementToBeClickable(printClippedCoupon));
 
 			printClippedCoupon.click();
-			System.out.println("Print Clipped Coupon Link Clicked");
+			System.out.println("Success: Print Clipped Coupon Link Clicked");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
@@ -377,7 +441,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 							brandName));
 			if (elementPresent) {
 				System.out
-						.println("The Clipped Coupons is Present in the Print Clipped Coupons Tab");
+						.println("Success: The Clipped Coupons is Present in the Print Clipped Coupons Tab");
 			} else {
 				System.out
 						.println("The Clipped Coupons is NOT Present in the Print Clipped Coupons Tab");
@@ -403,7 +467,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 
 			if (!showImages.isSelected()) {
 				showImages.click();
-				System.out.println("Check Box Checked");
+				System.out.println("Success: Check Box Checked");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -422,7 +486,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 			scrollToView(showImages);
 			if (showImages.isSelected()) {
 				showImages.click();
-				System.out.println("Check Box UnChecked");
+				System.out.println("Success: Check Box UnChecked");
 
 			}
 		} catch (Exception e) {
@@ -453,7 +517,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 			boolean imageIsDisplayed = false;
 			if (result instanceof Boolean) {
 				imageIsDisplayed = (Boolean) result;
-				System.out.println("Image Displayed is " + imageIsDisplayed);
+				System.out.println("Success: Image is Displayed");
 				Assert.assertEquals(true, imageIsDisplayed,
 						"Image is NOT Displayed");
 			}
@@ -474,10 +538,10 @@ public class DigitalCouponsPage extends PageBaseClass {
 			WebElement couponImage = driver.findElement(clippedCouponImg);
 			scrollToView(couponImage);
 		} catch (TimeoutException e) {
-			System.out.println("Image is NOT Displayed");
+			System.out.println("Success: Image is NOT Displayed");
 
 		} catch (NoSuchElementException e) {
-			System.out.println("Image is NOT Displayed");
+			System.out.println("Success: Image is NOT Displayed");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
@@ -563,7 +627,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 			driver.findElement(clippedCouponDiscount);
 
 		} catch (NoSuchElementException e) {
-			System.out.println("Discount is NOT Present");
+			System.out.println("Success: Discount is NOT Present");
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -578,22 +642,18 @@ public class DigitalCouponsPage extends PageBaseClass {
 			WebElement close = driver.findElement(closeInPrintClippedCouponBtn);
 			scrollToView(close);
 			WebDriverWait wait = new WebDriverWait(driver, 10);
-			wait.until(ExpectedConditions
-					.elementToBeClickable(close));
-			
-
-			scrollToView(close);
+			wait.until(ExpectedConditions.elementToBeClickable(close));
 
 			close.click();
-			System.out.println("Close button in Print Tab Clicked");
+			System.out.println("Success: Close button in Print Tab Clicked");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
 		}
 	}
 
-	/****** Check if it is in All Coupons Page *********/
-	public void checkIfAllCouponsIsClicked() {
+	/****** Click All Coupons *********/
+	public void clickAllCoupons() {
 
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -603,7 +663,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 			// scrollToElement(allCoupons);
 			allCoupons.click();
 
-			System.out.println("All coupons is Clicked");
+			System.out.println("Success: All coupons is Clicked");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
@@ -627,7 +687,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 			randomCategory.click();
 
 			randomCategoryName = randomCategory.getText();
-			System.out.println("Random category Clicked is "
+			System.out.println("Success: Random category Clicked is "
 					+ randomCategory.getText());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -716,7 +776,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 
 				System.out.println(brandName + ", " + discountPrice + ", "
 						+ expiryDate + ", " + description);
-				System.out.println("Coupon number " + (index + 1)
+				System.out.println("Success: Coupon number " + (index + 1)
 						+ " read successfully");
 			}
 		} catch (Exception e) {
@@ -739,7 +799,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 			ReadExcelDataFile readData = new ReadExcelDataFile(path);
 
 			readData.clearExistingDataInSheet("coupon_details", 2);
-			System.out.println("All data cleared in the sheet");
+			System.out.println("Success: All data cleared in the sheet");
 
 			for (int index = 0; index < couponsArray.length; index++) {
 

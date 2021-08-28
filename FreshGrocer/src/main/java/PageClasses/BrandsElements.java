@@ -8,6 +8,8 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import utilities.ReadExcelDataFile;
@@ -34,6 +36,9 @@ public class BrandsElements extends PageBaseClass {
 	public String[] getAllBrandsFromPage() {
 
 		System.out.println("*******Get All the Brands from the Page*********");
+		
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(brandsList));
 		List<WebElement> brandsElements = driver.findElements(brandsList);
 
 		String[] brandsText = new String[brandsElements.size()];
@@ -152,7 +157,7 @@ public class BrandsElements extends PageBaseClass {
 				}
 			}
 			if (notSortedBrands.size() == 0) {
-				System.out.println("===All the categories are Sorted===");
+				System.out.println("===Success: All the categories are Sorted===");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

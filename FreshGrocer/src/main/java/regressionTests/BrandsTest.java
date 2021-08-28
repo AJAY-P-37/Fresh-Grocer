@@ -75,7 +75,7 @@ public class BrandsTest extends BaseTestClass {
 
 		brandsPage.updateBrandsNotInExcel(brandsNotInExcel);
 
-		switchToParentFrame();
+		switchToDefaultFrame();
 
 		landPage.clickAccountHeaderButton();
 

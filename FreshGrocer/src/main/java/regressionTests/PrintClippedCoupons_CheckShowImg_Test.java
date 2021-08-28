@@ -17,12 +17,13 @@ public class PrintClippedCoupons_CheckShowImg_Test extends BaseTestClass {
 	LoginPage logPage;
 	LandingPage landPage;
 	DigitalCouponsPage digitalCouponsPage;
+
 	@BeforeClass
 	@Parameters("browser")
 	public void openBrowser(String browser) {
 
 		invokeBrowser(browser);
-		
+
 		logPage = new LoginPage(driver);
 		basePage = new PageBaseClass(driver);
 		landPage = new LandingPage(driver);
@@ -50,6 +51,12 @@ public class PrintClippedCoupons_CheckShowImg_Test extends BaseTestClass {
 
 		landPage.waitForFrameToLoadOrDoRefresh();
 
+		digitalCouponsPage.clickClippedLink();
+
+		digitalCouponsPage.clickUnClipForAllClippedCoupons();
+
+		digitalCouponsPage.clickAllCoupons();
+
 		digitalCouponsPage.clickShowAll();
 
 		digitalCouponsPage.checkCouponsLoadToCardText();
@@ -59,7 +66,7 @@ public class PrintClippedCoupons_CheckShowImg_Test extends BaseTestClass {
 		int randomNumber = digitalCouponsPage.clickLoadToCardOfRandomCoupon();
 
 		digitalCouponsPage.verifyChangesInLoadCardBtn(randomNumber);
-		
+
 		String[] randomCouponClipped = digitalCouponsPage
 				.getDetailsOfRandomCoupon(randomNumber);
 
@@ -72,7 +79,8 @@ public class PrintClippedCoupons_CheckShowImg_Test extends BaseTestClass {
 
 		digitalCouponsPage.checkIfImageIsDisplayed();
 
-		digitalCouponsPage.checkIfCouponDetailsIsDisplayedForChecked(randomCouponClipped);
+		digitalCouponsPage
+				.checkIfCouponDetailsIsDisplayedForChecked(randomCouponClipped);
 
 		digitalCouponsPage.clickCloseInPrintTab();
 
@@ -80,7 +88,7 @@ public class PrintClippedCoupons_CheckShowImg_Test extends BaseTestClass {
 
 		digitalCouponsPage.clickUnClipBtn();
 
-		switchToParentFrame();
+		switchToDefaultFrame();
 
 		landPage.clickAccountHeaderButton();
 

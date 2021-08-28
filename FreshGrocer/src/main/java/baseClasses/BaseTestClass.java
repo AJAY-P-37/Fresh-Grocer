@@ -1,5 +1,6 @@
 package baseClasses;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
@@ -14,6 +15,8 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BaseTestClass {
 
@@ -30,9 +33,13 @@ public class BaseTestClass {
 						"webdriver.chrome.driver",
 						System.getProperty("user.dir")
 								+ "/src/main/resources/Drivers/chromedriver.exe");
-//				ChromeOptions options = new ChromeOptions();
+				ChromeOptions options = new ChromeOptions();
+//				options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+//				options.setExperimentalOption("useAutomationExtension", false);
+				
 //				options.addArguments("headless");
-				driver = new ChromeDriver();
+				
+				driver = new ChromeDriver(options);
 			} else if (browserName.equalsIgnoreCase("firefox")) {
 
 				System.setProperty("webdriver.gecko.driver",
@@ -41,17 +48,20 @@ public class BaseTestClass {
 //				FirefoxOptions options = new FirefoxOptions();
 //				options.setHeadless(true);
 				driver = new FirefoxDriver();
+				
 			} else if (browserName.equalsIgnoreCase("Opera")) {
 				System.setProperty("webdriver.opera.driver",
 						System.getProperty("user.dir")
 								+ "/src/main/resources/Drivers/operadriver");
 				driver = new OperaDriver();
+				
 			} else if (browserName.equalsIgnoreCase("IE")) {
 				System.setProperty(
 						"webdriver.ie.driver",
 						System.getProperty("user.dir")
 								+ "/src/main/resources/Drivers/IEDriverServer.exe");
 				driver = new InternetExplorerDriver();
+				
 			} else if (browserName.equals("edge")) {
 				System.setProperty(
 						"webdriver.edge.driver",
@@ -62,8 +72,10 @@ public class BaseTestClass {
 //				edgeOptions.addArguments("headless");
 
 				driver = new EdgeDriver();
+				
 			} else if(browserName.equals("safari")) {
 				driver = new SafariDriver();
+				
 			}
 		} catch (Exception e) {
 			// reportFail(e.getMessage());
@@ -81,6 +93,7 @@ public class BaseTestClass {
 	public void flushReports() {
 		// report.flush();
 		driver.close();
+		System.out.println("Application Closed");
 	}
 
 	/************** Switch to New Tab *************/
@@ -90,6 +103,7 @@ public class BaseTestClass {
 		String newTab = windowHandles.next();
 
 		driver.switchTo().window(newTab);
+		System.out.println("Success: Switched to New Tab");
 	}
 
 	/************** Switch to Main Tab *************/
@@ -98,11 +112,15 @@ public class BaseTestClass {
 		String mainTab = windowHandles.next();
 
 		driver.switchTo().window(mainTab);
+		System.out.println("Success: Switched to Main Tab");
 	}
 
 	/*******Switch to Parent Frame********/
-	public void switchToParentFrame(){
-		driver.switchTo().parentFrame();
+	public void switchToDefaultFrame(){
+		
+		driver.switchTo().defaultContent();
+
+		System.out.println("Success: Switched to Default frame");
 	}
 	
 	/***************** Wait Functions in Framework *****************/

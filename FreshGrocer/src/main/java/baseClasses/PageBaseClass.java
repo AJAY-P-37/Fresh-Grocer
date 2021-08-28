@@ -43,8 +43,9 @@ public class PageBaseClass extends BaseTestClass {
 		} catch (TimeoutException e) {
 
 			try {
-				System.out.println("Page refereshed due to Time Out Exception");
+				
 				driver.navigate().refresh();
+				System.out.println("Page refereshed due to Time Out Exception");
 			} catch (Exception e1) {
 				reportFail(e.getMessage());
 			}
@@ -116,7 +117,7 @@ public class PageBaseClass extends BaseTestClass {
 	/****** Scroll the the Web page *********/
 	public void scrollToElement(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].scrollIntoView()", element);
+		js.executeScript("arguments[0].scrollIntoView(true)", element);
 	}
 
 	/**** Scroll to the Elements in Frame *****/
@@ -182,7 +183,7 @@ public class PageBaseClass extends BaseTestClass {
 			
 		} else if (matchedFiles.size() == 1) {
 			path = matchedFiles.get(0);
-			System.out.println("File prefix matched with " + path);
+			System.out.println("Success: File prefix matched with " + path);
 		}
 
 		return path;
@@ -199,7 +200,7 @@ public class PageBaseClass extends BaseTestClass {
 		File newFile = new File(newPath);
 
 		if (oldFile.renameTo(newFile)) {
-			System.out.println("File renamed to " + newPath);
+			System.out.println("Success: File renamed to " + newPath);
 		} else {
 			System.out.println("Sorry! the" + path
 					+ "can't be renamed. Error oocured");

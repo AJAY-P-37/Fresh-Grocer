@@ -79,7 +79,7 @@ public class LandingPage extends PageBaseClass {
 			WebDriverWait wait = new WebDriverWait(driver, 10);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(popUpBtn));
 			driver.findElement(popUpBtn).click();
-			System.out.println("PopUp Closed");
+			System.out.println("Success: PopUp Closed");
 		} catch (TimeoutException e) {
 			System.out.println("Pop did not exists");
 		} catch (NoSuchElementException e) {
@@ -101,7 +101,7 @@ public class LandingPage extends PageBaseClass {
 			String actualText = driver.findElement(signInOrRegisterText)
 					.getText();
 			Assert.assertEquals(actualText, expectedText);
-			System.out.println("Sign In button is Present");
+			System.out.println("Success: Sign In button is Present");
 
 		} catch (Exception e) {
 			reportFail(e.getMessage());
@@ -115,6 +115,7 @@ public class LandingPage extends PageBaseClass {
 			WebDriverWait wait = new WebDriverWait(driver, 10);
 			wait.until(ExpectedConditions.elementToBeClickable(signInBtn));
 			driver.findElement(signInBtn).click();
+			System.out.println("Success: Sign in Button is clicked");
 		} catch (Exception e) {
 			reportFail(e.getMessage());
 		}
@@ -129,7 +130,7 @@ public class LandingPage extends PageBaseClass {
 			wait.until(ExpectedConditions
 					.visibilityOfElementLocated(myAccountText));
 			String myAccounText = driver.findElement(myAccountText).getText();
-			System.out.println(myAccounText + " text is present");
+			System.out.println("Success: " + myAccounText + " text is present");
 		} catch (Exception e) {
 			reportFail(e.getMessage());
 		}
@@ -142,7 +143,7 @@ public class LandingPage extends PageBaseClass {
 			wait.until(ExpectedConditions
 					.visibilityOfElementLocated(digitalCouponsLink));
 			driver.findElement(digitalCouponsLink).click();
-			System.out.println("Digital Coupons Clicked");
+			System.out.println("Success: Digital Coupons Clicked");
 
 		} catch (Exception e) {
 			reportFail(e.getMessage());
@@ -161,13 +162,13 @@ public class LandingPage extends PageBaseClass {
 			wait.until(ExpectedConditions
 					.frameToBeAvailableAndSwitchToIt(couponsFrame));
 
-			System.out.println("Switched to the Frame");
+			System.out.println("Success: Switched to the Frame");
 
 			wait.until(ExpectedConditions
 					.invisibilityOfElementLocated(loadingCouponsText));
 
 			System.out
-					.println("Loading Coupons... is invisible and the coupons are being visible");
+					.println("Success: Loading Coupons... is invisible and the coupons are being visible");
 
 		} catch (NoSuchElementException e) {
 			try {
@@ -179,10 +180,12 @@ public class LandingPage extends PageBaseClass {
 				WebDriverWait wait = new WebDriverWait(driver, 90);
 				wait.until(ExpectedConditions
 						.frameToBeAvailableAndSwitchToIt(couponsFrame));
-				System.out.println("Switched to the Frame");
+				System.out.println("Success: Switched to the Frame");
 
 				wait.until(ExpectedConditions
 						.invisibilityOfElementLocated(loadingCouponsText));
+				System.out
+				.println("Success: Loading Coupons... is invisible and the coupons are being visible");
 			} catch (Exception e1) {
 				reportFail(e1.getMessage());
 			}
@@ -195,7 +198,7 @@ public class LandingPage extends PageBaseClass {
 	public void clickAccountHeaderButton() {
 
 		driver.findElement(accountHeaderBtn).click();
-		System.out.println("Acoount Header Button Clicked");
+		System.out.println("Success: Account Header Button Clicked");
 	}
 
 	/****** Click Sign Out Button *******/
@@ -205,7 +208,7 @@ public class LandingPage extends PageBaseClass {
 		wait.until(ExpectedConditions.elementToBeClickable(signOutBtn));
 
 		driver.findElement(signOutBtn).click();
-		System.out.println("Successfully Signed Out");
+		System.out.println("Success: Successfully Signed Out");
 
 	}
 }

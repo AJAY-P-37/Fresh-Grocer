@@ -50,6 +50,12 @@ public class ClippedCouponExistsTest extends BaseTestClass {
 		landPage.clickDigitalCouponsButton();
 
 		landPage.waitForFrameToLoadOrDoRefresh();
+		
+		digitalCouponsPage.clickClippedLink();
+		
+		digitalCouponsPage.clickUnClipForAllClippedCoupons();
+		
+		digitalCouponsPage.clickAllCoupons();
 
 		digitalCouponsPage.clickShowAll();
 
@@ -70,7 +76,7 @@ public class ClippedCouponExistsTest extends BaseTestClass {
 
 		digitalCouponsPage.clickUnClipBtn();
 
-		switchToParentFrame();
+		switchToDefaultFrame();
 
 		landPage.clickAccountHeaderButton();
 

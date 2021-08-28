@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite guice-stage="DEVELOPMENT" name="Failed suite [TheFreshGrocer]">
-  <parameter name="environment" value="staging"/>
-  <parameter name="browser" value="chrome"/>
-  <test name="Regression test(failed)">
-    <parameter name="environment" value="staging"/>
-    <parameter name="browser" value="chrome"/>
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
     <classes>
-      <class name="regressionTests.PrintClippedCoupons_CheckShowImg_Test">
+      <class name="regressionTests.ValidateSingleCategoryUnderCategoriesListedTest">
         <methods>
-          <include name="closeAllTheBrowser"/>
-          <include name="openBrowser"/>
-          <include name="printingClippedCouponsWithShowImagesChecked" invocation-numbers="0"/>
+          <include name="ValidateSingleCategoryUnderCategoriesListed"/>
         </methods>
-      </class> <!-- regressionTests.PrintClippedCoupons_CheckShowImg_Test -->
+      </class> <!-- regressionTests.ValidateSingleCategoryUnderCategoriesListedTest -->
     </classes>
-  </test> <!-- Regression test(failed) -->
-</suite> <!-- Failed suite [TheFreshGrocer] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

@@ -11,9 +11,39 @@
         <methods>
           <include name="closeAllTheBrowser"/>
           <include name="openBrowser"/>
-          <include name="printingClippedCouponsWithShowImagesChecked" invocation-numbers="0"/>
         </methods>
       </class> <!-- regressionTests.PrintClippedCoupons_CheckShowImg_Test -->
+      <class name="regressionTests.ValidateSingleCategoryUnderCategoriesListedTest">
+        <methods>
+          <include name="closeAllTheBrowser"/>
+          <include name="openBrowser"/>
+        </methods>
+      </class> <!-- regressionTests.ValidateSingleCategoryUnderCategoriesListedTest -->
+      <class name="regressionTests.PrintClippedCoupons_UnCheckShowImg_Test">
+        <methods>
+          <include name="openBrowser"/>
+          <include name="closeAllTheBrowser"/>
+          <include name="printingClippedCouponsWithShowImagesUnChecked" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- regressionTests.PrintClippedCoupons_UnCheckShowImg_Test -->
+      <class name="regressionTests.ClippedCouponExistsTest">
+        <methods>
+          <include name="openBrowser"/>
+          <include name="closeAllTheBrowser"/>
+        </methods>
+      </class> <!-- regressionTests.ClippedCouponExistsTest -->
+      <class name="regressionTests.CategoriesTest">
+        <methods>
+          <include name="openBrowser"/>
+          <include name="closeAllTheBrowser"/>
+        </methods>
+      </class> <!-- regressionTests.CategoriesTest -->
+      <class name="regressionTests.BrandsTest">
+        <methods>
+          <include name="closeAllTheBrowser"/>
+          <include name="openBrowser"/>
+        </methods>
+      </class> <!-- regressionTests.BrandsTest -->
     </classes>
   </test> <!-- Regression test(failed) -->
 </suite> <!-- Failed suite [TheFreshGrocer] -->

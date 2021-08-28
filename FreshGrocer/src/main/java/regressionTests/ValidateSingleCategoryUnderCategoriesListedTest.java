@@ -16,19 +16,18 @@ import baseClasses.PageBaseClass;
 public class ValidateSingleCategoryUnderCategoriesListedTest extends
 		BaseTestClass {
 
-	
 	PageBaseClass basePage;
 	LoginPage logPage;
 	LandingPage landPage;
 	DigitalCouponsPage digitalCouponsPage;
 	CategoriesElements categoryPage;
-	
+
 	@BeforeClass
 	@Parameters("browser")
 	public void openBrowser(String browser) {
 
 		invokeBrowser(browser);
-		
+
 		logPage = new LoginPage(driver);
 		basePage = new PageBaseClass(driver);
 		landPage = new LandingPage(driver);
@@ -40,7 +39,6 @@ public class ValidateSingleCategoryUnderCategoriesListedTest extends
 	@Test
 	@Parameters("environment")
 	public void ValidateSingleCategoryUnderCategoriesListed(String environment) {
-
 
 		basePage.openApplication(environment);
 
@@ -58,20 +56,23 @@ public class ValidateSingleCategoryUnderCategoriesListedTest extends
 
 		landPage.waitForFrameToLoadOrDoRefresh();
 
+		digitalCouponsPage.clickClippedLink();
 
-		digitalCouponsPage.checkIfAllCouponsIsClicked();
+		digitalCouponsPage.clickUnClipForAllClippedCoupons();
+
+		digitalCouponsPage.clickAllCoupons();
 
 		digitalCouponsPage.clickShowAll();
 
 		digitalCouponsPage.checkCouponsLoadToCardText();
 
-		String[] categoriesInPage = categoryPage
-				.getAllCategoriesFromPage();
+		String[] categoriesInPage = categoryPage.getAllCategoriesFromPage();
 
 		int randomCategoryNumber = RandomUtil.getRandomNumberBetween(0,
 				categoriesInPage.length - 1);
 
-		String randomCategoryName = digitalCouponsPage.clickRandomCategoryAndGetCategoyName(randomCategoryNumber);
+		String randomCategoryName = digitalCouponsPage
+				.clickRandomCategoryAndGetCategoyName(randomCategoryNumber);
 
 		int expectedNumberOfCouponsInRandomCategory = digitalCouponsPage
 				.extractNumberOfCouponsInRandomCategory(randomCategoryName);
@@ -84,7 +85,7 @@ public class ValidateSingleCategoryUnderCategoriesListedTest extends
 
 		digitalCouponsPage.setAllCouponDataInExcel(couponsArray);
 
-		switchToParentFrame();
+		switchToDefaultFrame();
 
 		landPage.clickAccountHeaderButton();
 

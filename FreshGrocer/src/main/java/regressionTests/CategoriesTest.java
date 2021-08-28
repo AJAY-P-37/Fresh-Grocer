@@ -75,7 +75,7 @@ public class CategoriesTest extends BaseTestClass {
 
 		categoriesPage.updateCategoriesNotInExcel(categoriesNotInExcel);
 
-		switchToParentFrame();
+		switchToDefaultFrame();
 
 		landPage.clickAccountHeaderButton();
 

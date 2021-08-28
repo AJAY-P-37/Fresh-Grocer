@@ -46,7 +46,7 @@ public class LoginPage extends PageBaseClass {
 			driver.findElement(password).sendKeys(passwordText);
 			driver.findElement(signInBtn).click();
 
-			System.out.println("Successfully Logged In");
+			System.out.println("Success: Logged In");
 
 		} catch (Exception e) {
 			reportFail(e.getMessage());
