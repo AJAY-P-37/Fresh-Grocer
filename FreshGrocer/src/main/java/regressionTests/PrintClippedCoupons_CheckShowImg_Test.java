@@ -72,21 +72,21 @@ public class PrintClippedCoupons_CheckShowImg_Test extends BaseTestClass {
 
 		digitalCouponsPage.clickPrintClippedCouponsButton();
 
-		digitalCouponsPage
+		int indexOfClippedCoupon = digitalCouponsPage
 				.checkClippedCouponIsPresentInPrintTab(randomCouponClipped[0]);
 
 		digitalCouponsPage.checkShowImagesCheckBoxIfNotChecked();
 
-		digitalCouponsPage.checkIfImageIsDisplayed();
+		digitalCouponsPage.checkIfImageIsDisplayed(indexOfClippedCoupon);
 
 		digitalCouponsPage
-				.checkIfCouponDetailsIsDisplayedForChecked(randomCouponClipped);
+				.checkIfCouponDetailsIsDisplayedForChecked(randomCouponClipped, indexOfClippedCoupon);
 
 		digitalCouponsPage.clickCloseInPrintTab();
 
 		digitalCouponsPage.clickClippedLink();
 
-		digitalCouponsPage.clickUnClipBtn();
+		digitalCouponsPage.clickUnClipBtnForClippedCoupon(randomCouponClipped);
 
 		switchToDefaultFrame();
 

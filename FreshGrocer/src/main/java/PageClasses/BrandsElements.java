@@ -36,14 +36,16 @@ public class BrandsElements extends PageBaseClass {
 	public String[] getAllBrandsFromPage() {
 
 		System.out.println("*******Get All the Brands from the Page*********");
-		
-		WebDriverWait wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(brandsList));
-		List<WebElement> brandsElements = driver.findElements(brandsList);
 
-		String[] brandsText = new String[brandsElements.size()];
+		String[] brandsText = null;
 
 		try {
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			wait.until(ExpectedConditions
+					.visibilityOfAllElementsLocatedBy(brandsList));
+			List<WebElement> brandsElements = driver.findElements(brandsList);
+
+			brandsText = new String[brandsElements.size()];
 			for (int index = 0; index < brandsElements.size(); index++) {
 
 				WebElement brand = brandsElements.get(index);
@@ -157,7 +159,8 @@ public class BrandsElements extends PageBaseClass {
 				}
 			}
 			if (notSortedBrands.size() == 0) {
-				System.out.println("===Success: All the categories are Sorted===");
+				System.out
+						.println("===Success: All the categories are Sorted===");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

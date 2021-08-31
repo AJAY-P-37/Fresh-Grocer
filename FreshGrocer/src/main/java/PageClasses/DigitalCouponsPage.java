@@ -37,14 +37,15 @@ public class DigitalCouponsPage extends PageBaseClass {
 	public By couponDiscount;
 	public By couponExpiryDate;
 	public By couponDescription;
-	public By loadToCardBtn;
 	public By modalContent;
+	public By modalContentOkBtn;
 	public By modalContentCloseBtn;
 	public By loadedText;
 	public By unClipBtn;
 	public By clippedLink;
 	public By noClippedCouponsText;
 	public By printClippedCouponBtn;
+	public By clippedCoupons;
 	public By clippedCouponName;
 	public By clippedCouponDiscount;
 	public By clippedCouponExpiryDate;
@@ -80,7 +81,6 @@ public class DigitalCouponsPage extends PageBaseClass {
 		couponDiscount = getByLocator(locators, "couponDiscount_xpath");
 		couponExpiryDate = getByLocator(locators, "couponExpiryDate_xpath");
 		couponDescription = getByLocator(locators, "couponDescription_xpath");
-		loadToCardBtn = getByLocator(locators, "loadToCardBtn_xpath");
 		modalContent = getByLocator(locators, "modalContent_xpath");
 		modalContentCloseBtn = getByLocator(locators,
 				"modalContentCloseBtn_xpath");
@@ -91,6 +91,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 				"noClippedCouponsText_xpath");
 		printClippedCouponBtn = getByLocator(locators,
 				"printClippedCouponBtn_xpath");
+		clippedCoupons = getByLocator(locators, "clippedCoupons_xpath");
 		clippedCouponName = getByLocator(locators, "clippedCouponName_xpath");
 		clippedCouponDiscount = getByLocator(locators,
 				"clippedCouponDiscount_xpath");
@@ -101,19 +102,75 @@ public class DigitalCouponsPage extends PageBaseClass {
 		closeInPrintClippedCouponBtn = getByLocator(locators,
 				"closeInPrintClippedCouponBtn_xpath");
 		allCouponsLink = getByLocator(locators, "allCouponsLink_xpath");
+		modalContentOkBtn = getByLocator(locators, "modalContentOkBtn_xpath");
 
+	}
+
+	/***** Check if the Clipped Coupon Link Text Changes To "Load To Card" ********/
+	public boolean verifyChangesAfterUnClip(WebElement clippedCoupon) {
+
+		boolean textChanged = false;
+		WebDriverWait wait = new WebDriverWait(driver, 5);
+		try {
+
+			wait.until(ExpectedConditions.textToBePresentInElement(
+					clippedCoupon.findElement(loadToCardBtnXpath),
+					"Load To Card"));
+
+			String expectedText = "Load To Card";
+
+			String actualText = clippedCoupon.findElement(loadToCardBtnXpath)
+					.getText();
+
+			System.out.println("Text Changed to Load To Card for "
+					+ clippedCoupon.findElement(couponName).getText());
+			Assert.assertEquals(actualText, expectedText);
+
+			textChanged = true;
+		} catch (Exception e) {
+
+			try {
+				wait = new WebDriverWait(driver, 5);
+				wait.until(ExpectedConditions
+						.visibilityOfElementLocated(modalContent));
+
+				System.out
+						.println("Error occurred while Unclipping the coupon");
+
+				scrollToElement(driver.findElement(printClippedCouponBtn));
+
+				wait = new WebDriverWait(driver, 10);
+				WebElement closeModalBtn = wait.until(ExpectedConditions
+						.elementToBeClickable(modalContentCloseBtn));
+				closeModalBtn.click();
+				System.out
+						.println("Close Button Clicked in modal. Leaving this Clipped Coupon "
+								+ clippedCoupon.findElement(couponName)
+										.getText());
+
+				textChanged = false;
+			} catch (Exception e1) {
+				System.out.println(e1.getMessage());
+				reportFail(e1.getMessage());
+			}
+
+		}
+		return textChanged;
 	}
 
 	/******* Clicking UnClip for all the Coupons which are clicked already *******/
 	public void clickUnClipForAllClippedCoupons() {
 
 		try {
-			WebDriverWait wait = new WebDriverWait(driver, 10);
+			WebDriverWait wait = new WebDriverWait(driver, 5);
 
 			WebElement noClippedCoupons = wait.until(ExpectedConditions
 					.visibilityOfElementLocated(noClippedCouponsText));
 
 			System.out.println("No clipped coupons found. It shows '"
+					+ noClippedCoupons.getText() + "'");
+
+			reportFail("No clipped coupons found. It shows '"
 					+ noClippedCoupons.getText() + "'");
 
 		} catch (TimeoutException e) {
@@ -136,7 +193,15 @@ public class DigitalCouponsPage extends PageBaseClass {
 											clippedCoupon, unClipBtn));
 
 					scrollToView(unClipButton.get(0));
-					clippedCoupon.findElement(unClipBtn).click();
+					wait.until(ExpectedConditions
+							.elementToBeClickable(unClipButton.get(0)));
+					unClipButton.get(0).click();
+					System.out.println("Unclip Clicked for "
+							+ clippedCoupon.findElement(couponName));
+					boolean textChanged = verifyChangesAfterUnClip(clippedCoupon);
+					if (!textChanged) {
+						continue;
+					}
 
 					System.out.println("Coupon UnClip clicked for coupon "
 							+ clippedCoupon.findElement(couponName).getText());
@@ -178,19 +243,34 @@ public class DigitalCouponsPage extends PageBaseClass {
 
 	/****** Check if all the coupons have "Load To Card" button *********/
 	public void checkCouponsLoadToCardText() {
+
+		String loadToCardString = null;
 		try {
 			List<WebElement> couponContainer = driver.findElements(couponsList);
 
 			for (int index = 0; index < couponContainer.size(); index++) {
 				scrollToElement(couponContainer.get(index));
 
-				String loadTocardString = couponContainer.get(index)
+				loadToCardString = couponContainer.get(index)
 						.findElement(By.tagName("a")).getText().trim();
-				System.out
-						.println("Success: Load to card is present at coupon number "
-								+ (index + 1));
 
-				Assert.assertEquals(loadTocardString, "Load To Card");
+				if (loadToCardString.equals("Load To Card")) {
+					Assert.assertEquals(loadToCardString, "Load To Card");
+					System.out
+							.println("Success: Load to card is present at coupon number "
+									+ (index + 1));
+
+				} else if (loadToCardString.equals("Unclip")) {
+					System.out.println("Unclip is present at coupon number "
+							+ (index + 1) + " .It can be ignored");
+
+				} else if (loadToCardString.equals("Log In to Load")) {
+					System.out
+							.println("Fail: Log In To Load Text present in Coupon after Log In");
+					Assert.assertEquals(loadToCardString, "Load To Card",
+							"Text present in Coupon after Log in =>");
+				}
+
 			}
 		} catch (Exception e) {
 			reportFail(e.getMessage());
@@ -247,16 +327,25 @@ public class DigitalCouponsPage extends PageBaseClass {
 			WebElement randomCoupon = couponsContainer.get(randomNumber);
 			scrollToElement(randomCoupon);
 
-			WebDriverWait wait = new WebDriverWait(driver, 10);
-			wait.until(ExpectedConditions.elementToBeClickable(loadToCardBtn));
+			try {
+				randomCoupon.findElement(unClipBtn);
+				System.out
+						.println("Unclip button for the random coupon found. Clicking another coupon");
+				randomNumber = clickLoadToCardOfRandomCoupon();
+			} catch (Exception e) {
 
-			WebElement loadToCard = randomCoupon.findElement(loadToCardBtn);
-			loadToCard.click();
-			System.out
-					.println("Success: Load to Card Clicked for random coupon");
+				WebDriverWait wait = new WebDriverWait(driver, 10);
+				wait.until(ExpectedConditions.elementToBeClickable(randomCoupon
+						.findElement(loadToCardBtnXpath)));
 
-			randomNumber = checkIfCouponClickingHasErrors(randomNumber);
+				WebElement loadToCard = randomCoupon
+						.findElement(loadToCardBtnXpath);
+				loadToCard.click();
+				System.out
+						.println("Success: Load to Card Clicked for random coupon");
 
+				randomNumber = checkIfCouponClickingHasErrors(randomNumber);
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
@@ -269,7 +358,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 	public int checkIfCouponClickingHasErrors(int randomNumber) {
 
 		try {
-			WebDriverWait wait = new WebDriverWait(driver, 10);
+			WebDriverWait wait = new WebDriverWait(driver, 5);
 			wait.until(ExpectedConditions
 					.visibilityOfElementLocated(modalContent));
 
@@ -291,8 +380,19 @@ public class DigitalCouponsPage extends PageBaseClass {
 					.println("Success: No Error Occured While Clicking the Load To Card of Coupon.");
 
 		} catch (NoSuchElementException e) {
-			System.out
-					.println("Success: No Error Occured While Clicking the Load To Card of Coupon");
+
+			try {
+				WebDriverWait wait = new WebDriverWait(driver, 5);
+				WebElement okModalBtn = wait.until(ExpectedConditions
+						.elementToBeClickable(modalContentOkBtn));
+				okModalBtn.click();
+				System.out.println("OK Button Clicked for the MESSAGE");
+			} catch (Exception e1) {
+
+				System.out.println(e1.getMessage());
+				reportFail(e1.getMessage());
+			}
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
@@ -360,54 +460,113 @@ public class DigitalCouponsPage extends PageBaseClass {
 	/********** Verifying if the random coupon clipped is present in the Clipped Link *****/
 	public void verifyCouponExistsInClipped(String[] randomCouponClipped) {
 
+		String expectedBrandName = randomCouponClipped[0];
+		String expectedDiscount = randomCouponClipped[1];
+		String expectedExpiryDate = randomCouponClipped[2];
+
+		WebDriverWait wait = new WebDriverWait(driver, 5);
+		WebElement noClippedCoupons = null;
 		try {
-			String expectedBrandName = randomCouponClipped[0];
-			String expectedDiscount = randomCouponClipped[1];
-			String expectedExpiryDate = randomCouponClipped[2];
+			noClippedCoupons = wait.until(ExpectedConditions
+					.visibilityOfElementLocated(noClippedCouponsText));
 
-			WebDriverWait wait = new WebDriverWait(driver, 10);
-			wait.until(ExpectedConditions.numberOfElementsToBe(couponsList, 1));
+			System.out.println("No clipped coupons found. It shows '"
+					+ noClippedCoupons.getText() + "'");
+			reportFail("No clipped coupons found. It shows '"
+					+ noClippedCoupons.getText() + "'");
+			return;
 
-			WebElement clippedCoupon = driver.findElement(couponsList);
-
-			scrollToElement(clippedCoupon.findElement(couponExpiryDate));
-
-			String actualBrandName = clippedCoupon.findElement(couponName)
-					.getText();
-			String actualDiscount = clippedCoupon.findElement(couponDiscount)
-					.getText();
-			String actualExpiryDate = clippedCoupon.findElement(
-					couponExpiryDate).getText();
-
-			System.out.println("Clipped coupons details: " + actualBrandName
-					+ ", " + actualDiscount + ", " + actualExpiryDate);
-
-			Assert.assertEquals(actualBrandName, expectedBrandName,
-					"Brand Name clipped is NOT Same");
-			Assert.assertEquals(actualDiscount, expectedDiscount,
-					"Discount clipped is NOT Same");
-			Assert.assertEquals(actualExpiryDate, expectedExpiryDate,
-					"Expiry Date clipped is NOT Same");
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			reportFail(e.getMessage());
+
+			try {
+				List<WebElement> clippedCoupons = driver
+						.findElements(couponsList);
+
+				boolean flag = false;
+				for (int index = 0; index < clippedCoupons.size(); index++) {
+
+					WebElement clippedCoupon = clippedCoupons.get(index);
+					scrollToElement(clippedCoupon.findElement(couponExpiryDate));
+
+					String actualBrandName = clippedCoupon.findElement(
+							couponName).getText();
+					String actualDiscount = clippedCoupon.findElement(
+							couponDiscount).getText();
+					String actualExpiryDate = clippedCoupon.findElement(
+							couponExpiryDate).getText();
+
+					if (actualBrandName.equals(expectedBrandName)
+							&& actualDiscount.equals(expectedDiscount)
+							&& actualExpiryDate.equals(expectedExpiryDate)) {
+						System.out.println("Clipped coupons details: "
+								+ actualBrandName + ", " + actualDiscount
+								+ ", " + actualExpiryDate);
+						System.out.println("The Clipped Coupon is Present");
+						flag = true;
+						break;
+					}
+				}
+				if (flag == false) {
+					System.out
+							.println("The Clipped Coupon is NOT present in the Clipped Tab");
+					reportFail("The Clipped Coupon is NOT present in the Clipped Tab");
+				}
+			} catch (Exception e1) {
+				System.out.println(e1.getMessage());
+				reportFail(e1.getMessage());
+			}
 		}
+
 	}
 
 	/***** Click the UnClip Button ******/
-	public void clickUnClipBtn() {
+	public void clickUnClipBtnForClippedCoupon(String[] randomCouponClipped) {
 
+		String expectedBrandName = randomCouponClipped[0];
+		String expectedDiscount = randomCouponClipped[1];
+		String expectedExpiryDate = randomCouponClipped[2];
+
+		WebDriverWait wait = null;
 		try {
-			WebDriverWait wait = new WebDriverWait(driver, 10);
-			wait.until(ExpectedConditions.numberOfElementsToBe(couponsList, 1));
+			wait = new WebDriverWait(driver, 5);
 
-			WebElement clippedCoupon = driver.findElement(couponsList);
-			scrollToElement(clippedCoupon);
-			clippedCoupon.findElement(unClipBtn).click();
-			System.out.println("Success: Coupon UnClip clicked");
+			WebElement noClippedCoupons = wait.until(ExpectedConditions
+					.visibilityOfElementLocated(noClippedCouponsText));
+
+			System.out.println("No clipped coupons found. It shows '"
+					+ noClippedCoupons.getText() + "'");
+
+			reportFail("No clipped coupons found. It shows '"
+					+ noClippedCoupons.getText() + "'");
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			reportFail(e.getMessage());
+
+			List<WebElement> clippedCoupons = driver.findElements(couponsList);
+
+			for (int index = 0; index < clippedCoupons.size(); index++) {
+				WebElement clippedCoupon = clippedCoupons.get(index);
+
+				String actualBrandName = clippedCoupon.findElement(couponName)
+						.getText();
+				String actualDiscount = clippedCoupon.findElement(
+						couponDiscount).getText();
+				String actualExpiryDate = clippedCoupon.findElement(
+						couponExpiryDate).getText();
+
+				if (actualBrandName.equals(expectedBrandName)
+						&& actualDiscount.equals(expectedDiscount)
+						&& actualExpiryDate.equals(expectedExpiryDate)) {
+
+					scrollToView(clippedCoupon.findElement(unClipBtn));
+					wait.until(ExpectedConditions
+							.elementToBeClickable(clippedCoupon
+									.findElement(unClipBtn)));
+					clippedCoupon.findElement(unClipBtn).click();
+					System.out
+							.println("Success: Coupon UnClip clicked for Coupon "
+									+ actualBrandName);
+					break;
+				}
+			}
 		}
 	}
 
@@ -432,26 +591,45 @@ public class DigitalCouponsPage extends PageBaseClass {
 	}
 
 	/***** Check if the Coupon Which is Clipped in Print Clipped Coupons Tab *****/
-	public void checkClippedCouponIsPresentInPrintTab(String brandName) {
+	public int checkClippedCouponIsPresentInPrintTab(String brandName) {
 
+		int indexOfClippedCoupon = 0;
 		try {
+			boolean couponPresent = false;
 			WebDriverWait wait = new WebDriverWait(driver, 10);
-			boolean elementPresent = wait.until(ExpectedConditions
-					.textToBePresentInElementLocated(clippedCouponName,
-							brandName));
-			if (elementPresent) {
-				System.out
-						.println("Success: The Clipped Coupons is Present in the Print Clipped Coupons Tab");
-			} else {
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By
+					.xpath("//*[@class='print-coupon']//*[contains(text(),'Loading..')]")));
+
+			List<WebElement> clippedCouponsInPrintTab = driver
+					.findElements(clippedCoupons);
+			for (int index = 0; index < clippedCouponsInPrintTab.size(); index++) {
+
+				WebElement clippedCouponInPrintTab = clippedCouponsInPrintTab
+						.get(index);
+				String actualBrandName = clippedCouponInPrintTab.findElement(
+						clippedCouponName).getText();
+				System.out.println(actualBrandName + " " + brandName);
+				if (actualBrandName.equals(brandName)) {
+					System.out
+							.println("Success: The Clipped Coupons is Present in the Print Clipped Coupons Tab");
+					couponPresent = true;
+					indexOfClippedCoupon = index;
+					break;
+				}
+
+			}
+			if (!couponPresent) {
 				System.out
 						.println("The Clipped Coupons is NOT Present in the Print Clipped Coupons Tab");
 				reportFail("The Clipped Coupons is NOT Present in the Print Clipped Coupons Tab");
 
 			}
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
 		}
+		return indexOfClippedCoupon;
 	}
 
 	/********* Click the Show Images Check Box if it is NOT Checked *******/
@@ -496,13 +674,16 @@ public class DigitalCouponsPage extends PageBaseClass {
 	}
 
 	/****** Check if the Coupon Image is Displayed *****/
-	public void checkIfImageIsDisplayed() {
+	public void checkIfImageIsDisplayed(int indexOfClippedCoupon) {
 
 		try {
+
+			WebElement clippedCoupon = driver.findElements(clippedCoupons).get(
+					indexOfClippedCoupon);
+
 			WebDriverWait wait = new WebDriverWait(driver, 10);
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(clippedCouponImg));
-			WebElement couponImage = driver.findElement(clippedCouponImg);
+			WebElement couponImage = wait.until(ExpectedConditions
+					.visibilityOf(clippedCoupon.findElement(clippedCouponImg)));
 
 			scrollToView(couponImage);
 
@@ -529,13 +710,15 @@ public class DigitalCouponsPage extends PageBaseClass {
 	}
 
 	/****** Check if the Coupon Image is Displayed *****/
-	public void checkIfImageIsNotDisplayed() {
+	public void checkIfImageIsNotDisplayed(int indexOfClippedCoupon) {
 
 		try {
+			WebElement clippedCoupon = driver.findElements(clippedCoupons).get(
+					indexOfClippedCoupon);
+
 			WebDriverWait wait = new WebDriverWait(driver, 10);
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(clippedCouponImg));
-			WebElement couponImage = driver.findElement(clippedCouponImg);
+			WebElement couponImage = wait.until(ExpectedConditions
+					.visibilityOf(clippedCoupon.findElement(clippedCouponImg)));
 			scrollToView(couponImage);
 		} catch (TimeoutException e) {
 			System.out.println("Success: Image is NOT Displayed");
@@ -552,7 +735,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 	 * Check the Clipped Coupon Details in Print Tab by Checking the Show Images
 	 *****/
 	public void checkIfCouponDetailsIsDisplayedForChecked(
-			String[] randomCouponClipped) {
+			String[] randomCouponClipped, int indexOfClippedCoupon) {
 
 		try {
 			String expectedBrandName = randomCouponClipped[0];
@@ -560,13 +743,15 @@ public class DigitalCouponsPage extends PageBaseClass {
 			String expectedExpiryDate = randomCouponClipped[2];
 			expectedExpiryDate = expectedExpiryDate.replace(":", "");
 
-			String actualBrandName = driver.findElement(clippedCouponName)
-					.getText();
+			WebElement clippedCoupon = driver.findElements(clippedCoupons).get(
+					indexOfClippedCoupon);
+			String actualBrandName = clippedCoupon.findElement(
+					clippedCouponName).getText();
 
-			String actualDiscount = driver.findElement(clippedCouponDiscount)
-					.getText();
+			String actualDiscount = clippedCoupon.findElement(
+					clippedCouponDiscount).getText();
 
-			String actualExpiryDate = driver.findElement(
+			String actualExpiryDate = clippedCoupon.findElement(
 					clippedCouponExpiryDate).getText();
 
 			System.out.println("Clipped Coupons details: " + actualBrandName
@@ -590,17 +775,19 @@ public class DigitalCouponsPage extends PageBaseClass {
 	 * Images
 	 *****/
 	public void checkIfCouponDetailsIsDisplayedForUnchecked(
-			String[] randomCouponClipped) {
+			String[] randomCouponClipped, int indexOfClippedCoupon) {
 
 		try {
 			String expectedBrandName = randomCouponClipped[0];
 			String expectedExpiryDate = randomCouponClipped[2];
 			expectedExpiryDate = expectedExpiryDate.replace(":", "");
 
-			String actualBrandName = driver.findElement(clippedCouponName)
-					.getText();
+			WebElement clippedCoupon = driver.findElements(clippedCoupons).get(
+					indexOfClippedCoupon);
+			String actualBrandName = clippedCoupon.findElement(
+					clippedCouponName).getText();
 
-			String actualExpiryDate = driver.findElement(
+			String actualExpiryDate = clippedCoupon.findElement(
 					clippedCouponExpiryDate).getText();
 
 			System.out.println("Clipped Coupons details: " + actualBrandName
@@ -622,9 +809,11 @@ public class DigitalCouponsPage extends PageBaseClass {
 	 * Check if Coupon Discount is NOT present in Print Tab by Unchecking the
 	 * Show Image
 	 ***/
-	public void checkIfDiscountIsNotDisplayed() {
+	public void checkIfDiscountIsNotDisplayed(int indexOfClippedCoupon) {
 		try {
-			driver.findElement(clippedCouponDiscount);
+			WebElement clippedCoupon = driver.findElements(clippedCoupons).get(
+					indexOfClippedCoupon);
+			clippedCoupon.findElement(clippedCouponDiscount);
 
 		} catch (NoSuchElementException e) {
 			System.out.println("Success: Discount is NOT Present");

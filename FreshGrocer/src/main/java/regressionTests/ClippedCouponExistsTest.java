@@ -74,7 +74,7 @@ public class ClippedCouponExistsTest extends BaseTestClass {
 
 		digitalCouponsPage.verifyCouponExistsInClipped(randomCouponClipped);
 
-		digitalCouponsPage.clickUnClipBtn();
+		digitalCouponsPage.clickUnClipBtnForClippedCoupon(randomCouponClipped);
 
 		switchToDefaultFrame();
 

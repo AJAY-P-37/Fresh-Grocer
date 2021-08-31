@@ -23,11 +23,11 @@
         <methods>
           <include name="openBrowser"/>
           <include name="closeAllTheBrowser"/>
-          <include name="printingClippedCouponsWithShowImagesUnChecked" invocation-numbers="0"/>
         </methods>
       </class> <!-- regressionTests.PrintClippedCoupons_UnCheckShowImg_Test -->
       <class name="regressionTests.ClippedCouponExistsTest">
         <methods>
+          <include name="clippingCoupons" invocation-numbers="0"/>
           <include name="openBrowser"/>
           <include name="closeAllTheBrowser"/>
         </methods>
@@ -41,6 +41,7 @@
       <class name="regressionTests.BrandsTest">
         <methods>
           <include name="closeAllTheBrowser"/>
+          <include name="brandsExtraction" invocation-numbers="0"/>
           <include name="openBrowser"/>
         </methods>
       </class> <!-- regressionTests.BrandsTest -->

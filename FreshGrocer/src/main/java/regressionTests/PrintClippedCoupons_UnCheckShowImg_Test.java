@@ -70,23 +70,23 @@ public class PrintClippedCoupons_UnCheckShowImg_Test extends BaseTestClass {
 
 		digitalCouponsPage.clickPrintClippedCouponsButton();
 
-		digitalCouponsPage
+		int indexOfClippedCoupon = digitalCouponsPage
 				.checkClippedCouponIsPresentInPrintTab(randomCouponClipped[0]);
 
 		digitalCouponsPage.unCheckShowImagesCheckBoxIfChecked();
 
-		digitalCouponsPage.checkIfImageIsNotDisplayed();
+		digitalCouponsPage.checkIfImageIsNotDisplayed(indexOfClippedCoupon);
 
 		digitalCouponsPage
-				.checkIfCouponDetailsIsDisplayedForUnchecked(randomCouponClipped);
+				.checkIfCouponDetailsIsDisplayedForUnchecked(randomCouponClipped, indexOfClippedCoupon);
 
-		digitalCouponsPage.checkIfDiscountIsNotDisplayed();
+		digitalCouponsPage.checkIfDiscountIsNotDisplayed(indexOfClippedCoupon);
 
 		digitalCouponsPage.clickCloseInPrintTab();
 
 		digitalCouponsPage.clickClippedLink();
 
-		digitalCouponsPage.clickUnClipBtn();
+		digitalCouponsPage.clickUnClipBtnForClippedCoupon(randomCouponClipped);
 
 		switchToDefaultFrame();
 
