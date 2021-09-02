@@ -4,6 +4,8 @@ import java.util.Hashtable;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import utilities.ReadExcelDataFile;
 import baseClasses.PageBaseClass;
@@ -22,12 +24,11 @@ public class LoginPage extends PageBaseClass {
 	public By password;
 	public By signInBtn;
 
-
 	/****** Assign values to the By locators **********/
 	public void assignValuesForLocatorsFromExcel() {
-		email = getByLocator(locators,"email_id");
-		password = getByLocator(locators,"password_id");
-		signInBtn = getByLocator(locators,"signInBtn_xpath");
+		email = getByLocator(locators, "email_id");
+		password = getByLocator(locators, "password_id");
+		signInBtn = getByLocator(locators, "signInBtn_xpath");
 
 	}
 
@@ -42,16 +43,37 @@ public class LoginPage extends PageBaseClass {
 			String passwordText = readData.getCellData(environment, "password",
 					2);
 
-			driver.findElement(email).sendKeys(emailText);
-			driver.findElement(password).sendKeys(passwordText);
-			driver.findElement(signInBtn).click();
+			int count = 1;
+			do {
+				try {
+					WebDriverWait wait = new WebDriverWait(driver, 30);
+					wait.until(ExpectedConditions
+							.visibilityOfElementLocated(email));
 
-			System.out.println("Success: Logged In");
+					driver.findElement(email).sendKeys(emailText);
+					driver.findElement(password).sendKeys(passwordText);
+					driver.findElement(signInBtn).click();
+					System.out.println("Success: Logged In in attempt no. " + count);
+
+					break;
+				} catch (Exception e) {
+					refreshPage();
+				}
+				count++;
+				if (count == 3) {
+
+					System.out
+							.println("Sign In page did NOT load even after "
+									+ count
+									+ " attempts, for 30 seconds each attempt");
+					reportFail("Sign In page did NOT load even after "
+							+ count + " attempts, for 30 seconds each attempt");
+				}
+			} while (count <= 3);
 
 		} catch (Exception e) {
 			reportFail(e.getMessage());
 		}
 
 	}
-
 }

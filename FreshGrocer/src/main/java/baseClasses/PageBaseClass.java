@@ -16,6 +16,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Coordinates;
 import org.openqa.selenium.interactions.Locatable;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import utilities.DateUtil;
@@ -36,39 +38,54 @@ public class PageBaseClass extends BaseTestClass {
 							+ "url_username_pwd.xlsx");
 
 			String websiteURL = readData.getCellData(environment, "url", 2);
-			driver.get(websiteURL);
 
-			System.out.println("Application Opened");
+			int count = 1;
+			String expectedTitle = "The Fresh Grocer";
+			do {
 
-		} catch (TimeoutException e) {
+				try {
+					driver.get(websiteURL);
 
-			try {
-				
-				driver.navigate().refresh();
-				System.out.println("Page refereshed due to Time Out Exception");
-			} catch (Exception e1) {
-				reportFail(e.getMessage());
-			}
+					if (expectedTitle.equals(getTitle())) {
+						System.out.println("Page Loaded in the attempt no. "
+								+ count);
+						break;
+					}
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+				count++;
+				if (count == 3) {
+					System.out.println("Page did NOT load even after " + count
+							+ " attempts, for 10 seconds each attempt");
+					reportFail("Page did NOT load even after " + count
+							+ " attempts, for 10 seconds each attempt");
+				}
+			} while (count <= 3);
 
 		} catch (Exception e) {
+
 			reportFail(e.getMessage());
+
 		}
 	}
 
 	/****************** Get Page Title ***********************/
-	public void getTitle(String expectedTitle) {
+	public String getTitle() {
+
+		String title = null;
 		try {
-			Assert.assertEquals(driver.getTitle(), expectedTitle);
-			reportPass("Actual Title : " + driver.getTitle()
-					+ " - equals to Expected Title : " + expectedTitle);
+			title = driver.getTitle();
 		} catch (Exception e) {
 			reportFail(e.getMessage());
 		}
+		return title;
 
 	}
 
 	/******* Read the Locators from Excel *********/
 	public Hashtable<String, String> readLocators(String sheetName) {
+
 		ReadExcelDataFile readData = new ReadExcelDataFile(
 				System.getProperty("user.dir")
 						+ "/src/main/resources/TestData/" + "locators.xlsx");
@@ -91,6 +108,7 @@ public class PageBaseClass extends BaseTestClass {
 
 	/******** Get the By class from the locator name ******/
 	public By getByLocator(Hashtable<String, String> locator, String locatorKey) {
+
 		By by = null;
 		String temp = locatorKey.toLowerCase();
 		String locatorValue = locator.get(locatorKey);
@@ -116,12 +134,14 @@ public class PageBaseClass extends BaseTestClass {
 
 	/****** Scroll the the Web page *********/
 	public void scrollToElement(WebElement element) {
+
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView(true)", element);
 	}
 
 	/**** Scroll to the Elements in Frame *****/
 	public void scrollToView(WebElement element) {
+
 		Coordinates coord = ((Locatable) element).getCoordinates();
 		coord.onPage();
 		coord.inViewPort();
@@ -129,6 +149,7 @@ public class PageBaseClass extends BaseTestClass {
 
 	/****************** Reporting Functions ***********************/
 	public void reportFail(String reportString) {
+
 		takeScreenShotOnFailure();
 		Assert.fail(reportString);
 	}
@@ -174,13 +195,13 @@ public class PageBaseClass extends BaseTestClass {
 					+ fileNamePrefix + " in directory " + dirPath);
 			reportFail("More than one file found for the prefix "
 					+ fileNamePrefix + " in directory " + dirPath);
-			
+
 		} else if (matchedFiles.size() == 0) {
 			System.out.println("No matched file found for Prefix "
 					+ fileNamePrefix + " in directory " + dirPath);
 			reportFail("No matched file found for Prefix " + fileNamePrefix
 					+ " in directory " + dirPath);
-			
+
 		} else if (matchedFiles.size() == 1) {
 			path = matchedFiles.get(0);
 			System.out.println("Success: File prefix matched with " + path);

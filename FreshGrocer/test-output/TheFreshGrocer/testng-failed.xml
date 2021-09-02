@@ -2,10 +2,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite guice-stage="DEVELOPMENT" name="Failed suite [TheFreshGrocer]">
   <parameter name="environment" value="staging"/>
-  <parameter name="browser" value="chrome"/>
-  <test name="Regression test(failed)">
+  <parameter name="browser" value="firefox"/>
+  <test name="Firefox test(failed)">
     <parameter name="environment" value="staging"/>
-    <parameter name="browser" value="chrome"/>
+    <parameter name="browser" value="firefox"/>
     <classes>
       <class name="regressionTests.PrintClippedCoupons_CheckShowImg_Test">
         <methods>
@@ -19,25 +19,6 @@
           <include name="openBrowser"/>
         </methods>
       </class> <!-- regressionTests.ValidateSingleCategoryUnderCategoriesListedTest -->
-      <class name="regressionTests.PrintClippedCoupons_UnCheckShowImg_Test">
-        <methods>
-          <include name="openBrowser"/>
-          <include name="closeAllTheBrowser"/>
-        </methods>
-      </class> <!-- regressionTests.PrintClippedCoupons_UnCheckShowImg_Test -->
-      <class name="regressionTests.ClippedCouponExistsTest">
-        <methods>
-          <include name="clippingCoupons" invocation-numbers="0"/>
-          <include name="openBrowser"/>
-          <include name="closeAllTheBrowser"/>
-        </methods>
-      </class> <!-- regressionTests.ClippedCouponExistsTest -->
-      <class name="regressionTests.CategoriesTest">
-        <methods>
-          <include name="openBrowser"/>
-          <include name="closeAllTheBrowser"/>
-        </methods>
-      </class> <!-- regressionTests.CategoriesTest -->
       <class name="regressionTests.BrandsTest">
         <methods>
           <include name="closeAllTheBrowser"/>
@@ -45,6 +26,24 @@
           <include name="openBrowser"/>
         </methods>
       </class> <!-- regressionTests.BrandsTest -->
+      <class name="regressionTests.CategoriesTest">
+        <methods>
+          <include name="openBrowser"/>
+          <include name="closeAllTheBrowser"/>
+        </methods>
+      </class> <!-- regressionTests.CategoriesTest -->
+      <class name="regressionTests.ClippedCouponExistsTest">
+        <methods>
+          <include name="openBrowser"/>
+          <include name="closeAllTheBrowser"/>
+        </methods>
+      </class> <!-- regressionTests.ClippedCouponExistsTest -->
+      <class name="regressionTests.PrintClippedCoupons_UnCheckShowImg_Test">
+        <methods>
+          <include name="openBrowser"/>
+          <include name="closeAllTheBrowser"/>
+        </methods>
+      </class> <!-- regressionTests.PrintClippedCoupons_UnCheckShowImg_Test -->
     </classes>
-  </test> <!-- Regression test(failed) -->
+  </test> <!-- Firefox test(failed) -->
 </suite> <!-- Failed suite [TheFreshGrocer] -->

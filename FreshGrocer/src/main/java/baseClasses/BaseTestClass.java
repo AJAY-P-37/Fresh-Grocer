@@ -12,8 +12,11 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -45,6 +48,9 @@ public class BaseTestClass {
 				System.setProperty("webdriver.gecko.driver",
 						System.getProperty("user.dir")
 								+ "/src/main/resources/Drivers/geckodriver.exe");
+				
+				System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE,"true");
+				System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"/dev/null");
 //				FirefoxOptions options = new FirefoxOptions();
 //				options.setHeadless(true);
 				driver = new FirefoxDriver();
@@ -82,8 +88,8 @@ public class BaseTestClass {
 			System.out.println(e.getMessage());
 		}
 
-		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
-		driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
+		//driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 
 	}
@@ -121,6 +127,12 @@ public class BaseTestClass {
 		driver.switchTo().defaultContent();
 
 		System.out.println("Success: Switched to Default frame");
+	}
+	
+	/****** Do a refresh *****/
+	public void refreshPage() {
+		
+		driver.navigate().refresh();
 	}
 	
 	/***************** Wait Functions in Framework *****************/

@@ -6,7 +6,7 @@
 
 	<!-- Suite -->
 
-	<test name="Regression test" thread-count="1">
+	<test name="Chrome test">
 
 		<!-- <class name="regressionTests.BrandsTest" /> <class name="regressionTests.CategoriesTest" 
 			/> <class name="regressionTests.ClippedCouponExistsTest" /> <class name="regressionTests.PrintClippedCoupons_CheckShowImg_Test" 
@@ -25,7 +25,24 @@
 			<class name="regressionTests.PrintClippedCoupons_UnCheckShowImg_Test" />
 			<class
 				name="regressionTests.ValidateSingleCategoryUnderCategoriesListedTest" />
+		</classes>
 
+
+	</test>
+
+	<test name="Firefox test">
+
+		<parameter name="browser" value="firefox"></parameter>
+		<parameter name="environment" value="staging"></parameter>
+
+		<classes>
+			<class name="regressionTests.BrandsTest" />
+			<class name="regressionTests.CategoriesTest" />
+			<class name="regressionTests.ClippedCouponExistsTest" />
+			<class name="regressionTests.PrintClippedCoupons_CheckShowImg_Test" />
+			<class name="regressionTests.PrintClippedCoupons_UnCheckShowImg_Test" />
+			<class
+				name="regressionTests.ValidateSingleCategoryUnderCategoriesListedTest" />
 		</classes>
 
 

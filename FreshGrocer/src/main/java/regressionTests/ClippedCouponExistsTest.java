@@ -39,13 +39,30 @@ public class ClippedCouponExistsTest extends BaseTestClass {
 
 		landPage.closePopUp();
 
-		landPage.checkIfSignInIsPresent();
+		boolean present = landPage.checkIfSignInIsPresent();
+		if(present){
+			landPage.clickSignIn();
 
-		landPage.clickSignIn();
+			logPage.enterCredentials(environment);
+		}else{
+			
+			present = landPage.checkIfMyAccountIsPresent();
+			if(present){
+				
+				landPage.clickAccountHeaderButton();
 
-		logPage.enterCredentials(environment);
+				landPage.clickSignOutButton();
+				
+				present = landPage.checkIfSignInIsPresent();
+				if(present){
+					landPage.clickSignIn();
 
-		landPage.checkIfMyAccountIsPresent();
+					logPage.enterCredentials(environment);
+				}
+			}
+		}
+		
+		present = landPage.checkIfMyAccountIsPresent();
 
 		landPage.clickDigitalCouponsButton();
 

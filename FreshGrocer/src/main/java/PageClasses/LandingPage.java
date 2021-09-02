@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -77,8 +78,9 @@ public class LandingPage extends PageBaseClass {
 
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, 10);
-			wait.until(ExpectedConditions.visibilityOfElementLocated(popUpBtn));
-			driver.findElement(popUpBtn).click();
+			WebElement popUp = wait.until(ExpectedConditions
+					.visibilityOfElementLocated(popUpBtn));
+			popUp.click();
 			System.out.println("Success: PopUp Closed");
 		} catch (TimeoutException e) {
 			System.out.println("Pop did not exists");
@@ -90,22 +92,52 @@ public class LandingPage extends PageBaseClass {
 	}
 
 	/********* Check if Sign In is present before Signing In ********/
-	public void checkIfSignInIsPresent() {
+	public boolean checkIfSignInIsPresent() {
+
+		boolean present = false;
 		try {
 
-			WebDriverWait wait = new WebDriverWait(driver, 10);
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(accountHeaderBtn));
+			int count = 1;
+			do {
+				String expectedText = "Sign In or Register";
+				String actualText = null;
 
-			String expectedText = "Sign In or Register";
-			String actualText = driver.findElement(signInOrRegisterText)
-					.getText();
-			Assert.assertEquals(actualText, expectedText);
-			System.out.println("Success: Sign In button is Present");
+				try {
+					WebDriverWait wait = new WebDriverWait(driver, 30);
+					wait.until(ExpectedConditions
+							.visibilityOfElementLocated(accountHeaderBtn));
+
+					actualText = driver.findElement(signInOrRegisterText)
+							.getText();
+
+					if (actualText.equals(expectedText)) {
+
+						Assert.assertEquals(actualText, expectedText);
+						present = true;
+						System.out
+								.println("Success: Sign In button is Present in attempt no. "
+										+ count);
+						break;
+					}
+				} catch (Exception e) {
+					refreshPage();
+
+				}
+				count++;
+				if (count == 3) {
+					System.out
+							.println("Sign In or Register Text did NOT load even after "
+									+ count
+									+ " attempts, for 30 seconds each attempt");
+					reportFail("Sign In or Register Text did NOT load even after "
+							+ count + " attempts, for 30 seconds each attempt");
+				}
+			} while (count <= 3);
 
 		} catch (Exception e) {
-			reportFail(e.getMessage());
+			present = false;
 		}
+		return present;
 	}
 
 	/********* Click in the SignIn Button ************/
@@ -123,17 +155,48 @@ public class LandingPage extends PageBaseClass {
 	}
 
 	/********* Check if My Account is present after Signing In ********/
-	public void checkIfMyAccountIsPresent() {
-		try {
+	public boolean checkIfMyAccountIsPresent() {
 
-			WebDriverWait wait = new WebDriverWait(driver, 10);
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(myAccountText));
-			String myAccounText = driver.findElement(myAccountText).getText();
-			System.out.println("Success: " + myAccounText + " text is present");
+		boolean isPresent = false;
+		try {
+			int count = 1;
+			do {
+				String expectedText = "My Account";
+				String actualText = null;
+
+				try {
+
+					WebDriverWait wait = new WebDriverWait(driver, 30);
+					WebElement myAccountElement = wait.until(ExpectedConditions
+							.visibilityOfElementLocated(myAccountText));
+					actualText = myAccountElement.getText();
+
+					if (actualText.equals(expectedText)) {
+						Assert.assertEquals(actualText, expectedText);
+						isPresent = true;
+						System.out.println("Success: " + actualText
+								+ " text is present in attempt no. " + count);
+						break;
+					}
+
+				} catch (Exception e) {
+					refreshPage();
+				}
+				count++;
+				if (count == 3) {
+					System.out
+							.println("My Account Text did NOT load even after "
+									+ count
+									+ " attempts, for 30 seconds each attempt");
+					reportFail("My Account Text did NOT load even after "
+							+ count + " attempts, for 30 seconds each attempt");
+				}
+			} while (count <= 3);
+
 		} catch (Exception e) {
-			reportFail(e.getMessage());
+			isPresent = false;
 		}
+		return isPresent;
 	}
 
 	/*********** Click Digital Coupons Link **********/
@@ -157,38 +220,39 @@ public class LandingPage extends PageBaseClass {
 	public void waitForFrameToLoadOrDoRefresh() {
 
 		try {
+			int count = 1;
+			do {
 
-			WebDriverWait wait = new WebDriverWait(driver, 90);
-			wait.until(ExpectedConditions
-					.frameToBeAvailableAndSwitchToIt(couponsFrame));
+				try {
+					WebDriverWait wait = new WebDriverWait(driver, 30);
+					wait.until(ExpectedConditions
+							.frameToBeAvailableAndSwitchToIt(couponsFrame));
 
-			System.out.println("Success: Switched to the Frame");
+					System.out
+							.println("Success: Switched to the Frame in attempt no. "
+									+ count);
 
-			wait.until(ExpectedConditions
-					.invisibilityOfElementLocated(loadingCouponsText));
+					wait.until(ExpectedConditions
+							.invisibilityOfElementLocated(loadingCouponsText));
+					System.out
+							.println("Success: Loading Coupons... is invisible and the coupons are being visiblein attempt no. "
+									+ count);
+					break;
 
-			System.out
-					.println("Success: Loading Coupons... is invisible and the coupons are being visible");
+				} catch (Exception e) {
+					refreshPage();
+				}
+				count++;
+				if (count == 3) {
+					System.out
+							.println("Digital Coupons Frame did NOT load even after "
+									+ count
+									+ " attempts, for 30 seconds each attempt");
+					reportFail("Digital Coupons Frame did NOT load even after "
+							+ count + " attempts, for 30 seconds each attempt");
+				}
+			} while (count <= 3);
 
-		} catch (NoSuchElementException e) {
-			try {
-				driver.navigate().refresh();
-				System.out
-						.println("Page refreshes because the Coupons frame was loading more than 90 seconds");
-				driver.findElement(digitalCouponsLink).click();
-
-				WebDriverWait wait = new WebDriverWait(driver, 90);
-				wait.until(ExpectedConditions
-						.frameToBeAvailableAndSwitchToIt(couponsFrame));
-				System.out.println("Success: Switched to the Frame");
-
-				wait.until(ExpectedConditions
-						.invisibilityOfElementLocated(loadingCouponsText));
-				System.out
-				.println("Success: Loading Coupons... is invisible and the coupons are being visible");
-			} catch (Exception e1) {
-				reportFail(e1.getMessage());
-			}
 		} catch (Exception e) {
 			reportFail(e.getMessage());
 		}

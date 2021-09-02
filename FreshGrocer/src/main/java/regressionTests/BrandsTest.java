@@ -33,6 +33,7 @@ public class BrandsTest extends BaseTestClass {
 		landPage = new LandingPage(driver);
 		brandsPage = new BrandsElements(driver);
 	}
+	
 
 	@Test
 	@Parameters("environment")
@@ -41,15 +42,34 @@ public class BrandsTest extends BaseTestClass {
 		basePage.openApplication(environment);
 
 		landPage.closePopUp();
+		
+		boolean present = landPage.checkIfSignInIsPresent();
+		if(present){
+			landPage.clickSignIn();
 
-		landPage.checkIfSignInIsPresent();
+			logPage.enterCredentials(environment);
+		}else{
+			
+			present = landPage.checkIfMyAccountIsPresent();
+			if(present){
+				
+				landPage.clickAccountHeaderButton();
 
-		landPage.clickSignIn();
+				landPage.clickSignOutButton();
+				
+				present = landPage.checkIfSignInIsPresent();
+				if(present){
+					landPage.clickSignIn();
 
-		logPage.enterCredentials(environment);
-
-		landPage.checkIfMyAccountIsPresent();
-
+					logPage.enterCredentials(environment);
+				}
+			}else{
+				refreshPage();
+			}
+		}
+		
+		present = landPage.checkIfMyAccountIsPresent();
+		
 		landPage.clickDigitalCouponsButton();
 
 		landPage.waitForFrameToLoadOrDoRefresh();

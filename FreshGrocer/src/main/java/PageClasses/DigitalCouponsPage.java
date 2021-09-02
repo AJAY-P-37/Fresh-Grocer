@@ -38,6 +38,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 	public By couponExpiryDate;
 	public By couponDescription;
 	public By modalContent;
+	public By modalContentBody;
 	public By modalContentOkBtn;
 	public By modalContentCloseBtn;
 	public By loadedText;
@@ -46,6 +47,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 	public By noClippedCouponsText;
 	public By printClippedCouponBtn;
 	public By clippedCoupons;
+	public By printLoadingText;
 	public By clippedCouponName;
 	public By clippedCouponDiscount;
 	public By clippedCouponExpiryDate;
@@ -82,8 +84,10 @@ public class DigitalCouponsPage extends PageBaseClass {
 		couponExpiryDate = getByLocator(locators, "couponExpiryDate_xpath");
 		couponDescription = getByLocator(locators, "couponDescription_xpath");
 		modalContent = getByLocator(locators, "modalContent_xpath");
+		modalContentBody = getByLocator(locators, "modalContentBody_xpath");
 		modalContentCloseBtn = getByLocator(locators,
 				"modalContentCloseBtn_xpath");
+		modalContentOkBtn = getByLocator(locators, "modalContentOkBtn_xpath");
 		loadedText = getByLocator(locators, "loadedText_xpath");
 		unClipBtn = getByLocator(locators, "unClipBtn_xpath");
 		clippedLink = getByLocator(locators, "clippedLink_xpath");
@@ -92,6 +96,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 		printClippedCouponBtn = getByLocator(locators,
 				"printClippedCouponBtn_xpath");
 		clippedCoupons = getByLocator(locators, "clippedCoupons_xpath");
+		printLoadingText = getByLocator(locators, "printLoadingText_xpath");
 		clippedCouponName = getByLocator(locators, "clippedCouponName_xpath");
 		clippedCouponDiscount = getByLocator(locators,
 				"clippedCouponDiscount_xpath");
@@ -102,7 +107,6 @@ public class DigitalCouponsPage extends PageBaseClass {
 		closeInPrintClippedCouponBtn = getByLocator(locators,
 				"closeInPrintClippedCouponBtn_xpath");
 		allCouponsLink = getByLocator(locators, "allCouponsLink_xpath");
-		modalContentOkBtn = getByLocator(locators, "modalContentOkBtn_xpath");
 
 	}
 
@@ -113,14 +117,15 @@ public class DigitalCouponsPage extends PageBaseClass {
 		WebDriverWait wait = new WebDriverWait(driver, 5);
 		try {
 
+			List<WebElement> loadToCard = wait.until(ExpectedConditions
+					.visibilityOfNestedElementsLocatedBy(clippedCoupon,
+							loadToCardBtnXpath));
 			wait.until(ExpectedConditions.textToBePresentInElement(
-					clippedCoupon.findElement(loadToCardBtnXpath),
-					"Load To Card"));
+					loadToCard.get(0), "Load To Card"));
 
 			String expectedText = "Load To Card";
 
-			String actualText = clippedCoupon.findElement(loadToCardBtnXpath)
-					.getText();
+			String actualText = loadToCard.get(0).getText();
 
 			System.out.println("Text Changed to Load To Card for "
 					+ clippedCoupon.findElement(couponName).getText());
@@ -129,24 +134,35 @@ public class DigitalCouponsPage extends PageBaseClass {
 			textChanged = true;
 		} catch (Exception e) {
 
+			System.out.println("Text did NOT Change to Load To Card for "
+					+ clippedCoupon.findElement(couponName).getText());
 			try {
-				wait = new WebDriverWait(driver, 5);
-				wait.until(ExpectedConditions
-						.visibilityOfElementLocated(modalContent));
-
-				System.out
-						.println("Error occurred while Unclipping the coupon");
-
 				scrollToElement(driver.findElement(printClippedCouponBtn));
 
-				wait = new WebDriverWait(driver, 10);
+				wait = new WebDriverWait(driver, 5);
+				WebElement modalDiv = wait.until(ExpectedConditions
+						.visibilityOfElementLocated(modalContent));
+
+				WebElement modalBody = wait.until(ExpectedConditions
+						.visibilityOfElementLocated(modalContentBody));
+
+				System.out
+						.println("PopUp occurred while Unclipping the coupon. It shows "
+								+ modalBody.getText());
+
+				wait = new WebDriverWait(driver, 5);
 				WebElement closeModalBtn = wait.until(ExpectedConditions
 						.elementToBeClickable(modalContentCloseBtn));
+
+				scrollToView(closeModalBtn);
 				closeModalBtn.click();
 				System.out
 						.println("Close Button Clicked in modal. Leaving this Clipped Coupon "
 								+ clippedCoupon.findElement(couponName)
 										.getText());
+
+				wait = new WebDriverWait(driver, 5);
+				wait.until(ExpectedConditions.invisibilityOf(modalDiv));
 
 				textChanged = false;
 			} catch (Exception e1) {
@@ -197,7 +213,8 @@ public class DigitalCouponsPage extends PageBaseClass {
 							.elementToBeClickable(unClipButton.get(0)));
 					unClipButton.get(0).click();
 					System.out.println("Unclip Clicked for "
-							+ clippedCoupon.findElement(couponName));
+							+ clippedCoupon.findElement(couponName).getText());
+
 					boolean textChanged = verifyChangesAfterUnClip(clippedCoupon);
 					if (!textChanged) {
 						continue;
@@ -254,19 +271,23 @@ public class DigitalCouponsPage extends PageBaseClass {
 				loadToCardString = couponContainer.get(index)
 						.findElement(By.tagName("a")).getText().trim();
 
+				String brandName = couponContainer.get(index)
+						.findElement(couponName).getText();
+
 				if (loadToCardString.equals("Load To Card")) {
 					Assert.assertEquals(loadToCardString, "Load To Card");
 					System.out
-							.println("Success: Load to card is present at coupon number "
-									+ (index + 1));
+							.println("Success: Load to card is present at coupon "
+									+ brandName);
 
 				} else if (loadToCardString.equals("Unclip")) {
-					System.out.println("Unclip is present at coupon number "
-							+ (index + 1) + " .It can be ignored");
+					System.out.println("Unclip is present at coupon "
+							+ brandName + ". It can be ignored");
 
 				} else if (loadToCardString.equals("Log In to Load")) {
 					System.out
-							.println("Fail: Log In To Load Text present in Coupon after Log In");
+							.println("Fail: Log In To Load Text present after Log In in Coupon "
+									+ brandName);
 					Assert.assertEquals(loadToCardString, "Load To Card",
 							"Text present in Coupon after Log in =>");
 				}
@@ -334,7 +355,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 				randomNumber = clickLoadToCardOfRandomCoupon();
 			} catch (Exception e) {
 
-				WebDriverWait wait = new WebDriverWait(driver, 10);
+				WebDriverWait wait = new WebDriverWait(driver, 5);
 				wait.until(ExpectedConditions.elementToBeClickable(randomCoupon
 						.findElement(loadToCardBtnXpath)));
 
@@ -358,40 +379,51 @@ public class DigitalCouponsPage extends PageBaseClass {
 	public int checkIfCouponClickingHasErrors(int randomNumber) {
 
 		try {
+
 			WebDriverWait wait = new WebDriverWait(driver, 5);
 			wait.until(ExpectedConditions
 					.visibilityOfElementLocated(modalContent));
 
+			WebElement modalBody = wait.until(ExpectedConditions
+					.visibilityOfElementLocated(modalContentBody));
 			System.out
-					.println("Error Occured While Clicking the Load To Card of the Coupon");
+					.println("PopUp Occured While Clicking the Load To Card of the Coupon. It shows '"
+							+ modalBody.getText() + "'");
 
 			scrollToElement(driver.findElement(printClippedCouponBtn));
 
-			wait = new WebDriverWait(driver, 10);
-			WebElement closeModalBtn = wait.until(ExpectedConditions
-					.elementToBeClickable(modalContentCloseBtn));
-			closeModalBtn.click();
-			System.out
-					.println("Close Button Clicked. Clicking another random Coupon");
+			try {
 
-			randomNumber = clickLoadToCardOfRandomCoupon();
+				wait = new WebDriverWait(driver, 5);
+				WebElement closeModalBtn = wait.until(ExpectedConditions
+						.elementToBeClickable(modalContentCloseBtn));
+				closeModalBtn.click();
+				System.out
+						.println("Close Button found and Clicked. Clicking another random Coupon");
+				randomNumber = clickLoadToCardOfRandomCoupon();
+
+			} catch (TimeoutException e) {
+
+				try {
+					wait = new WebDriverWait(driver, 5);
+					WebElement okModalBtn = wait.until(ExpectedConditions
+							.elementToBeClickable(modalContentOkBtn));
+					okModalBtn.click();
+					System.out
+							.println("OK Button found and Clicked for the above MESSAGE");
+
+					wait.until(ExpectedConditions.invisibilityOf(okModalBtn));
+
+				} catch (Exception e1) {
+
+					System.out.println(e1.getMessage());
+					reportFail(e1.getMessage());
+				}
+			}
+
 		} catch (TimeoutException e) {
 			System.out
-					.println("Success: No Error Occured While Clicking the Load To Card of Coupon.");
-
-		} catch (NoSuchElementException e) {
-
-			try {
-				WebDriverWait wait = new WebDriverWait(driver, 5);
-				WebElement okModalBtn = wait.until(ExpectedConditions
-						.elementToBeClickable(modalContentOkBtn));
-				okModalBtn.click();
-				System.out.println("OK Button Clicked for the MESSAGE");
-			} catch (Exception e1) {
-
-				System.out.println(e1.getMessage());
-				reportFail(e1.getMessage());
-			}
+					.println("No PopUp Occured While Clicking the Load To Card of Coupon.");
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -411,9 +443,9 @@ public class DigitalCouponsPage extends PageBaseClass {
 			WebElement randomCoupon = couponsContainer.get(randomNumber);
 			scrollToElement(randomCoupon);
 
-			WebDriverWait wait = new WebDriverWait(driver, 10);
-			wait.until(ExpectedConditions.textToBePresentInElement(
-					randomCoupon.findElement(unClipBtn), "Unclip"));
+			WebDriverWait wait = new WebDriverWait(driver, 5);
+			wait.until(ExpectedConditions.visibilityOfNestedElementsLocatedBy(
+					randomCoupon, unClipBtn));
 
 			String expectedText = "Loaded -Unclip";
 
@@ -423,7 +455,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 			System.out.println("Success: Text changed to " + actualText);
 
 			Assert.assertEquals(actualText, expectedText,
-					"The expected Text is not present in the Load To Card Button");
+					"The expected Text is NOT present in the Load To Card Button");
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -435,20 +467,20 @@ public class DigitalCouponsPage extends PageBaseClass {
 	public void clickClippedLink() {
 
 		try {
-			WebDriverWait wait = new WebDriverWait(driver, 10);
+			WebDriverWait wait = new WebDriverWait(driver, 5);
 			WebElement clipped = wait.until(ExpectedConditions
 					.visibilityOfElementLocated(clippedLink));
 
-			// scrollToView(clipped);
+			scrollToView(clipped);
 
-			wait = new WebDriverWait(driver, 10);
+			wait = new WebDriverWait(driver, 5);
 			wait.until(ExpectedConditions.elementToBeClickable(clipped));
 
-			Actions actions = new Actions(driver);
-			actions.moveToElement(clipped).click().build().perform();
+			// Actions actions = new Actions(driver);
+			// actions.moveToElement(clipped).click().build().perform();
 
-			// JavascriptExecutor jse = (JavascriptExecutor)driver;
-			// jse.executeScript("arguments[0].click()", clipped);
+			JavascriptExecutor jse = (JavascriptExecutor) driver;
+			jse.executeScript("arguments[0].click()", clipped);
 
 			System.out.println("Success: Clipped Link clicked");
 		} catch (Exception e) {
@@ -597,8 +629,8 @@ public class DigitalCouponsPage extends PageBaseClass {
 		try {
 			boolean couponPresent = false;
 			WebDriverWait wait = new WebDriverWait(driver, 10);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By
-					.xpath("//*[@class='print-coupon']//*[contains(text(),'Loading..')]")));
+			wait.until(ExpectedConditions
+					.invisibilityOfElementLocated(printLoadingText));
 
 			List<WebElement> clippedCouponsInPrintTab = driver
 					.findElements(clippedCoupons);
@@ -608,10 +640,10 @@ public class DigitalCouponsPage extends PageBaseClass {
 						.get(index);
 				String actualBrandName = clippedCouponInPrintTab.findElement(
 						clippedCouponName).getText();
-				System.out.println(actualBrandName + " " + brandName);
 				if (actualBrandName.equals(brandName)) {
-					System.out
-							.println("Success: The Clipped Coupons is Present in the Print Clipped Coupons Tab");
+					System.out.println("Success: The Clipped Coupon "
+							+ actualBrandName
+							+ "is Present in the Print Clipped Coupons Tab");
 					couponPresent = true;
 					indexOfClippedCoupon = index;
 					break;
