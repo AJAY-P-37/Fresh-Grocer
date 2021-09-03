@@ -8,6 +8,8 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import utilities.ReadExcelDataFile;
@@ -35,12 +37,21 @@ public class CategoriesElements extends PageBaseClass {
 
 		System.out
 				.println("*******Get All the Categories from the Page*********");
-		List<WebElement> categoriesElements = driver
-				.findElements(categoriesList);
+		
+		
 
-		String[] categoriesText = new String[categoriesElements.size()];
+		String[] categoriesText = null;
 
 		try {
+			
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			wait.until(ExpectedConditions
+					.visibilityOfAllElementsLocatedBy(categoriesList));
+			
+			List<WebElement> categoriesElements = driver
+					.findElements(categoriesList);
+			
+			categoriesText = new String[categoriesElements.size()];
 			for (int index = 0; index < categoriesElements.size(); index++) {
 
 				WebElement category = categoriesElements.get(index);
@@ -48,6 +59,10 @@ public class CategoriesElements extends PageBaseClass {
 				scrollToView(category);
 
 				String categoryText = category.getText().trim();
+				if (categoryText.equals("")) {
+					scrollToView(category);
+					categoryText = category.getText().trim();
+				}
 				categoriesText[index] = categoryText;
 				System.out.println(categoriesText[index] + " <= is in page");
 			}
@@ -89,11 +104,12 @@ public class CategoriesElements extends PageBaseClass {
 	/***** Reading all the Category from Excel ********/
 	public String[] readAllCategoriesFromExcel() {
 
-		String dir = System.getProperty("user.dir")+ "/src/main/resources/TestData";
+		String dir = System.getProperty("user.dir")
+				+ "/src/main/resources/TestData";
 		String fileNamePrefix = "categories";
 		String path = readFileWithPrefix(dir, fileNamePrefix);
 		ReadExcelDataFile readData = new ReadExcelDataFile(path);
-		
+
 		int rowCount = readData.getRowCount("categories") - 1;
 		if (rowCount == -1) {
 			System.out.println("Sheet Categories NOT found");
@@ -117,7 +133,7 @@ public class CategoriesElements extends PageBaseClass {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
 		}
-		
+
 		return categoriesText;
 
 	}
@@ -153,7 +169,8 @@ public class CategoriesElements extends PageBaseClass {
 				}
 			}
 			if (notSortedCategories.size() == 0) {
-				System.out.println("===Success: All the categories are Sorted===");
+				System.out
+						.println("===Success: All the categories are Sorted===");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -250,10 +267,11 @@ public class CategoriesElements extends PageBaseClass {
 		System.out.println("*****Updating the " + sheetName + "******");
 
 		try {
-			String dir = System.getProperty("user.dir")+ "/src/main/resources/TestData";
+			String dir = System.getProperty("user.dir")
+					+ "/src/main/resources/TestData";
 
 			String path = readFileWithPrefix(dir, fileNamePrefix);
-			
+
 			ReadExcelDataFile readData = new ReadExcelDataFile(path);
 
 			readData.clearExistingDataInSheet(sheetName, 2);
@@ -265,17 +283,18 @@ public class CategoriesElements extends PageBaseClass {
 
 				boolean flag = readData.setCellData(sheetName, colName,
 						index + 2, data.get(index));
-				Assert.assertEquals(true, flag, "Excel Data NOT set for" + data.get(index));
+				Assert.assertEquals(true, flag,
+						"Excel Data NOT set for" + data.get(index));
 				System.out.println(data.get(index) + " updated in Excel");
-				
+
 			}
-			
+
 			renameFileWithDateTime(path);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
 		}
-		
+
 	}
 
 	public void updateCategoriesNotSorted(List<String> categoriesNotSorted) {

@@ -43,7 +43,7 @@ public class LoginPage extends PageBaseClass {
 			String passwordText = readData.getCellData(environment, "password",
 					2);
 
-			int count = 1;
+			int count = 0;
 			do {
 				try {
 					WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -53,21 +53,22 @@ public class LoginPage extends PageBaseClass {
 					driver.findElement(email).sendKeys(emailText);
 					driver.findElement(password).sendKeys(passwordText);
 					driver.findElement(signInBtn).click();
-					System.out.println("Success: Logged In in attempt no. " + count);
+					System.out.println("Success: Logged In in attempt no. "
+							+ (count + 1));
 
 					break;
 				} catch (Exception e) {
+					System.out
+							.println("Page did NOT load properly. Refreshing");
 					refreshPage();
 				}
 				count++;
 				if (count == 3) {
 
-					System.out
-							.println("Sign In page did NOT load even after "
-									+ count
-									+ " attempts, for 30 seconds each attempt");
-					reportFail("Sign In page did NOT load even after "
+					System.out.println("Sign In page did NOT load even after "
 							+ count + " attempts, for 30 seconds each attempt");
+					reportFail("Sign In page did NOT load even after " + count
+							+ " attempts, for 30 seconds each attempt");
 				}
 			} while (count <= 3);
 

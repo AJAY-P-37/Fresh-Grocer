@@ -97,7 +97,7 @@ public class LandingPage extends PageBaseClass {
 		boolean present = false;
 		try {
 
-			int count = 1;
+			int count = 0;
 			do {
 				String expectedText = "Sign In or Register";
 				String actualText = null;
@@ -116,10 +116,13 @@ public class LandingPage extends PageBaseClass {
 						present = true;
 						System.out
 								.println("Success: Sign In button is Present in attempt no. "
-										+ count);
+										+ (count + 1));
 						break;
 					}
 				} catch (Exception e) {
+					System.out
+							.println("Page did NOT load properly. Refreshing");
+
 					refreshPage();
 
 				}
@@ -127,10 +130,11 @@ public class LandingPage extends PageBaseClass {
 				if (count == 3) {
 					System.out
 							.println("Sign In or Register Text did NOT load even after "
-									+ count
+									+ (count)
 									+ " attempts, for 30 seconds each attempt");
 					reportFail("Sign In or Register Text did NOT load even after "
-							+ count + " attempts, for 30 seconds each attempt");
+							+ (count)
+							+ " attempts, for 30 seconds each attempt");
 				}
 			} while (count <= 3);
 
@@ -159,7 +163,7 @@ public class LandingPage extends PageBaseClass {
 
 		boolean isPresent = false;
 		try {
-			int count = 1;
+			int count = 0;
 			do {
 				String expectedText = "My Account";
 				String actualText = null;
@@ -175,21 +179,25 @@ public class LandingPage extends PageBaseClass {
 						Assert.assertEquals(actualText, expectedText);
 						isPresent = true;
 						System.out.println("Success: " + actualText
-								+ " text is present in attempt no. " + count);
+								+ " text is present in attempt no. "
+								+ (count + 1));
 						break;
 					}
 
 				} catch (Exception e) {
+					System.out
+							.println("Page did NOT load properly. Refreshing");
 					refreshPage();
 				}
 				count++;
 				if (count == 3) {
 					System.out
 							.println("My Account Text did NOT load even after "
-									+ count
+									+ (count)
 									+ " attempts, for 30 seconds each attempt");
 					reportFail("My Account Text did NOT load even after "
-							+ count + " attempts, for 30 seconds each attempt");
+							+ (count)
+							+ " attempts, for 30 seconds each attempt");
 				}
 			} while (count <= 3);
 
@@ -220,7 +228,7 @@ public class LandingPage extends PageBaseClass {
 	public void waitForFrameToLoadOrDoRefresh() {
 
 		try {
-			int count = 1;
+			int count = 0;
 			do {
 
 				try {
@@ -230,26 +238,29 @@ public class LandingPage extends PageBaseClass {
 
 					System.out
 							.println("Success: Switched to the Frame in attempt no. "
-									+ count);
+									+ (count + 1));
 
 					wait.until(ExpectedConditions
 							.invisibilityOfElementLocated(loadingCouponsText));
 					System.out
 							.println("Success: Loading Coupons... is invisible and the coupons are being visiblein attempt no. "
-									+ count);
+									+ (count + 1));
 					break;
 
 				} catch (Exception e) {
+					System.out
+							.println("Frame did NOT load properly. Refreshing");
 					refreshPage();
 				}
 				count++;
 				if (count == 3) {
 					System.out
 							.println("Digital Coupons Frame did NOT load even after "
-									+ count
+									+ (count )
 									+ " attempts, for 30 seconds each attempt");
 					reportFail("Digital Coupons Frame did NOT load even after "
-							+ count + " attempts, for 30 seconds each attempt");
+							+ (count )
+							+ " attempts, for 30 seconds each attempt");
 				}
 			} while (count <= 3);
 

@@ -1,25 +1,18 @@
 package baseClasses;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BaseTestClass {
 
@@ -37,58 +30,64 @@ public class BaseTestClass {
 						System.getProperty("user.dir")
 								+ "/src/main/resources/Drivers/chromedriver.exe");
 				ChromeOptions options = new ChromeOptions();
-//				options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
-//				options.setExperimentalOption("useAutomationExtension", false);
-				
-//				options.addArguments("headless");
-				
+				// options.setExperimentalOption("excludeSwitches",
+				// Collections.singletonList("enable-automation"));
+				// options.setExperimentalOption("useAutomationExtension",
+				// false);
+
+				// options.addArguments("headless");
+
 				driver = new ChromeDriver(options);
 			} else if (browserName.equalsIgnoreCase("firefox")) {
 
 				System.setProperty("webdriver.gecko.driver",
 						System.getProperty("user.dir")
 								+ "/src/main/resources/Drivers/geckodriver.exe");
-				
-				System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE,"true");
-				System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"/dev/null");
-//				FirefoxOptions options = new FirefoxOptions();
-//				options.setHeadless(true);
+
+				System.setProperty(
+						FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE,
+						"true");
+				System.setProperty(
+						FirefoxDriver.SystemProperty.BROWSER_LOGFILE,
+						"/dev/null");
+				// FirefoxOptions options = new FirefoxOptions();
+				// options.setHeadless(true);
 				driver = new FirefoxDriver();
-				
+
 			} else if (browserName.equalsIgnoreCase("Opera")) {
 				System.setProperty("webdriver.opera.driver",
 						System.getProperty("user.dir")
 								+ "/src/main/resources/Drivers/operadriver");
 				driver = new OperaDriver();
-				
+
 			} else if (browserName.equalsIgnoreCase("IE")) {
 				System.setProperty(
 						"webdriver.ie.driver",
 						System.getProperty("user.dir")
 								+ "/src/main/resources/Drivers/IEDriverServer.exe");
 				driver = new InternetExplorerDriver();
-				
+
 			} else if (browserName.equals("edge")) {
 				System.setProperty(
 						"webdriver.edge.driver",
 						System.getProperty("user.dir")
 								+ "/src/main/resources/Drivers/msedgedriver85.exe");
 
-//				EdgeOptions edgeOptions = new EdgeOptions();
-//				edgeOptions.addArguments("headless");
+				// EdgeOptions edgeOptions = new EdgeOptions();
+				// edgeOptions.addArguments("headless");
 
 				driver = new EdgeDriver();
-				
-			} else if(browserName.equals("safari")) {
+
+			} else if (browserName.equals("safari")) {
 				driver = new SafariDriver();
-				
+
 			}
 		} catch (Exception e) {
 			// reportFail(e.getMessage());
 			System.out.println(e.getMessage());
 		}
 
-		//driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		// driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 
@@ -121,20 +120,37 @@ public class BaseTestClass {
 		System.out.println("Success: Switched to Main Tab");
 	}
 
-	/*******Switch to Parent Frame********/
-	public void switchToDefaultFrame(){
-		
+	/******* Switch to Parent Frame ********/
+	public void switchToDefaultFrame() {
+
 		driver.switchTo().defaultContent();
 
 		System.out.println("Success: Switched to Default frame");
 	}
-	
+
 	/****** Do a refresh *****/
 	public void refreshPage() {
-		
+
 		driver.navigate().refresh();
 	}
-	
+
+	/****
+	 * Wait for CSS Transition
+	 *****/
+	public void waitForCssTransition(WebElement element, String cssValue) {
+
+		String duration = element.getCssValue(cssValue);
+		duration = duration.substring(0, duration.length() - 1);
+		System.out.println("Waiting for " + duration + " seconds for CSS transition to complete");
+		try {
+			Thread.sleep((long) (Double.valueOf(duration) * 1000));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
 	/***************** Wait Functions in Framework *****************/
 	public void waitForPageLoad() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -150,7 +166,7 @@ public class BaseTestClass {
 			}
 		}
 
-		waitLoad(2);
+		waitLoad(1);
 
 		i = 0;
 		while (i != 180) {
@@ -164,11 +180,10 @@ public class BaseTestClass {
 		}
 	}
 
-	public void waitLoad(int i) {
+	public void waitLoad(long i) {
 		try {
 			Thread.sleep(i * 1000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

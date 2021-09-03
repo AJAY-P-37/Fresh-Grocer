@@ -8,6 +8,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import PageClasses.CategoriesElements;
+import PageClasses.DigitalCouponsPage;
 import PageClasses.LandingPage;
 import PageClasses.LoginPage;
 import baseClasses.BaseTestClass;
@@ -18,6 +19,7 @@ public class CategoriesTest extends BaseTestClass {
 	PageBaseClass basePage;
 	LoginPage logPage;
 	LandingPage landPage;
+	DigitalCouponsPage digitalCouponsPage;
 	CategoriesElements categoriesPage;
 
 	@BeforeClass
@@ -29,6 +31,7 @@ public class CategoriesTest extends BaseTestClass {
 		logPage = new LoginPage(driver);
 		basePage = new PageBaseClass(driver);
 		landPage = new LandingPage(driver);
+		digitalCouponsPage = new DigitalCouponsPage(driver);
 		categoriesPage = new CategoriesElements(driver);
 	}
 
@@ -41,33 +44,39 @@ public class CategoriesTest extends BaseTestClass {
 		landPage.closePopUp();
 
 		boolean present = landPage.checkIfSignInIsPresent();
-		if(present){
+		if (present) {
 			landPage.clickSignIn();
 
 			logPage.enterCredentials(environment);
-		}else{
-			
+		} else {
+
 			present = landPage.checkIfMyAccountIsPresent();
-			if(present){
-				
+			if (present) {
+
 				landPage.clickAccountHeaderButton();
 
 				landPage.clickSignOutButton();
-				
+
 				present = landPage.checkIfSignInIsPresent();
-				if(present){
+				if (present) {
 					landPage.clickSignIn();
 
 					logPage.enterCredentials(environment);
 				}
 			}
 		}
-		
+
 		present = landPage.checkIfMyAccountIsPresent();
 
 		landPage.clickDigitalCouponsButton();
 
 		landPage.waitForFrameToLoadOrDoRefresh();
+
+		digitalCouponsPage.clickClippedLink();
+
+		digitalCouponsPage.clickUnClipForAllClippedCoupons();
+		
+		digitalCouponsPage.clickAllCoupons();
 
 		String[] categoriesInPage = categoriesPage.getAllCategoriesFromPage();
 

@@ -31,9 +31,9 @@ public class BrandsTest extends BaseTestClass {
 		logPage = new LoginPage(driver);
 		basePage = new PageBaseClass(driver);
 		landPage = new LandingPage(driver);
+		digitalCouponsPage = new DigitalCouponsPage(driver);
 		brandsPage = new BrandsElements(driver);
 	}
-	
 
 	@Test
 	@Parameters("environment")
@@ -42,37 +42,43 @@ public class BrandsTest extends BaseTestClass {
 		basePage.openApplication(environment);
 
 		landPage.closePopUp();
-		
+
 		boolean present = landPage.checkIfSignInIsPresent();
-		if(present){
+		if (present) {
 			landPage.clickSignIn();
 
 			logPage.enterCredentials(environment);
-		}else{
-			
+		} else {
+
 			present = landPage.checkIfMyAccountIsPresent();
-			if(present){
-				
+			if (present) {
+
 				landPage.clickAccountHeaderButton();
 
 				landPage.clickSignOutButton();
-				
+
 				present = landPage.checkIfSignInIsPresent();
-				if(present){
+				if (present) {
 					landPage.clickSignIn();
 
 					logPage.enterCredentials(environment);
 				}
-			}else{
+			} else {
 				refreshPage();
 			}
 		}
-		
+
 		present = landPage.checkIfMyAccountIsPresent();
-		
+
 		landPage.clickDigitalCouponsButton();
 
 		landPage.waitForFrameToLoadOrDoRefresh();
+
+		digitalCouponsPage.clickClippedLink();
+
+		digitalCouponsPage.clickUnClipForAllClippedCoupons();
+
+		digitalCouponsPage.clickAllCoupons();
 
 		String[] brandsInPage = brandsPage.getAllBrandsFromPage();
 

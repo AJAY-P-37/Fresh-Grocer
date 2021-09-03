@@ -11,13 +11,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Coordinates;
 import org.openqa.selenium.interactions.Locatable;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import utilities.DateUtil;
@@ -39,7 +36,7 @@ public class PageBaseClass extends BaseTestClass {
 
 			String websiteURL = readData.getCellData(environment, "url", 2);
 
-			int count = 1;
+			int count = 0;
 			String expectedTitle = "The Fresh Grocer";
 			do {
 
@@ -48,7 +45,7 @@ public class PageBaseClass extends BaseTestClass {
 
 					if (expectedTitle.equals(getTitle())) {
 						System.out.println("Page Loaded in the attempt no. "
-								+ count);
+								+ (count + 1));
 						break;
 					}
 				} catch (Exception e) {
@@ -56,10 +53,11 @@ public class PageBaseClass extends BaseTestClass {
 				}
 				count++;
 				if (count == 3) {
-					System.out.println("Page did NOT load even after " + count
-							+ " attempts, for 10 seconds each attempt");
-					reportFail("Page did NOT load even after " + count
-							+ " attempts, for 10 seconds each attempt");
+					System.out.println("Page did NOT load even after "
+							+ (count)
+							+ " attempts, for 30 seconds each attempt");
+					reportFail("Page did NOT load even after " + (count)
+							+ " attempts, for 30 seconds each attempt");
 				}
 			} while (count <= 3);
 

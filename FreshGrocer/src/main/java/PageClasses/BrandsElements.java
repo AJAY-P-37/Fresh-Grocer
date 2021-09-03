@@ -43,6 +43,8 @@ public class BrandsElements extends PageBaseClass {
 			WebDriverWait wait = new WebDriverWait(driver, 10);
 			wait.until(ExpectedConditions
 					.visibilityOfAllElementsLocatedBy(brandsList));
+			
+			
 			List<WebElement> brandsElements = driver.findElements(brandsList);
 
 			brandsText = new String[brandsElements.size()];
@@ -53,6 +55,10 @@ public class BrandsElements extends PageBaseClass {
 				scrollToView(brand);
 
 				String brandText = brand.getText().trim();
+				if (brandText.equals("")) {
+					scrollToView(brand);
+					brandText = brand.getText().trim();
+				}
 				brandsText[index] = brandText;
 				System.out.println(brandsText[index] + " <= is in page");
 			}

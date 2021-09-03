@@ -3,7 +3,9 @@ package PageClasses;
 import java.util.Hashtable;
 import java.util.List;
 
+import org.jsoup.safety.Cleaner;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
@@ -467,22 +469,41 @@ public class DigitalCouponsPage extends PageBaseClass {
 	public void clickClippedLink() {
 
 		try {
-			WebDriverWait wait = new WebDriverWait(driver, 5);
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+
 			WebElement clipped = wait.until(ExpectedConditions
 					.visibilityOfElementLocated(clippedLink));
 
-			scrollToView(clipped);
+			int count = 0;
+			do {
+				try {
 
-			wait = new WebDriverWait(driver, 5);
-			wait.until(ExpectedConditions.elementToBeClickable(clipped));
+					waitForCssTransition(clipped, "transition-duration");
+					
+					scrollToView(clipped);
+					wait.until(ExpectedConditions.elementToBeClickable(clipped));
+					clipped.click();
+					System.out
+							.println("Success: Clipped Link clicked in attempt no. "
+									+ (count + 1));
+					break;
+				} catch (Exception e) {
+					System.out
+							.println("Clipped Link is NOT clicked due to the following reason");
+					System.out.println(e.getMessage());
 
-			// Actions actions = new Actions(driver);
-			// actions.moveToElement(clipped).click().build().perform();
+				}
+				count++;
+				if (count == 3) {
 
-			JavascriptExecutor jse = (JavascriptExecutor) driver;
-			jse.executeScript("arguments[0].click()", clipped);
+					System.out
+							.println("Css transition NOT completed even after trying for "
+									+ (count) + " attempts");
+					reportFail("Css transition NOT completed even after trying for "
+							+ (count ) + " attempts");
+				}
+			} while (count <= 3);
 
-			System.out.println("Success: Clipped Link clicked");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
@@ -560,7 +581,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 
 		WebDriverWait wait = null;
 		try {
-			wait = new WebDriverWait(driver, 5);
+			wait = new WebDriverWait(driver, 3);
 
 			WebElement noClippedCoupons = wait.until(ExpectedConditions
 					.visibilityOfElementLocated(noClippedCouponsText));
@@ -731,7 +752,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 			if (result instanceof Boolean) {
 				imageIsDisplayed = (Boolean) result;
 				System.out.println("Success: Image is Displayed");
-				Assert.assertEquals(true, imageIsDisplayed,
+				Assert.assertEquals(imageIsDisplayed, true,
 						"Image is NOT Displayed");
 			}
 		} catch (Exception e) {
@@ -877,14 +898,44 @@ public class DigitalCouponsPage extends PageBaseClass {
 	public void clickAllCoupons() {
 
 		try {
+
 			WebDriverWait wait = new WebDriverWait(driver, 10);
-			wait.until(ExpectedConditions.elementToBeClickable(allCouponsLink));
-			WebElement allCoupons = driver.findElement(allCouponsLink);
+			WebElement allCoupons = wait.until(ExpectedConditions
+					.visibilityOfElementLocated(allCouponsLink));
+			int count = 0;
+			do {
+				try {
 
-			// scrollToElement(allCoupons);
-			allCoupons.click();
+					waitForCssTransition(allCoupons, "transition-duration");
 
-			System.out.println("Success: All coupons is Clicked");
+					scrollToView(allCoupons);
+
+					wait.until(ExpectedConditions
+							.elementToBeClickable(allCoupons));
+
+					allCoupons.click();
+
+					System.out.println("Success: All coupons is Clicked after "
+							+ (count + 1) + " attempts");
+					break;
+
+				} catch (Exception e) {
+					System.out
+							.println("All Coupons Link is NOT clicked due to the following reason");
+					System.out.println(e.getMessage());
+
+				}
+				count++;
+				if (count == 3) {
+
+					System.out
+							.println("Css transition NOT completed even after trying for "
+									+ (count ) + " attempts");
+					reportFail("Css transition NOT completed even after trying for "
+							+ (count) + " attempts");
+				}
+			} while (count <= 3);
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
