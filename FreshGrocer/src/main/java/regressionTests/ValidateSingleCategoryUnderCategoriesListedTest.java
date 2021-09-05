@@ -100,7 +100,7 @@ public class ValidateSingleCategoryUnderCategoriesListedTest extends
 		String[][] couponsArray = digitalCouponsPage
 				.getCouponsInCheckedCategoryFromPage();
 
-		digitalCouponsPage.setAllCouponDataInExcel(couponsArray);
+		digitalCouponsPage.setAllCouponDataInExcel(couponsArray, randomCategoryName);
 
 		switchToDefaultFrame();
 

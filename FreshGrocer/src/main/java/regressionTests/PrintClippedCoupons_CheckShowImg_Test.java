@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import PageClasses.DigitalCouponsPage;
 import PageClasses.LandingPage;
 import PageClasses.LoginPage;
+import PageClasses.PrintTabPage;
 import baseClasses.BaseTestClass;
 import baseClasses.PageBaseClass;
 
@@ -17,6 +18,7 @@ public class PrintClippedCoupons_CheckShowImg_Test extends BaseTestClass {
 	LoginPage logPage;
 	LandingPage landPage;
 	DigitalCouponsPage digitalCouponsPage;
+	PrintTabPage printPage;
 
 	@BeforeClass
 	@Parameters("browser")
@@ -28,6 +30,7 @@ public class PrintClippedCoupons_CheckShowImg_Test extends BaseTestClass {
 		basePage = new PageBaseClass(driver);
 		landPage = new LandingPage(driver);
 		digitalCouponsPage = new DigitalCouponsPage(driver);
+		printPage = new PrintTabPage(driver);
 
 	}
 
@@ -89,17 +92,17 @@ public class PrintClippedCoupons_CheckShowImg_Test extends BaseTestClass {
 
 		digitalCouponsPage.clickPrintClippedCouponsButton();
 
-		int indexOfClippedCoupon = digitalCouponsPage
+		int indexOfClippedCoupon = printPage
 				.checkClippedCouponIsPresentInPrintTab(randomCouponClipped[0]);
 
-		digitalCouponsPage.checkShowImagesCheckBoxIfNotChecked();
+		printPage.checkShowImagesCheckBoxIfNotChecked();
 
-		digitalCouponsPage.checkIfImageIsDisplayed(indexOfClippedCoupon);
+		printPage.checkIfImageIsDisplayed(indexOfClippedCoupon);
 
-		digitalCouponsPage
+		printPage
 				.checkIfCouponDetailsIsDisplayedForChecked(randomCouponClipped, indexOfClippedCoupon);
 
-		digitalCouponsPage.clickCloseInPrintTab();
+		printPage.clickCloseInPrintTab();
 
 		digitalCouponsPage.clickClippedLink();
 

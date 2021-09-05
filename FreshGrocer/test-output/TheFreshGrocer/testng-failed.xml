@@ -13,7 +13,6 @@
           <include name="closeAllTheBrowser"/>
           <include name="openBrowser"/>
           <include name="openBrowser"/>
-          <include name="printingClippedCouponsWithShowImagesChecked" invocation-numbers="0"/>
         </methods>
       </class> <!-- regressionTests.PrintClippedCoupons_CheckShowImg_Test -->
       <class name="regressionTests.ValidateSingleCategoryUnderCategoriesListedTest">
@@ -52,6 +51,7 @@
         <methods>
           <include name="closeAllTheBrowser"/>
           <include name="closeAllTheBrowser"/>
+          <include name="brandsExtraction" invocation-numbers="0"/>
           <include name="openBrowser"/>
           <include name="openBrowser"/>
         </methods>
@@ -68,6 +68,7 @@
           <include name="closeAllTheBrowser"/>
           <include name="openBrowser"/>
           <include name="openBrowser"/>
+          <include name="printingClippedCouponsWithShowImagesChecked" invocation-numbers="0"/>
         </methods>
       </class> <!-- regressionTests.PrintClippedCoupons_CheckShowImg_Test -->
       <class name="regressionTests.ValidateSingleCategoryUnderCategoriesListedTest">

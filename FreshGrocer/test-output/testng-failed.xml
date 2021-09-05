@@ -3,11 +3,11 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="regressionTests.BrandsTest">
+      <class name="regressionTests.PrintClippedCoupons_UnCheckShowImg_Test">
         <methods>
-          <include name="brandsExtraction"/>
+          <include name="printingClippedCouponsWithShowImagesUnChecked"/>
         </methods>
-      </class> <!-- regressionTests.BrandsTest -->
+      </class> <!-- regressionTests.PrintClippedCoupons_UnCheckShowImg_Test -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

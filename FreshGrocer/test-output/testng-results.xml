@@ -2,12 +2,12 @@
 <testng-results skipped="0" failed="0" total="12" passed="12">
   <reporter-output>
   </reporter-output>
-  <suite name="TheFreshGrocer" duration-ms="1469068" started-at="2021-09-03T16:48:21Z" finished-at="2021-09-03T17:12:50Z">
+  <suite name="TheFreshGrocer" duration-ms="1093958" started-at="2021-09-05T15:21:41Z" finished-at="2021-09-05T15:39:55Z">
     <groups>
     </groups>
-    <test name="Chrome test" duration-ms="841170" started-at="2021-09-03T16:48:21Z" finished-at="2021-09-03T17:02:22Z">
+    <test name="Chrome test" duration-ms="552982" started-at="2021-09-05T15:21:41Z" finished-at="2021-09-05T15:30:54Z">
       <class name="regressionTests.ClippedCouponExistsTest">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.ClippedCouponExistsTest@4667ae56]" name="openBrowser" is-config="true" duration-ms="1640" started-at="2021-09-03T22:25:21Z" finished-at="2021-09-03T22:25:23Z">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.ClippedCouponExistsTest@4667ae56]" name="openBrowser" is-config="true" duration-ms="1485" started-at="2021-09-05T20:55:30Z" finished-at="2021-09-05T20:55:31Z">
           <params>
             <param index="0">
               <value>
@@ -18,7 +18,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="clippingCoupons(java.lang.String)[pri:0, instance:regressionTests.ClippedCouponExistsTest@4667ae56]" name="clippingCoupons" duration-ms="107164" started-at="2021-09-03T22:25:23Z" finished-at="2021-09-03T22:27:10Z">
+        <test-method status="PASS" signature="clippingCoupons(java.lang.String)[pri:0, instance:regressionTests.ClippedCouponExistsTest@4667ae56]" name="clippingCoupons" duration-ms="76128" started-at="2021-09-05T20:55:31Z" finished-at="2021-09-05T20:56:48Z">
           <params>
             <param index="0">
               <value>
@@ -29,13 +29,13 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- clippingCoupons -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.ClippedCouponExistsTest@4667ae56]" name="closeAllTheBrowser" is-config="true" duration-ms="111" started-at="2021-09-03T22:27:10Z" finished-at="2021-09-03T22:27:10Z">
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.ClippedCouponExistsTest@4667ae56]" name="closeAllTheBrowser" is-config="true" duration-ms="121" started-at="2021-09-05T20:56:48Z" finished-at="2021-09-05T20:56:48Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeAllTheBrowser -->
       </class> <!-- regressionTests.ClippedCouponExistsTest -->
       <class name="regressionTests.BrandsTest">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.BrandsTest@548e7350]" name="openBrowser" is-config="true" duration-ms="4085" started-at="2021-09-03T22:18:21Z" finished-at="2021-09-03T22:18:25Z">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.BrandsTest@548e7350]" name="openBrowser" is-config="true" duration-ms="2855" started-at="2021-09-05T20:51:41Z" finished-at="2021-09-05T20:51:44Z">
           <params>
             <param index="0">
               <value>
@@ -46,7 +46,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="brandsExtraction(java.lang.String)[pri:0, instance:regressionTests.BrandsTest@548e7350]" name="brandsExtraction" duration-ms="352281" started-at="2021-09-03T22:18:25Z" finished-at="2021-09-03T22:24:17Z">
+        <test-method status="PASS" signature="brandsExtraction(java.lang.String)[pri:0, instance:regressionTests.BrandsTest@548e7350]" name="brandsExtraction" duration-ms="179225" started-at="2021-09-05T20:51:44Z" finished-at="2021-09-05T20:54:44Z">
           <params>
             <param index="0">
               <value>
@@ -57,13 +57,13 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- brandsExtraction -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.BrandsTest@548e7350]" name="closeAllTheBrowser" is-config="true" duration-ms="598" started-at="2021-09-03T22:24:17Z" finished-at="2021-09-03T22:24:18Z">
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.BrandsTest@548e7350]" name="closeAllTheBrowser" is-config="true" duration-ms="79" started-at="2021-09-05T20:54:44Z" finished-at="2021-09-05T20:54:44Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeAllTheBrowser -->
       </class> <!-- regressionTests.BrandsTest -->
       <class name="regressionTests.PrintClippedCoupons_CheckShowImg_Test">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.PrintClippedCoupons_CheckShowImg_Test@77cd7a0]" name="openBrowser" is-config="true" duration-ms="1611" started-at="2021-09-03T22:27:10Z" finished-at="2021-09-03T22:27:11Z">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.PrintClippedCoupons_CheckShowImg_Test@77cd7a0]" name="openBrowser" is-config="true" duration-ms="1377" started-at="2021-09-05T20:56:48Z" finished-at="2021-09-05T20:56:49Z">
           <params>
             <param index="0">
               <value>
@@ -74,7 +74,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="printingClippedCouponsWithShowImagesChecked(java.lang.String)[pri:0, instance:regressionTests.PrintClippedCoupons_CheckShowImg_Test@77cd7a0]" name="printingClippedCouponsWithShowImagesChecked" duration-ms="105250" started-at="2021-09-03T22:27:11Z" finished-at="2021-09-03T22:28:57Z">
+        <test-method status="PASS" signature="printingClippedCouponsWithShowImagesChecked(java.lang.String)[pri:0, instance:regressionTests.PrintClippedCoupons_CheckShowImg_Test@77cd7a0]" name="printingClippedCouponsWithShowImagesChecked" duration-ms="87088" started-at="2021-09-05T20:56:49Z" finished-at="2021-09-05T20:58:16Z">
           <params>
             <param index="0">
               <value>
@@ -85,13 +85,13 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- printingClippedCouponsWithShowImagesChecked -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.PrintClippedCoupons_CheckShowImg_Test@77cd7a0]" name="closeAllTheBrowser" is-config="true" duration-ms="167" started-at="2021-09-03T22:28:57Z" finished-at="2021-09-03T22:28:57Z">
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.PrintClippedCoupons_CheckShowImg_Test@77cd7a0]" name="closeAllTheBrowser" is-config="true" duration-ms="103" started-at="2021-09-05T20:58:16Z" finished-at="2021-09-05T20:58:16Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeAllTheBrowser -->
       </class> <!-- regressionTests.PrintClippedCoupons_CheckShowImg_Test -->
       <class name="regressionTests.ValidateSingleCategoryUnderCategoriesListedTest">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.ValidateSingleCategoryUnderCategoriesListedTest@e25b2fe]" name="openBrowser" is-config="true" duration-ms="1710" started-at="2021-09-03T22:30:44Z" finished-at="2021-09-03T22:30:46Z">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.ValidateSingleCategoryUnderCategoriesListedTest@e25b2fe]" name="openBrowser" is-config="true" duration-ms="1398" started-at="2021-09-05T20:59:42Z" finished-at="2021-09-05T20:59:43Z">
           <params>
             <param index="0">
               <value>
@@ -102,7 +102,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="ValidateSingleCategoryUnderCategoriesListed(java.lang.String)[pri:0, instance:regressionTests.ValidateSingleCategoryUnderCategoriesListedTest@e25b2fe]" name="ValidateSingleCategoryUnderCategoriesListed" duration-ms="95357" started-at="2021-09-03T22:30:46Z" finished-at="2021-09-03T22:32:22Z">
+        <test-method status="PASS" signature="ValidateSingleCategoryUnderCategoriesListed(java.lang.String)[pri:0, instance:regressionTests.ValidateSingleCategoryUnderCategoriesListedTest@e25b2fe]" name="ValidateSingleCategoryUnderCategoriesListed" duration-ms="70841" started-at="2021-09-05T20:59:43Z" finished-at="2021-09-05T21:00:54Z">
           <params>
             <param index="0">
               <value>
@@ -113,13 +113,13 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- ValidateSingleCategoryUnderCategoriesListed -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.ValidateSingleCategoryUnderCategoriesListedTest@e25b2fe]" name="closeAllTheBrowser" is-config="true" duration-ms="210" started-at="2021-09-03T22:32:22Z" finished-at="2021-09-03T22:32:22Z">
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.ValidateSingleCategoryUnderCategoriesListedTest@e25b2fe]" name="closeAllTheBrowser" is-config="true" duration-ms="95" started-at="2021-09-05T21:00:54Z" finished-at="2021-09-05T21:00:54Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeAllTheBrowser -->
       </class> <!-- regressionTests.ValidateSingleCategoryUnderCategoriesListedTest -->
-      <class name="regressionTests.PrintClippedCoupons_UnCheckShowImg_Test">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.PrintClippedCoupons_UnCheckShowImg_Test@204f30ec]" name="openBrowser" is-config="true" duration-ms="1660" started-at="2021-09-03T22:28:57Z" finished-at="2021-09-03T22:28:58Z">
+      <class name="regressionTests.CategoriesTest">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.CategoriesTest@1a968a59]" name="openBrowser" is-config="true" duration-ms="1407" started-at="2021-09-05T20:54:44Z" finished-at="2021-09-05T20:54:45Z">
           <params>
             <param index="0">
               <value>
@@ -130,7 +130,35 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="printingClippedCouponsWithShowImagesUnChecked(java.lang.String)[pri:0, instance:regressionTests.PrintClippedCoupons_UnCheckShowImg_Test@204f30ec]" name="printingClippedCouponsWithShowImagesUnChecked" duration-ms="105688" started-at="2021-09-03T22:28:58Z" finished-at="2021-09-03T22:30:44Z">
+        <test-method status="PASS" signature="categoriesExtraction(java.lang.String)[pri:0, instance:regressionTests.CategoriesTest@1a968a59]" name="categoriesExtraction" duration-ms="44796" started-at="2021-09-05T20:54:45Z" finished-at="2021-09-05T20:55:30Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[staging]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- categoriesExtraction -->
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.CategoriesTest@1a968a59]" name="closeAllTheBrowser" is-config="true" duration-ms="100" started-at="2021-09-05T20:55:30Z" finished-at="2021-09-05T20:55:30Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeAllTheBrowser -->
+      </class> <!-- regressionTests.CategoriesTest -->
+      <class name="regressionTests.PrintClippedCoupons_UnCheckShowImg_Test">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.PrintClippedCoupons_UnCheckShowImg_Test@204f30ec]" name="openBrowser" is-config="true" duration-ms="1512" started-at="2021-09-05T20:58:16Z" finished-at="2021-09-05T20:58:18Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openBrowser -->
+        <test-method status="PASS" signature="printingClippedCouponsWithShowImagesUnChecked(java.lang.String)[pri:0, instance:regressionTests.PrintClippedCoupons_UnCheckShowImg_Test@204f30ec]" name="printingClippedCouponsWithShowImagesUnChecked" duration-ms="84219" started-at="2021-09-05T20:58:18Z" finished-at="2021-09-05T20:59:42Z">
           <params>
             <param index="0">
               <value>
@@ -141,43 +169,15 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- printingClippedCouponsWithShowImagesUnChecked -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.PrintClippedCoupons_UnCheckShowImg_Test@204f30ec]" name="closeAllTheBrowser" is-config="true" duration-ms="311" started-at="2021-09-03T22:30:44Z" finished-at="2021-09-03T22:30:44Z">
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.PrintClippedCoupons_UnCheckShowImg_Test@204f30ec]" name="closeAllTheBrowser" is-config="true" duration-ms="105" started-at="2021-09-05T20:59:42Z" finished-at="2021-09-05T20:59:42Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeAllTheBrowser -->
       </class> <!-- regressionTests.PrintClippedCoupons_UnCheckShowImg_Test -->
-      <class name="regressionTests.CategoriesTest">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.CategoriesTest@1a968a59]" name="openBrowser" is-config="true" duration-ms="1719" started-at="2021-09-03T22:24:18Z" finished-at="2021-09-03T22:24:19Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[chrome]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="categoriesExtraction(java.lang.String)[pri:0, instance:regressionTests.CategoriesTest@1a968a59]" name="categoriesExtraction" duration-ms="61376" started-at="2021-09-03T22:24:19Z" finished-at="2021-09-03T22:25:21Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[staging]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- categoriesExtraction -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.CategoriesTest@1a968a59]" name="closeAllTheBrowser" is-config="true" duration-ms="181" started-at="2021-09-03T22:25:21Z" finished-at="2021-09-03T22:25:21Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- closeAllTheBrowser -->
-      </class> <!-- regressionTests.CategoriesTest -->
     </test> <!-- Chrome test -->
-    <test name="Firefox test" duration-ms="627874" started-at="2021-09-03T17:02:22Z" finished-at="2021-09-03T17:12:50Z">
+    <test name="Firefox test" duration-ms="540945" started-at="2021-09-05T15:30:54Z" finished-at="2021-09-05T15:39:55Z">
       <class name="regressionTests.ClippedCouponExistsTest">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.ClippedCouponExistsTest@1ce92674]" name="openBrowser" is-config="true" duration-ms="4450" started-at="2021-09-03T22:36:47Z" finished-at="2021-09-03T22:36:51Z">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.ClippedCouponExistsTest@1ce92674]" name="openBrowser" is-config="true" duration-ms="3867" started-at="2021-09-05T21:05:01Z" finished-at="2021-09-05T21:05:05Z">
           <params>
             <param index="0">
               <value>
@@ -188,7 +188,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="clippingCoupons(java.lang.String)[pri:0, instance:regressionTests.ClippedCouponExistsTest@1ce92674]" name="clippingCoupons" duration-ms="80711" started-at="2021-09-03T22:36:51Z" finished-at="2021-09-03T22:38:12Z">
+        <test-method status="PASS" signature="clippingCoupons(java.lang.String)[pri:0, instance:regressionTests.ClippedCouponExistsTest@1ce92674]" name="clippingCoupons" duration-ms="68009" started-at="2021-09-05T21:05:05Z" finished-at="2021-09-05T21:06:13Z">
           <params>
             <param index="0">
               <value>
@@ -199,13 +199,13 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- clippingCoupons -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.ClippedCouponExistsTest@1ce92674]" name="closeAllTheBrowser" is-config="true" duration-ms="1704" started-at="2021-09-03T22:38:12Z" finished-at="2021-09-03T22:38:14Z">
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.ClippedCouponExistsTest@1ce92674]" name="closeAllTheBrowser" is-config="true" duration-ms="1232" started-at="2021-09-05T21:06:13Z" finished-at="2021-09-05T21:06:14Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeAllTheBrowser -->
       </class> <!-- regressionTests.ClippedCouponExistsTest -->
       <class name="regressionTests.BrandsTest">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.BrandsTest@73ad2d6]" name="openBrowser" is-config="true" duration-ms="5086" started-at="2021-09-03T22:32:22Z" finished-at="2021-09-03T22:32:27Z">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.BrandsTest@73ad2d6]" name="openBrowser" is-config="true" duration-ms="3448" started-at="2021-09-05T21:00:54Z" finished-at="2021-09-05T21:00:58Z">
           <params>
             <param index="0">
               <value>
@@ -216,7 +216,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="brandsExtraction(java.lang.String)[pri:0, instance:regressionTests.BrandsTest@73ad2d6]" name="brandsExtraction" duration-ms="196313" started-at="2021-09-03T22:32:27Z" finished-at="2021-09-03T22:35:43Z">
+        <test-method status="PASS" signature="brandsExtraction(java.lang.String)[pri:0, instance:regressionTests.BrandsTest@73ad2d6]" name="brandsExtraction" duration-ms="183217" started-at="2021-09-05T21:00:58Z" finished-at="2021-09-05T21:04:01Z">
           <params>
             <param index="0">
               <value>
@@ -227,13 +227,13 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- brandsExtraction -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.BrandsTest@73ad2d6]" name="closeAllTheBrowser" is-config="true" duration-ms="1377" started-at="2021-09-03T22:35:43Z" finished-at="2021-09-03T22:35:45Z">
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.BrandsTest@73ad2d6]" name="closeAllTheBrowser" is-config="true" duration-ms="758" started-at="2021-09-05T21:04:01Z" finished-at="2021-09-05T21:04:02Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeAllTheBrowser -->
       </class> <!-- regressionTests.BrandsTest -->
       <class name="regressionTests.PrintClippedCoupons_CheckShowImg_Test">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.PrintClippedCoupons_CheckShowImg_Test@5700d6b1]" name="openBrowser" is-config="true" duration-ms="4376" started-at="2021-09-03T22:38:14Z" finished-at="2021-09-03T22:38:18Z">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.PrintClippedCoupons_CheckShowImg_Test@5700d6b1]" name="openBrowser" is-config="true" duration-ms="3920" started-at="2021-09-05T21:06:14Z" finished-at="2021-09-05T21:06:18Z">
           <params>
             <param index="0">
               <value>
@@ -244,7 +244,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="printingClippedCouponsWithShowImagesChecked(java.lang.String)[pri:0, instance:regressionTests.PrintClippedCoupons_CheckShowImg_Test@5700d6b1]" name="printingClippedCouponsWithShowImagesChecked" duration-ms="86067" started-at="2021-09-03T22:38:18Z" finished-at="2021-09-03T22:39:44Z">
+        <test-method status="PASS" signature="printingClippedCouponsWithShowImagesChecked(java.lang.String)[pri:0, instance:regressionTests.PrintClippedCoupons_CheckShowImg_Test@5700d6b1]" name="printingClippedCouponsWithShowImagesChecked" duration-ms="75440" started-at="2021-09-05T21:06:18Z" finished-at="2021-09-05T21:07:33Z">
           <params>
             <param index="0">
               <value>
@@ -255,13 +255,13 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- printingClippedCouponsWithShowImagesChecked -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.PrintClippedCoupons_CheckShowImg_Test@5700d6b1]" name="closeAllTheBrowser" is-config="true" duration-ms="1959" started-at="2021-09-03T22:39:44Z" finished-at="2021-09-03T22:39:46Z">
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.PrintClippedCoupons_CheckShowImg_Test@5700d6b1]" name="closeAllTheBrowser" is-config="true" duration-ms="1140" started-at="2021-09-05T21:07:33Z" finished-at="2021-09-05T21:07:34Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeAllTheBrowser -->
       </class> <!-- regressionTests.PrintClippedCoupons_CheckShowImg_Test -->
       <class name="regressionTests.ValidateSingleCategoryUnderCategoriesListedTest">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.ValidateSingleCategoryUnderCategoriesListedTest@5bcab519]" name="openBrowser" is-config="true" duration-ms="4867" started-at="2021-09-03T22:41:18Z" finished-at="2021-09-03T22:41:23Z">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.ValidateSingleCategoryUnderCategoriesListedTest@5bcab519]" name="openBrowser" is-config="true" duration-ms="3321" started-at="2021-09-05T21:08:50Z" finished-at="2021-09-05T21:08:54Z">
           <params>
             <param index="0">
               <value>
@@ -272,7 +272,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="ValidateSingleCategoryUnderCategoriesListed(java.lang.String)[pri:0, instance:regressionTests.ValidateSingleCategoryUnderCategoriesListedTest@5bcab519]" name="ValidateSingleCategoryUnderCategoriesListed" duration-ms="85078" started-at="2021-09-03T22:41:23Z" finished-at="2021-09-03T22:42:48Z">
+        <test-method status="PASS" signature="ValidateSingleCategoryUnderCategoriesListed(java.lang.String)[pri:0, instance:regressionTests.ValidateSingleCategoryUnderCategoriesListedTest@5bcab519]" name="ValidateSingleCategoryUnderCategoriesListed" duration-ms="60576" started-at="2021-09-05T21:08:54Z" finished-at="2021-09-05T21:09:54Z">
           <params>
             <param index="0">
               <value>
@@ -283,13 +283,13 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- ValidateSingleCategoryUnderCategoriesListed -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.ValidateSingleCategoryUnderCategoriesListedTest@5bcab519]" name="closeAllTheBrowser" is-config="true" duration-ms="2053" started-at="2021-09-03T22:42:48Z" finished-at="2021-09-03T22:42:50Z">
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.ValidateSingleCategoryUnderCategoriesListedTest@5bcab519]" name="closeAllTheBrowser" is-config="true" duration-ms="1224" started-at="2021-09-05T21:09:54Z" finished-at="2021-09-05T21:09:55Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeAllTheBrowser -->
       </class> <!-- regressionTests.ValidateSingleCategoryUnderCategoriesListedTest -->
       <class name="regressionTests.CategoriesTest">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.CategoriesTest@7085bdee]" name="openBrowser" is-config="true" duration-ms="4418" started-at="2021-09-03T22:35:45Z" finished-at="2021-09-03T22:35:49Z">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.CategoriesTest@7085bdee]" name="openBrowser" is-config="true" duration-ms="3956" started-at="2021-09-05T21:04:02Z" finished-at="2021-09-05T21:04:06Z">
           <params>
             <param index="0">
               <value>
@@ -300,7 +300,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="categoriesExtraction(java.lang.String)[pri:0, instance:regressionTests.CategoriesTest@7085bdee]" name="categoriesExtraction" duration-ms="55800" started-at="2021-09-03T22:35:49Z" finished-at="2021-09-03T22:36:45Z">
+        <test-method status="PASS" signature="categoriesExtraction(java.lang.String)[pri:0, instance:regressionTests.CategoriesTest@7085bdee]" name="categoriesExtraction" duration-ms="53908" started-at="2021-09-05T21:04:06Z" finished-at="2021-09-05T21:05:00Z">
           <params>
             <param index="0">
               <value>
@@ -311,13 +311,13 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- categoriesExtraction -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.CategoriesTest@7085bdee]" name="closeAllTheBrowser" is-config="true" duration-ms="1929" started-at="2021-09-03T22:36:45Z" finished-at="2021-09-03T22:36:47Z">
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.CategoriesTest@7085bdee]" name="closeAllTheBrowser" is-config="true" duration-ms="1108" started-at="2021-09-05T21:05:00Z" finished-at="2021-09-05T21:05:01Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeAllTheBrowser -->
       </class> <!-- regressionTests.CategoriesTest -->
       <class name="regressionTests.PrintClippedCoupons_UnCheckShowImg_Test">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.PrintClippedCoupons_UnCheckShowImg_Test@6fd02e5]" name="openBrowser" is-config="true" duration-ms="4398" started-at="2021-09-03T22:39:46Z" finished-at="2021-09-03T22:39:50Z">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:regressionTests.PrintClippedCoupons_UnCheckShowImg_Test@6fd02e5]" name="openBrowser" is-config="true" duration-ms="3393" started-at="2021-09-05T21:07:34Z" finished-at="2021-09-05T21:07:38Z">
           <params>
             <param index="0">
               <value>
@@ -328,7 +328,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="printingClippedCouponsWithShowImagesUnChecked(java.lang.String)[pri:0, instance:regressionTests.PrintClippedCoupons_UnCheckShowImg_Test@6fd02e5]" name="printingClippedCouponsWithShowImagesUnChecked" duration-ms="85600" started-at="2021-09-03T22:39:50Z" finished-at="2021-09-03T22:41:16Z">
+        <test-method status="PASS" signature="printingClippedCouponsWithShowImagesUnChecked(java.lang.String)[pri:0, instance:regressionTests.PrintClippedCoupons_UnCheckShowImg_Test@6fd02e5]" name="printingClippedCouponsWithShowImagesUnChecked" duration-ms="71049" started-at="2021-09-05T21:07:38Z" finished-at="2021-09-05T21:08:49Z">
           <params>
             <param index="0">
               <value>
@@ -339,7 +339,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- printingClippedCouponsWithShowImagesUnChecked -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.PrintClippedCoupons_UnCheckShowImg_Test@6fd02e5]" name="closeAllTheBrowser" is-config="true" duration-ms="1674" started-at="2021-09-03T22:41:16Z" finished-at="2021-09-03T22:41:18Z">
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:regressionTests.PrintClippedCoupons_UnCheckShowImg_Test@6fd02e5]" name="closeAllTheBrowser" is-config="true" duration-ms="1363" started-at="2021-09-05T21:08:49Z" finished-at="2021-09-05T21:08:50Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeAllTheBrowser -->

@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import PageClasses.DigitalCouponsPage;
 import PageClasses.LandingPage;
 import PageClasses.LoginPage;
+import PageClasses.PrintTabPage;
 import baseClasses.BaseTestClass;
 import baseClasses.PageBaseClass;
 
@@ -17,6 +18,7 @@ public class PrintClippedCoupons_UnCheckShowImg_Test extends BaseTestClass {
 	LoginPage logPage;
 	LandingPage landPage;
 	DigitalCouponsPage digitalCouponsPage;
+	PrintTabPage printPage;
 
 	@BeforeClass
 	@Parameters("browser")
@@ -28,6 +30,7 @@ public class PrintClippedCoupons_UnCheckShowImg_Test extends BaseTestClass {
 		basePage = new PageBaseClass(driver);
 		landPage = new LandingPage(driver);
 		digitalCouponsPage = new DigitalCouponsPage(driver);
+		printPage = new PrintTabPage(driver);
 
 	}
 
@@ -87,19 +90,19 @@ public class PrintClippedCoupons_UnCheckShowImg_Test extends BaseTestClass {
 
 		digitalCouponsPage.clickPrintClippedCouponsButton();
 
-		int indexOfClippedCoupon = digitalCouponsPage
+		int indexOfClippedCoupon = printPage
 				.checkClippedCouponIsPresentInPrintTab(randomCouponClipped[0]);
 
-		digitalCouponsPage.unCheckShowImagesCheckBoxIfChecked();
+		printPage.unCheckShowImagesCheckBoxIfChecked();
 
-		digitalCouponsPage.checkIfImageIsNotDisplayed(indexOfClippedCoupon);
+		printPage.checkIfImageIsNotDisplayed(indexOfClippedCoupon);
 
-		digitalCouponsPage
+		printPage
 				.checkIfCouponDetailsIsDisplayedForUnchecked(randomCouponClipped, indexOfClippedCoupon);
 
-		digitalCouponsPage.checkIfDiscountIsNotDisplayed(indexOfClippedCoupon);
+		printPage.checkIfDiscountIsNotDisplayed(indexOfClippedCoupon);
 
-		digitalCouponsPage.clickCloseInPrintTab();
+		printPage.clickCloseInPrintTab();
 
 		digitalCouponsPage.clickClippedLink();
 
