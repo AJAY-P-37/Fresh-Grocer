@@ -1,26 +1,22 @@
-package regressionTests;
-
-import java.util.List;
+package myAccountPageTests;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import PageClasses.BrandsElements;
-import PageClasses.DigitalCouponsPage;
 import PageClasses.LandingPage;
 import PageClasses.LoginPage;
+import PageClasses.MyAccountPage;
 import baseClasses.BaseTestClass;
 import baseClasses.PageBaseClass;
 
-public class BrandsTest extends BaseTestClass {
+public class validateMessageForInvalidContactType extends BaseTestClass {
 
 	PageBaseClass basePage;
 	LoginPage logPage;
 	LandingPage landPage;
-	DigitalCouponsPage digitalCouponsPage;
-	BrandsElements brandsPage;
+	MyAccountPage myAccountPage;
 
 	@BeforeClass
 	@Parameters("browser")
@@ -31,8 +27,7 @@ public class BrandsTest extends BaseTestClass {
 		logPage = new LoginPage(driver);
 		basePage = new PageBaseClass(driver);
 		landPage = new LandingPage(driver);
-		digitalCouponsPage = new DigitalCouponsPage(driver);
-		brandsPage = new BrandsElements(driver);
+		myAccountPage = new MyAccountPage(driver);
 	}
 
 	@Test
@@ -70,39 +65,28 @@ public class BrandsTest extends BaseTestClass {
 
 		present = landPage.checkIfMyAccountIsPresent();
 
-		landPage.clickDigitalCouponsButton();
-
-		landPage.waitForFrameToLoadOrDoRefresh();
-
-		digitalCouponsPage.clickClippedLink();
-
-		digitalCouponsPage.clickUnClipForAllClippedCoupons();
-
-		digitalCouponsPage.clickAllCoupons();
-
-		String[] brandsInPage = brandsPage.getAllBrandsFromPage();
-
-		brandsInPage = brandsPage.extractOnlyBrandName(brandsInPage);
-
-		String[] brandsInExcel = brandsPage.readAllBrandsFromExcel();
-
-		List<String> brandsNotSorted = brandsPage
-				.getBrandsNotSorted(brandsInPage);
-
-		brandsPage.updateBrandsNotSorted(brandsNotSorted);
-
-		List<String> brandsNotInPage = brandsPage.getBrandsNotInPage(
-				brandsInPage, brandsInExcel);
-
-		brandsPage.updateBrandsNotInPage(brandsNotInPage);
-
-		List<String> brandsNotInExcel = brandsPage.getBrandsNotInExcel(
-				brandsInPage, brandsInExcel);
-
-		brandsPage.updateBrandsNotInExcel(brandsNotInExcel);
-
-		switchToDefaultFrame();
-
+		landPage.clickAccountHeaderButton();
+		
+		landPage.clickMyAccountSettingLink();
+		
+		myAccountPage.checkIfMyAccountTitleIsPresent();
+		
+		myAccountPage.clickEditProfileBtn();
+		
+		myAccountPage.enterRandomPrimaryPhone();
+		
+		myAccountPage.unCheckMobileIfChecked();
+		
+		myAccountPage.selectPreferredContactType("Text");
+		
+		myAccountPage.clickUpdateProfileBtn();
+		
+		myAccountPage.validateContactMethodErrorMessage();
+		
+		myAccountPage.clickHomeLink();
+		
+		landPage.checkIfMyAccountIsPresent();
+		
 		landPage.clickAccountHeaderButton();
 
 		landPage.clickSignOutButton();
@@ -115,4 +99,5 @@ public class BrandsTest extends BaseTestClass {
 
 		flushReports();
 	}
+
 }

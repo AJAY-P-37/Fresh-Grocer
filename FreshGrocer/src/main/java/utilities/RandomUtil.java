@@ -9,6 +9,27 @@ public class RandomUtil {
 		return randomNumber;
 	}
 
+	public static String getRandomNumberOfLength(int length) {
+
+		// chose a Character random from this String
+		String numericString = "0123456789";
+
+		// create StringBuffer size of NumericString
+		StringBuilder sb = new StringBuilder(length);
+
+		for (int i = 0; i < length; i++) {
+
+			// generate a random number between
+			// 0 to NumericString variable length
+			int index = (int) (numericString.length() * Math.random());
+
+			// add Character one by one in end of sb
+			sb.append(numericString.charAt(index));
+		}
+
+		return sb.toString();
+	}
+
 	public static String getRandomStringOfLength(int length) {
 
 		// chose a Character random from this String

@@ -3,115 +3,19 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [TheFreshGrocer]">
   <parameter name="environment" value="staging"/>
   <parameter name="browser" value="firefox"/>
-  <test name="Chrome test(failed)">
-    <parameter name="environment" value="staging"/>
-    <parameter name="browser" value="chrome"/>
-    <classes>
-      <class name="regressionTests.PrintClippedCoupons_CheckShowImg_Test">
-        <methods>
-          <include name="closeAllTheBrowser"/>
-          <include name="closeAllTheBrowser"/>
-          <include name="openBrowser"/>
-          <include name="openBrowser"/>
-        </methods>
-      </class> <!-- regressionTests.PrintClippedCoupons_CheckShowImg_Test -->
-      <class name="regressionTests.ValidateSingleCategoryUnderCategoriesListedTest">
-        <methods>
-          <include name="closeAllTheBrowser"/>
-          <include name="closeAllTheBrowser"/>
-          <include name="openBrowser"/>
-          <include name="openBrowser"/>
-        </methods>
-      </class> <!-- regressionTests.ValidateSingleCategoryUnderCategoriesListedTest -->
-      <class name="regressionTests.PrintClippedCoupons_UnCheckShowImg_Test">
-        <methods>
-          <include name="openBrowser"/>
-          <include name="openBrowser"/>
-          <include name="closeAllTheBrowser"/>
-          <include name="closeAllTheBrowser"/>
-        </methods>
-      </class> <!-- regressionTests.PrintClippedCoupons_UnCheckShowImg_Test -->
-      <class name="regressionTests.ClippedCouponExistsTest">
-        <methods>
-          <include name="openBrowser"/>
-          <include name="openBrowser"/>
-          <include name="closeAllTheBrowser"/>
-          <include name="closeAllTheBrowser"/>
-        </methods>
-      </class> <!-- regressionTests.ClippedCouponExistsTest -->
-      <class name="regressionTests.CategoriesTest">
-        <methods>
-          <include name="openBrowser"/>
-          <include name="openBrowser"/>
-          <include name="closeAllTheBrowser"/>
-          <include name="closeAllTheBrowser"/>
-        </methods>
-      </class> <!-- regressionTests.CategoriesTest -->
-      <class name="regressionTests.BrandsTest">
-        <methods>
-          <include name="closeAllTheBrowser"/>
-          <include name="closeAllTheBrowser"/>
-          <include name="brandsExtraction" invocation-numbers="0"/>
-          <include name="openBrowser"/>
-          <include name="openBrowser"/>
-        </methods>
-      </class> <!-- regressionTests.BrandsTest -->
-    </classes>
-  </test> <!-- Chrome test(failed) -->
   <test name="Firefox test(failed)">
     <parameter name="environment" value="staging"/>
     <parameter name="browser" value="firefox"/>
     <classes>
-      <class name="regressionTests.PrintClippedCoupons_CheckShowImg_Test">
-        <methods>
-          <include name="closeAllTheBrowser"/>
-          <include name="closeAllTheBrowser"/>
-          <include name="openBrowser"/>
-          <include name="openBrowser"/>
-          <include name="printingClippedCouponsWithShowImagesChecked" invocation-numbers="0"/>
-        </methods>
-      </class> <!-- regressionTests.PrintClippedCoupons_CheckShowImg_Test -->
-      <class name="regressionTests.ValidateSingleCategoryUnderCategoriesListedTest">
-        <methods>
-          <include name="closeAllTheBrowser"/>
-          <include name="closeAllTheBrowser"/>
-          <include name="openBrowser"/>
-          <include name="openBrowser"/>
-        </methods>
-      </class> <!-- regressionTests.ValidateSingleCategoryUnderCategoriesListedTest -->
-      <class name="regressionTests.PrintClippedCoupons_UnCheckShowImg_Test">
+      <class name="myAccountPageTests.validateMessageForInvalidContactType">
         <methods>
           <include name="openBrowser"/>
           <include name="openBrowser"/>
-          <include name="closeAllTheBrowser"/>
-          <include name="closeAllTheBrowser"/>
-        </methods>
-      </class> <!-- regressionTests.PrintClippedCoupons_UnCheckShowImg_Test -->
-      <class name="regressionTests.ClippedCouponExistsTest">
-        <methods>
-          <include name="openBrowser"/>
-          <include name="openBrowser"/>
-          <include name="closeAllTheBrowser"/>
-          <include name="closeAllTheBrowser"/>
-        </methods>
-      </class> <!-- regressionTests.ClippedCouponExistsTest -->
-      <class name="regressionTests.CategoriesTest">
-        <methods>
-          <include name="openBrowser"/>
-          <include name="openBrowser"/>
-          <include name="closeAllTheBrowser"/>
-          <include name="closeAllTheBrowser"/>
-        </methods>
-      </class> <!-- regressionTests.CategoriesTest -->
-      <class name="regressionTests.BrandsTest">
-        <methods>
           <include name="closeAllTheBrowser"/>
           <include name="closeAllTheBrowser"/>
           <include name="brandsExtraction" invocation-numbers="0"/>
-          <include name="openBrowser"/>
-          <include name="openBrowser"/>
         </methods>
-      </class> <!-- regressionTests.BrandsTest -->
+      </class> <!-- myAccountPageTests.validateMessageForInvalidContactType -->
     </classes>
   </test> <!-- Firefox test(failed) -->
 </suite> <!-- Failed suite [TheFreshGrocer] -->

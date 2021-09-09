@@ -1,4 +1,4 @@
-package regressionTests;
+package digitalCouponsPageTests;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -12,7 +12,7 @@ import PageClasses.PrintTabPage;
 import baseClasses.BaseTestClass;
 import baseClasses.PageBaseClass;
 
-public class PrintClippedCoupons_UnCheckShowImg_Test extends BaseTestClass {
+public class PrintClippedCoupons_CheckShowImg_Test extends BaseTestClass {
 
 	PageBaseClass basePage;
 	LoginPage logPage;
@@ -36,7 +36,7 @@ public class PrintClippedCoupons_UnCheckShowImg_Test extends BaseTestClass {
 
 	@Test
 	@Parameters("environment")
-	public void printingClippedCouponsWithShowImagesUnChecked(String environment) {
+	public void printingClippedCouponsWithShowImagesChecked(String environment) {
 
 		basePage.openApplication(environment);
 
@@ -81,6 +81,8 @@ public class PrintClippedCoupons_UnCheckShowImg_Test extends BaseTestClass {
 
 		digitalCouponsPage.checkCouponsLoadToCardText();
 
+		digitalCouponsPage.getNumberOfCoupons();
+
 		int randomNumber = digitalCouponsPage.clickLoadToCardOfRandomCoupon();
 
 		digitalCouponsPage.verifyChangesInLoadCardBtn(randomNumber);
@@ -93,14 +95,12 @@ public class PrintClippedCoupons_UnCheckShowImg_Test extends BaseTestClass {
 		int indexOfClippedCoupon = printPage
 				.checkClippedCouponIsPresentInPrintTab(randomCouponClipped[0]);
 
-		printPage.unCheckShowImagesCheckBoxIfChecked();
+		printPage.checkShowImagesCheckBoxIfNotChecked();
 
-		printPage.checkIfImageIsNotDisplayed(indexOfClippedCoupon);
+		printPage.checkIfImageIsDisplayed(indexOfClippedCoupon);
 
 		printPage
-				.checkIfCouponDetailsIsDisplayedForUnchecked(randomCouponClipped, indexOfClippedCoupon);
-
-		printPage.checkIfDiscountIsNotDisplayed(indexOfClippedCoupon);
+				.checkIfCouponDetailsIsDisplayedForChecked(randomCouponClipped, indexOfClippedCoupon);
 
 		printPage.clickCloseInPrintTab();
 

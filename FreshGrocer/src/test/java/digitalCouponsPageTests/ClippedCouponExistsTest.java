@@ -1,44 +1,39 @@
-package regressionTests;
+package digitalCouponsPageTests;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import utilities.RandomUtil;
-import PageClasses.CategoriesElements;
 import PageClasses.DigitalCouponsPage;
 import PageClasses.LandingPage;
 import PageClasses.LoginPage;
 import baseClasses.BaseTestClass;
 import baseClasses.PageBaseClass;
 
-public class ValidateSingleCategoryUnderCategoriesListedTest extends
-		BaseTestClass {
+public class ClippedCouponExistsTest extends BaseTestClass {
 
 	PageBaseClass basePage;
 	LoginPage logPage;
 	LandingPage landPage;
 	DigitalCouponsPage digitalCouponsPage;
-	CategoriesElements categoryPage;
 
 	@BeforeClass
 	@Parameters("browser")
 	public void openBrowser(String browser) {
 
 		invokeBrowser(browser);
-
+		
 		logPage = new LoginPage(driver);
 		basePage = new PageBaseClass(driver);
 		landPage = new LandingPage(driver);
 		digitalCouponsPage = new DigitalCouponsPage(driver);
-		categoryPage = new CategoriesElements(driver);
 
 	}
 
 	@Test
 	@Parameters("environment")
-	public void ValidateSingleCategoryUnderCategoriesListed(String environment) {
+	public void clippingCoupons(String environment) {
 
 		basePage.openApplication(environment);
 
@@ -72,35 +67,31 @@ public class ValidateSingleCategoryUnderCategoriesListedTest extends
 		landPage.clickDigitalCouponsButton();
 
 		landPage.waitForFrameToLoadOrDoRefresh();
-
+		
 		digitalCouponsPage.clickClippedLink();
-
+		
 		digitalCouponsPage.clickUnClipForAllClippedCoupons();
-
+		
 		digitalCouponsPage.clickAllCoupons();
 
 		digitalCouponsPage.clickShowAll();
 
 		digitalCouponsPage.checkCouponsLoadToCardText();
 
-		String[] categoriesInPage = categoryPage.getAllCategoriesFromPage();
+		digitalCouponsPage.getNumberOfCoupons();
 
-		int randomCategoryNumber = RandomUtil.getRandomNumberBetween(0,
-				categoriesInPage.length - 1);
+		int randomNumber = digitalCouponsPage.clickLoadToCardOfRandomCoupon();
 
-		String randomCategoryName = digitalCouponsPage
-				.clickRandomCategoryAndGetCategoyName(randomCategoryNumber);
+		digitalCouponsPage.verifyChangesInLoadCardBtn(randomNumber);
+		
+		String[] randomCouponClipped = digitalCouponsPage
+				.getDetailsOfRandomCoupon(randomNumber);
 
-		int expectedNumberOfCouponsInRandomCategory = digitalCouponsPage
-				.extractNumberOfCouponsInRandomCategory(randomCategoryName);
+		digitalCouponsPage.clickClippedLink();
 
-		digitalCouponsPage
-				.checkIfNumberCouponsPresentAreCorrect(expectedNumberOfCouponsInRandomCategory);
+		digitalCouponsPage.verifyCouponExistsInClipped(randomCouponClipped);
 
-		String[][] couponsArray = digitalCouponsPage
-				.getCouponsInCheckedCategoryFromPage();
-
-		digitalCouponsPage.setAllCouponDataInExcel(couponsArray, randomCategoryName);
+		digitalCouponsPage.clickUnClipBtnForClippedCoupon(randomCouponClipped);
 
 		switchToDefaultFrame();
 
@@ -111,6 +102,7 @@ public class ValidateSingleCategoryUnderCategoriesListedTest extends
 	}
 
 	@AfterClass
+	/********** Close the Browser ***********/
 	public void closeAllTheBrowser() {
 
 		flushReports();

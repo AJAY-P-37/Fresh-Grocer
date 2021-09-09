@@ -1,12 +1,11 @@
-package regressionTests;
-
-import java.util.List;
+package digitalCouponsPageTests;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import utilities.RandomUtil;
 import PageClasses.CategoriesElements;
 import PageClasses.DigitalCouponsPage;
 import PageClasses.LandingPage;
@@ -14,13 +13,14 @@ import PageClasses.LoginPage;
 import baseClasses.BaseTestClass;
 import baseClasses.PageBaseClass;
 
-public class CategoriesTest extends BaseTestClass {
+public class ValidateSingleCategoryUnderCategoriesListedTest extends
+		BaseTestClass {
 
 	PageBaseClass basePage;
 	LoginPage logPage;
 	LandingPage landPage;
 	DigitalCouponsPage digitalCouponsPage;
-	CategoriesElements categoriesPage;
+	CategoriesElements categoryPage;
 
 	@BeforeClass
 	@Parameters("browser")
@@ -32,40 +32,41 @@ public class CategoriesTest extends BaseTestClass {
 		basePage = new PageBaseClass(driver);
 		landPage = new LandingPage(driver);
 		digitalCouponsPage = new DigitalCouponsPage(driver);
-		categoriesPage = new CategoriesElements(driver);
+		categoryPage = new CategoriesElements(driver);
+
 	}
 
 	@Test
 	@Parameters("environment")
-	public void categoriesExtraction(String environment) {
+	public void ValidateSingleCategoryUnderCategoriesListed(String environment) {
 
 		basePage.openApplication(environment);
 
 		landPage.closePopUp();
 
 		boolean present = landPage.checkIfSignInIsPresent();
-		if (present) {
+		if(present){
 			landPage.clickSignIn();
 
 			logPage.enterCredentials(environment);
-		} else {
-
+		}else{
+			
 			present = landPage.checkIfMyAccountIsPresent();
-			if (present) {
-
+			if(present){
+				
 				landPage.clickAccountHeaderButton();
 
 				landPage.clickSignOutButton();
-
+				
 				present = landPage.checkIfSignInIsPresent();
-				if (present) {
+				if(present){
 					landPage.clickSignIn();
 
 					logPage.enterCredentials(environment);
 				}
 			}
 		}
-
+		
 		present = landPage.checkIfMyAccountIsPresent();
 
 		landPage.clickDigitalCouponsButton();
@@ -75,31 +76,31 @@ public class CategoriesTest extends BaseTestClass {
 		digitalCouponsPage.clickClippedLink();
 
 		digitalCouponsPage.clickUnClipForAllClippedCoupons();
-		
+
 		digitalCouponsPage.clickAllCoupons();
 
-		String[] categoriesInPage = categoriesPage.getAllCategoriesFromPage();
+		digitalCouponsPage.clickShowAll();
 
-		categoriesInPage = categoriesPage
-				.extractOnlyCategoryName(categoriesInPage);
+		digitalCouponsPage.checkCouponsLoadToCardText();
 
-		String[] categoriesInExcel = categoriesPage
-				.readAllCategoriesFromExcel();
+		String[] categoriesInPage = categoryPage.getAllCategoriesFromPage();
 
-		List<String> categoriesNotSorted = categoriesPage
-				.getCategoriestNotSorted(categoriesInPage);
+		int randomCategoryNumber = RandomUtil.getRandomNumberBetween(0,
+				categoriesInPage.length - 1);
 
-		categoriesPage.updateCategoriesNotSorted(categoriesNotSorted);
+		String randomCategoryName = digitalCouponsPage
+				.clickRandomCategoryAndGetCategoyName(randomCategoryNumber);
 
-		List<String> categoriesNotInPage = categoriesPage
-				.getCategoriesNotInPage(categoriesInPage, categoriesInExcel);
+		int expectedNumberOfCouponsInRandomCategory = digitalCouponsPage
+				.extractNumberOfCouponsInRandomCategory(randomCategoryName);
 
-		categoriesPage.updateCategoriesNotInPage(categoriesNotInPage);
+		digitalCouponsPage
+				.checkIfNumberCouponsPresentAreCorrect(expectedNumberOfCouponsInRandomCategory);
 
-		List<String> categoriesNotInExcel = categoriesPage
-				.getCategoriesNotInExcel(categoriesInPage, categoriesInExcel);
+		String[][] couponsArray = digitalCouponsPage
+				.getCouponsInCheckedCategoryFromPage();
 
-		categoriesPage.updateCategoriesNotInExcel(categoriesNotInExcel);
+		digitalCouponsPage.setAllCouponDataInExcel(couponsArray, randomCategoryName);
 
 		switchToDefaultFrame();
 
@@ -110,7 +111,6 @@ public class CategoriesTest extends BaseTestClass {
 	}
 
 	@AfterClass
-	/********** Close the Browser ***********/
 	public void closeAllTheBrowser() {
 
 		flushReports();

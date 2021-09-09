@@ -1,97 +1,105 @@
-package regressionTests;
+package digitalCouponsPageTests;
+
+import java.util.List;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import PageClasses.BrandsElements;
 import PageClasses.DigitalCouponsPage;
 import PageClasses.LandingPage;
 import PageClasses.LoginPage;
 import baseClasses.BaseTestClass;
 import baseClasses.PageBaseClass;
 
-public class ClippedCouponExistsTest extends BaseTestClass {
+public class BrandsTest extends BaseTestClass {
 
 	PageBaseClass basePage;
 	LoginPage logPage;
 	LandingPage landPage;
 	DigitalCouponsPage digitalCouponsPage;
+	BrandsElements brandsPage;
 
 	@BeforeClass
 	@Parameters("browser")
 	public void openBrowser(String browser) {
 
 		invokeBrowser(browser);
-		
+
 		logPage = new LoginPage(driver);
 		basePage = new PageBaseClass(driver);
 		landPage = new LandingPage(driver);
 		digitalCouponsPage = new DigitalCouponsPage(driver);
-
+		brandsPage = new BrandsElements(driver);
 	}
 
 	@Test
 	@Parameters("environment")
-	public void clippingCoupons(String environment) {
+	public void brandsExtraction(String environment) {
 
 		basePage.openApplication(environment);
 
 		landPage.closePopUp();
 
 		boolean present = landPage.checkIfSignInIsPresent();
-		if(present){
+		if (present) {
 			landPage.clickSignIn();
 
 			logPage.enterCredentials(environment);
-		}else{
-			
+		} else {
+
 			present = landPage.checkIfMyAccountIsPresent();
-			if(present){
-				
+			if (present) {
+
 				landPage.clickAccountHeaderButton();
 
 				landPage.clickSignOutButton();
-				
+
 				present = landPage.checkIfSignInIsPresent();
-				if(present){
+				if (present) {
 					landPage.clickSignIn();
 
 					logPage.enterCredentials(environment);
 				}
+			} else {
+				refreshPage();
 			}
 		}
-		
+
 		present = landPage.checkIfMyAccountIsPresent();
 
 		landPage.clickDigitalCouponsButton();
 
 		landPage.waitForFrameToLoadOrDoRefresh();
-		
+
 		digitalCouponsPage.clickClippedLink();
-		
+
 		digitalCouponsPage.clickUnClipForAllClippedCoupons();
-		
+
 		digitalCouponsPage.clickAllCoupons();
 
-		digitalCouponsPage.clickShowAll();
+		String[] brandsInPage = brandsPage.getAllBrandsFromPage();
 
-		digitalCouponsPage.checkCouponsLoadToCardText();
+		brandsInPage = brandsPage.extractOnlyBrandName(brandsInPage);
 
-		digitalCouponsPage.getNumberOfCoupons();
+		String[] brandsInExcel = brandsPage.readAllBrandsFromExcel();
 
-		int randomNumber = digitalCouponsPage.clickLoadToCardOfRandomCoupon();
+		List<String> brandsNotSorted = brandsPage
+				.getBrandsNotSorted(brandsInPage);
 
-		digitalCouponsPage.verifyChangesInLoadCardBtn(randomNumber);
-		
-		String[] randomCouponClipped = digitalCouponsPage
-				.getDetailsOfRandomCoupon(randomNumber);
+		brandsPage.updateBrandsNotSorted(brandsNotSorted);
 
-		digitalCouponsPage.clickClippedLink();
+		List<String> brandsNotInPage = brandsPage.getBrandsNotInPage(
+				brandsInPage, brandsInExcel);
 
-		digitalCouponsPage.verifyCouponExistsInClipped(randomCouponClipped);
+		brandsPage.updateBrandsNotInPage(brandsNotInPage);
 
-		digitalCouponsPage.clickUnClipBtnForClippedCoupon(randomCouponClipped);
+		List<String> brandsNotInExcel = brandsPage.getBrandsNotInExcel(
+				brandsInPage, brandsInExcel);
+
+		brandsPage.updateBrandsNotInExcel(brandsNotInExcel);
 
 		switchToDefaultFrame();
 
@@ -107,5 +115,4 @@ public class ClippedCouponExistsTest extends BaseTestClass {
 
 		flushReports();
 	}
-
 }

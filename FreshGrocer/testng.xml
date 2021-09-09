@@ -18,13 +18,7 @@
 		<parameter name="environment" value="staging"></parameter>
 
 		<classes>
-			<class name="regressionTests.BrandsTest" />
-			<class name="regressionTests.CategoriesTest" />
-			<class name="regressionTests.ClippedCouponExistsTest" />
-			<class name="regressionTests.PrintClippedCoupons_CheckShowImg_Test" />
-			<class name="regressionTests.PrintClippedCoupons_UnCheckShowImg_Test" />
-			<class
-				name="regressionTests.ValidateSingleCategoryUnderCategoriesListedTest" />
+			<class name="myAccountPageTests.validateMessageForInvalidContactType" />
 		</classes>
 
 
@@ -36,13 +30,7 @@
 		<parameter name="environment" value="staging"></parameter>
 
 		<classes>
-			<class name="regressionTests.BrandsTest" />
-			<class name="regressionTests.CategoriesTest" />
-			<class name="regressionTests.ClippedCouponExistsTest" />
-			<class name="regressionTests.PrintClippedCoupons_CheckShowImg_Test" />
-			<class name="regressionTests.PrintClippedCoupons_UnCheckShowImg_Test" />
-			<class
-				name="regressionTests.ValidateSingleCategoryUnderCategoriesListedTest" />
+			<class name="myAccountPageTests.validateMessageForInvalidContactType" />
 		</classes>
 
 

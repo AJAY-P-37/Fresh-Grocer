@@ -26,7 +26,7 @@ public class LandingPage extends PageBaseClass {
 	public By digitalCouponsLink;
 	public By couponsFrame;
 	public By loadingCouponsText;
-
+	public By myAccountSettingsLink;
 	public By signOutBtn;
 
 	public LandingPage(WebDriver driver) {
@@ -50,6 +50,8 @@ public class LandingPage extends PageBaseClass {
 		loadingCouponsText = getByLocator(locators,
 				("loadingCouponsText_xpath"));
 
+		myAccountSettingsLink = getByLocator(locators,
+				"myAccountSettingsLink_xpath");
 		signOutBtn = getByLocator(locators, "signOutBtn_id");
 	}
 
@@ -68,6 +70,8 @@ public class LandingPage extends PageBaseClass {
 					+ " - equals to Expected Text : " + expectedText);
 			System.out.println("Coupon Button Text is " + expectedText);
 		} catch (Exception e) {
+
+			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
 		}
 
@@ -87,6 +91,8 @@ public class LandingPage extends PageBaseClass {
 		} catch (NoSuchElementException e) {
 			System.out.println("Pop did not exists");
 		} catch (Exception e) {
+
+			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
 		}
 	}
@@ -153,6 +159,8 @@ public class LandingPage extends PageBaseClass {
 			driver.findElement(signInBtn).click();
 			System.out.println("Success: Sign in Button is clicked");
 		} catch (Exception e) {
+
+			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
 		}
 
@@ -256,15 +264,17 @@ public class LandingPage extends PageBaseClass {
 				if (count == 3) {
 					System.out
 							.println("Digital Coupons Frame did NOT load even after "
-									+ (count )
+									+ (count)
 									+ " attempts, for 30 seconds each attempt");
 					reportFail("Digital Coupons Frame did NOT load even after "
-							+ (count )
+							+ (count)
 							+ " attempts, for 30 seconds each attempt");
 				}
 			} while (count <= 3);
 
 		} catch (Exception e) {
+
+			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
 		}
 	}
@@ -272,18 +282,82 @@ public class LandingPage extends PageBaseClass {
 	/********* Clicking the Account Header (My Account) Button *******/
 	public void clickAccountHeaderButton() {
 
-		driver.findElement(accountHeaderBtn).click();
-		System.out.println("Success: Account Header Button Clicked");
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			WebElement accountHeader = wait.until(ExpectedConditions
+					.elementToBeClickable(accountHeaderBtn));
+
+			int maxAttempts = 3;
+			int count = 0;
+			do {
+
+				try {
+
+					accountHeader.click();
+					System.out
+							.println("Success: Account Header Button Clicked");
+
+					wait = new WebDriverWait(driver, 10);
+					WebElement myAccountHeaderContect = wait
+							.until(ExpectedConditions
+									.visibilityOfElementLocated(myAccountSettingsLink));
+					System.out
+							.println("Account Header content is Visible in attempt no."
+									+ (count + 1));
+					break;
+
+				} catch (Exception e) {
+					System.out
+							.println("Account Header content is NOT Visible. Clicking again");
+				}
+				count++;
+				if (count == maxAttempts) {
+
+					System.out
+							.println("Account Header content is NOT Visible even after "
+									+ count + "attempts. Clicking again");
+
+				}
+			} while (count <= maxAttempts);
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			reportFail(e.getMessage());
+		}
+	}
+
+	/******* Clicking the My Account Setting *******/
+	public void clickMyAccountSettingLink() {
+
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			WebElement myAccountSettings = wait.until(ExpectedConditions
+					.elementToBeClickable(myAccountSettingsLink));
+
+			myAccountSettings.click();
+			System.out
+					.println("Success: My Account Settings link clicked Successfully");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			reportFail(e.getMessage());
+		}
+
 	}
 
 	/****** Click Sign Out Button *******/
 	public void clickSignOutButton() {
 
-		WebDriverWait wait = new WebDriverWait(driver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(signOutBtn));
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			WebElement signOut = wait.until(ExpectedConditions
+					.elementToBeClickable(signOutBtn));
 
-		driver.findElement(signOutBtn).click();
-		System.out.println("Success: Successfully Signed Out");
+			signOut.click();
+			System.out.println("Success: Successfully Signed Out");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			reportFail(e.getMessage());
+		}
 
 	}
 }
