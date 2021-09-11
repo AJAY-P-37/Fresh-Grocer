@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="TheFreshGrocer">
+
+	<!-- Suite -->
+
+	<test name="Chrome test">
+
+		<!-- <class name="myAccountPageTests.ValidateMessageForInvalidContactType" 
+			/> <class name="myAccountPageTests.ValidateMessageForValidContactType" /> 
+			<class name="myAccountPageTests.VerifyAddressProfile" /> <class name="myAccountPageTests.VerifyPersonalInformation" 
+			/> -->
+
+		<parameter name="browser" value="chrome"></parameter>
+		<parameter name="environment" value="staging"></parameter>
+
+		<classes>
+			<class name="myAccountPageTests.ValidateMessageForInvalidContactType" />
+			<class name="myAccountPageTests.ValidateMessageForValidContactType" />
+			<class name="myAccountPageTests.VerifyAddressProfile" />
+			<class name="myAccountPageTests.VerifyPersonalInformation" />
+		</classes>
+
+
+	</test>
+
+	<test name="Firefox test">
+
+		<parameter name="browser" value="firefox"></parameter>
+		<parameter name="environment" value="staging"></parameter>
+
+		<classes>
+			<class name="myAccountPageTests.ValidateMessageForInvalidContactType" />
+			<class name="myAccountPageTests.ValidateMessageForValidContactType" />
+			<class name="myAccountPageTests.VerifyAddressProfile" />
+			<class name="myAccountPageTests.VerifyPersonalInformation" />
+		</classes>
+
+
+	</test>
+
+	<!-- Suite -->
+</suite>

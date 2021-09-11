@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="TheFreshGrocer">
+
+	<!-- Suite -->
+
+	<test name="Chrome test">
+
+		<!-- <class name="digitalCouponsPageTests.BrandsTest" /> <class name="digitalCouponsPageTests.CategoriesTest" 
+			/> <class name="digitalCouponsPageTests.ClippedCouponExistsTest" /> <class 
+			name="digitalCouponsPageTests.PrintClippedCoupons_CheckShowImg_Test" /> <class 
+			name="digitalCouponsPageTests.PrintClippedCoupons_UnCheckShowImg_Test" /> 
+			<class name="digitalCouponsPageTests.ValidateSingleCategoryUnderCategoriesListedTest" 
+			/> -->
+
+		<parameter name="browser" value="chrome"></parameter>
+		<parameter name="environment" value="staging"></parameter>
+
+		<classes>
+			<class name="digitalCouponsPageTests.BrandsTest" />
+			<class name="digitalCouponsPageTests.CategoriesTest" />
+			<class name="digitalCouponsPageTests.ClippedCouponExistsTest" />
+			<class
+				name="digitalCouponsPageTests.PrintClippedCoupons_CheckShowImg_Test" />
+			<class
+				name="digitalCouponsPageTests.PrintClippedCoupons_UnCheckShowImg_Test" />
+			<class
+				name="digitalCouponsPageTests.ValidateSingleCategoryUnderCategoriesListedTest" />
+		</classes>
+
+
+	</test>
+
+	<test name="Firefox test">
+
+		<parameter name="browser" value="firefox"></parameter>
+		<parameter name="environment" value="staging"></parameter>
+
+		<classes>
+			<class name="digitalCouponsPageTests.BrandsTest" />
+			<class name="digitalCouponsPageTests.CategoriesTest" />
+			<class name="digitalCouponsPageTests.ClippedCouponExistsTest" />
+			<class
+				name="digitalCouponsPageTests.PrintClippedCoupons_CheckShowImg_Test" />
+			<class
+				name="digitalCouponsPageTests.PrintClippedCoupons_UnCheckShowImg_Test" />
+			<class
+				name="digitalCouponsPageTests.ValidateSingleCategoryUnderCategoriesListedTest" />
+		</classes>
+
+
+	</test>
+
+	<!-- Suite -->
+</suite>

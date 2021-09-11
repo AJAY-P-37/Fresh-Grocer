@@ -5,18 +5,20 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import PageClasses.AddEditAddressPage;
 import PageClasses.LandingPage;
 import PageClasses.LoginPage;
 import PageClasses.MyAccountPage;
 import baseClasses.BaseTestClass;
 import baseClasses.PageBaseClass;
 
-public class validateMessageForValidContactType extends BaseTestClass {
+public class VerifyAddressProfile extends BaseTestClass {
 
 	PageBaseClass basePage;
 	LoginPage logPage;
 	LandingPage landPage;
 	MyAccountPage myAccountPage;
+	AddEditAddressPage addressPage;
 
 	@BeforeClass
 	@Parameters("browser")
@@ -28,11 +30,12 @@ public class validateMessageForValidContactType extends BaseTestClass {
 		basePage = new PageBaseClass(driver);
 		landPage = new LandingPage(driver);
 		myAccountPage = new MyAccountPage(driver);
+		addressPage = new AddEditAddressPage(driver);
 	}
 
 	@Test
 	@Parameters("environment")
-	public void brandsExtraction(String environment) {
+	public void verifyAddressBookByAddingNewAddress(String environment) {
 
 		basePage.openApplication(environment);
 
@@ -71,17 +74,29 @@ public class validateMessageForValidContactType extends BaseTestClass {
 
 		myAccountPage.checkIfMyAccountTitleIsPresent();
 
-		myAccountPage.clickEditProfileBtn();
+		myAccountPage.clickAddressBookEditBtn();
 
-		myAccountPage.enterRandomPrimaryPhone();
+		myAccountPage.clickAddNewAddressBtn();
 
-		myAccountPage.checkMobileIfUnChecked();
+		addressPage.enterFirstName();
 
-		myAccountPage.selectPreferredContactType("Text");
+		addressPage.enterLastName();
 
-		myAccountPage.clickUpdateProfileBtn();
+		addressPage.enterAddress();
 
-		myAccountPage.validateContactMethodErrorMessage();
+		addressPage.enterCity();
+
+		addressPage.selectStateDropDown();
+
+		addressPage.enterZipcode();
+		
+		addressPage.enterPrimaryPhone();
+
+		addressPage.clickSaveAddressBtn();
+
+		myAccountPage.validateAdrressUpdatedSuccessMessage();
+		
+		myAccountPage.clickAddressDeleteBtn();
 
 		myAccountPage.clickHomeLink();
 

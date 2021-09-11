@@ -44,6 +44,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 	public By modalContentCloseBtn;
 	public By loadedText;
 	public By unClipBtn;
+	public By availableSoonBtn;
 	public By clippedLink;
 	public By noClippedCouponsText;
 	public By printClippedCouponBtn;
@@ -83,6 +84,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 		modalContentOkBtn = getByLocator(locators, "modalContentOkBtn_xpath");
 		loadedText = getByLocator(locators, "loadedText_xpath");
 		unClipBtn = getByLocator(locators, "unClipBtn_xpath");
+		availableSoonBtn = getByLocator(locators, "availableSoonBtn_xpath");
 		clippedLink = getByLocator(locators, "clippedLink_xpath");
 		noClippedCouponsText = getByLocator(locators,
 				"noClippedCouponsText_xpath");
@@ -275,6 +277,13 @@ public class DigitalCouponsPage extends PageBaseClass {
 									+ brandName);
 					Assert.assertEquals(loadToCardString, "Load To Card",
 							"Text present in Coupon after Log in =>");
+				} else if (loadToCardString.equals("Available Soon")) {
+					System.out.println("Available Soon is present at coupon "
+							+ brandName + ". It can be ignored");
+				} else {
+					System.out.println(loadToCardString
+							+ " is present at coupon " + brandName
+							+ ". This is an unexpected string in testcases");
 				}
 
 			}
@@ -338,19 +347,28 @@ public class DigitalCouponsPage extends PageBaseClass {
 				System.out
 						.println("Unclip button for the random coupon found. Clicking another coupon");
 				randomNumber = clickLoadToCardOfRandomCoupon();
-			} catch (Exception e) {
+			} catch (Exception e1) {
+				try {
+					randomCoupon.findElement(availableSoonBtn);
+					System.out
+							.println("Available Soon button for the random coupon found. Clicking another coupon");
+					randomNumber = clickLoadToCardOfRandomCoupon();
 
-				WebDriverWait wait = new WebDriverWait(driver, 5);
-				wait.until(ExpectedConditions.elementToBeClickable(randomCoupon
-						.findElement(loadToCardBtnXpath)));
+				} catch (Exception e) {
 
-				WebElement loadToCard = randomCoupon
-						.findElement(loadToCardBtnXpath);
-				loadToCard.click();
-				System.out
-						.println("Success: Load to Card Clicked for random coupon");
+					WebDriverWait wait = new WebDriverWait(driver, 5);
+					wait.until(ExpectedConditions
+							.elementToBeClickable(randomCoupon
+									.findElement(loadToCardBtnXpath)));
 
-				randomNumber = checkIfCouponClickingHasErrors(randomNumber);
+					WebElement loadToCard = randomCoupon
+							.findElement(loadToCardBtnXpath);
+					loadToCard.click();
+					System.out
+							.println("Success: Load to Card Clicked for random coupon");
+
+					randomNumber = checkIfCouponClickingHasErrors(randomNumber);
+				}
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -863,7 +881,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 
 				boolean flag5 = readData.setCellData("coupon_details",
 						"Category Name", index + 2, randomCategoryName);
-				
+
 				System.out.println("Details of Coupon " + (index + 1)
 						+ " updated: " + brandName + ", " + discountPrice
 						+ ", " + expiryDate + ", " + description);

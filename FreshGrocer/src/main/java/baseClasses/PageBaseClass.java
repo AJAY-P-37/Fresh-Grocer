@@ -15,6 +15,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Coordinates;
 import org.openqa.selenium.interactions.Locatable;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import utilities.DateUtil;
@@ -145,86 +147,72 @@ public class PageBaseClass extends BaseTestClass {
 		coord.inViewPort();
 	}
 
-	/****************** Reporting Functions ***********************/
-	public void reportFail(String reportString) {
+	/******* Performing JavaScript Executor Click *******/
+	public void clickWithJSExecutor(WebElement element) {
 
-		takeScreenShotOnFailure();
-		Assert.fail(reportString);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click()", element);
 	}
 
-	public void reportPass(String reportString) {
-		Assert.assertTrue(true);
-	}
+	/****
+	 * Wait for CSS Transition
+	 *****/
+	public void waitForCssTransition(WebElement element, String cssValue) {
 
-	/****************** Capture Screen Shot ***********************/
-	public void takeScreenShotOnFailure() {
-		TakesScreenshot takeScreenShot = (TakesScreenshot) driver;
-		File sourceFile = takeScreenShot.getScreenshotAs(OutputType.FILE);
-
-		File destFolder = new File(System.getProperty("user.dir")
-				+ "/ScreenShots");
-		destFolder.mkdir();
-		File destFile = new File(System.getProperty("user.dir")
-				+ "/ScreenShots/" + DateUtil.getTimeStamp() + ".png");
+		String duration = element.getCssValue(cssValue);
+		duration = duration.substring(0, duration.length() - 1);
+		System.out.println("Waiting for " + duration
+				+ " seconds for CSS transition to complete");
 		try {
-			FileUtils.copyFile(sourceFile, destFile);
+			Thread.sleep((long) (Double.valueOf(duration) * 1000));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 
-		} catch (IOException e) {
+	/**** Wait for Element (Explicit Wait) ****/
+	public WebElement waitUntil(String condition, By locator,
+			int timeOutInSeconds) {
+
+		WebElement element = null;
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
+
+			if (condition.equals("visibilityOfElementLocated")) {
+
+				element = wait.until(ExpectedConditions
+						.visibilityOfElementLocated(locator));
+
+			} else if (condition.equals("elementToBeClickable")) {
+
+				element = wait.until(ExpectedConditions
+						.elementToBeClickable(locator));
+
+			} else if (condition.equals("invisibilityOfElementLocated")) {
+
+				wait.until(ExpectedConditions
+						.invisibilityOfElementLocated(locator));
+
+			} else if (condition.equals("presenceOfElementLocated")) {
+
+				element = wait.until(ExpectedConditions
+						.presenceOfElementLocated(locator));
+
+			} else if (condition.equals("")) {
+
+			} else if (condition.equals("")) {
+
+			} else if (condition.equals("")) {
+
+			}
+		} catch (Exception e) {
+
+			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
 		}
-	}
-
-	/********* Reading files with Prefix ************/
-	public String readFileWithPrefix(String dirPath, String fileNamePrefix) {
-
-		File dir = new File(dirPath);
-
-		File[] foundFiles = dir.listFiles();
-		List<String> matchedFiles = new ArrayList<String>();
-		String path = "";
-		for (File file : foundFiles) {
-			if (file.getName().startsWith(fileNamePrefix + " ")) {
-				matchedFiles.add(file.getAbsolutePath());
-			}
-		}
-
-		if (matchedFiles.size() > 1) {
-			System.out.println("More than one file found for the prefix "
-					+ fileNamePrefix + " in directory " + dirPath);
-			reportFail("More than one file found for the prefix "
-					+ fileNamePrefix + " in directory " + dirPath);
-
-		} else if (matchedFiles.size() == 0) {
-			System.out.println("No matched file found for Prefix "
-					+ fileNamePrefix + " in directory " + dirPath);
-			reportFail("No matched file found for Prefix " + fileNamePrefix
-					+ " in directory " + dirPath);
-
-		} else if (matchedFiles.size() == 1) {
-			path = matchedFiles.get(0);
-			System.out.println("Success: File prefix matched with " + path);
-		}
-
-		return path;
-	}
-
-	/*********** Updating Name of the Files *************/
-	public void renameFileWithDateTime(String path) {
-
-		File oldFile = new File(path);
-
-		String[] fileName = path.split(" ");
-
-		String newPath = fileName[0] + " " + DateUtil.getTimeStamp() + ".xslx";
-		File newFile = new File(newPath);
-
-		if (oldFile.renameTo(newFile)) {
-			System.out.println("Success: File renamed to " + newPath);
-		} else {
-			System.out.println("Sorry! the" + path
-					+ "can't be renamed. Error oocured");
-			reportFail("Sorry! the" + path + "can't be renamed. Error oocured");
-		}
+		return element;
 	}
 
 }

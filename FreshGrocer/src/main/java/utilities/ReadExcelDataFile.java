@@ -8,6 +8,7 @@ import java.util.Calendar;
 
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
@@ -34,6 +35,7 @@ public class ReadExcelDataFile {
 		this.path = path;
 		try {
 			fis = new FileInputStream(path);
+			ZipSecureFile.setMinInflateRatio(-1.0d);
 			workbook = new XSSFWorkbook(fis);
 			sheet = workbook.getSheetAt(0);
 			fis.close();
@@ -168,8 +170,6 @@ public class ReadExcelDataFile {
 	public boolean setCellData(String sheetName, String colName, int rowNum,
 			String data) {
 		try {
-			fis = new FileInputStream(path);
-			workbook = new XSSFWorkbook(fis);
 
 			if (rowNum <= 0) {
 				return false;
@@ -210,21 +210,19 @@ public class ReadExcelDataFile {
 			cell.setCellStyle(cs);
 			cell.setCellValue(data);
 
-			fis.close();
-
-			fos = new FileOutputStream(path);
-			workbook.write(fos);
-
-			fos.close();
-
-		} catch (Exception e) {
 			try {
-				fis.close();
+
+				fos = new FileOutputStream(path);
+				workbook.write(fos);
 				fos.close();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				System.out.println(e.getMessage());
+
+				System.out.println(e1.getMessage());
+				fos.close();
+				return false;
 			}
+		} catch (Exception e) {
+
 			System.out.println(e.getMessage());
 			return false;
 		}

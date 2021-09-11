@@ -1,9 +1,16 @@
 package baseClasses;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,6 +20,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.testng.Assert;
+
+import utilities.DateUtil;
 
 public class BaseTestClass {
 
@@ -82,14 +92,15 @@ public class BaseTestClass {
 				driver = new SafariDriver();
 
 			}
+			System.out.println("Application Opened");
+
+			// driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+			driver.manage().window().maximize();
 		} catch (Exception e) {
 			// reportFail(e.getMessage());
 			System.out.println(e.getMessage());
 		}
-
-		// driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
 
 	}
 
@@ -133,21 +144,86 @@ public class BaseTestClass {
 
 		driver.navigate().refresh();
 	}
+	
+	/****************** Reporting Functions ***********************/
+	public void reportFail(String reportString) {
 
-	/****
-	 * Wait for CSS Transition
-	 *****/
-	public void waitForCssTransition(WebElement element, String cssValue) {
+		takeScreenShotOnFailure();
+		Assert.fail(reportString);
+	}
 
-		String duration = element.getCssValue(cssValue);
-		duration = duration.substring(0, duration.length() - 1);
-		System.out.println("Waiting for " + duration + " seconds for CSS transition to complete");
+	public void reportPass(String reportString) {
+		Assert.assertTrue(true);
+	}
+
+	/****************** Capture Screen Shot ***********************/
+	public void takeScreenShotOnFailure() {
+		TakesScreenshot takeScreenShot = (TakesScreenshot) driver;
+		File sourceFile = takeScreenShot.getScreenshotAs(OutputType.FILE);
+
+		File destFolder = new File(System.getProperty("user.dir")
+				+ "/ScreenShots");
+		destFolder.mkdir();
+		File destFile = new File(System.getProperty("user.dir")
+				+ "/ScreenShots/" + DateUtil.getTimeStamp() + ".png");
 		try {
-			Thread.sleep((long) (Double.valueOf(duration) * 1000));
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+			FileUtils.copyFile(sourceFile, destFile);
+
+		} catch (IOException e) {
+			reportFail(e.getMessage());
+		}
+	}
+
+	/********* Reading files with Prefix ************/
+	public String readFileWithPrefix(String dirPath, String fileNamePrefix) {
+
+		File dir = new File(dirPath);
+
+		File[] foundFiles = dir.listFiles();
+		List<String> matchedFiles = new ArrayList<String>();
+		String path = "";
+		for (File file : foundFiles) {
+			if (file.getName().startsWith(fileNamePrefix + " ")) {
+				matchedFiles.add(file.getAbsolutePath());
+			}
+		}
+
+		if (matchedFiles.size() > 1) {
+			System.out.println("More than one file found for the prefix "
+					+ fileNamePrefix + " in directory " + dirPath);
+			reportFail("More than one file found for the prefix "
+					+ fileNamePrefix + " in directory " + dirPath);
+
+		} else if (matchedFiles.size() == 0) {
+			System.out.println("No matched file found for Prefix "
+					+ fileNamePrefix + " in directory " + dirPath);
+			reportFail("No matched file found for Prefix " + fileNamePrefix
+					+ " in directory " + dirPath);
+
+		} else if (matchedFiles.size() == 1) {
+			path = matchedFiles.get(0);
+			System.out.println("Success: File prefix matched with " + path);
+		}
+
+		return path;
+	}
+
+	/*********** Updating Name of the Files *************/
+	public void renameFileWithDateTime(String path) {
+
+		File oldFile = new File(path);
+
+		String[] fileName = path.split(" ");
+
+		String newPath = fileName[0] + " " + DateUtil.getTimeStamp() + ".xslx";
+		File newFile = new File(newPath);
+
+		if (oldFile.renameTo(newFile)) {
+			System.out.println("Success: File renamed to " + newPath);
+		} else {
+			System.out.println("Sorry! the" + path
+					+ "can't be renamed. Error oocured");
+			reportFail("Sorry! the" + path + "can't be renamed. Error oocured");
 		}
 	}
 
