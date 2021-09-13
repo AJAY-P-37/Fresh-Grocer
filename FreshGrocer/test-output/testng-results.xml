@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="8" passed="8">
+<testng-results skipped="0" failed="0" total="2" passed="2">
   <reporter-output>
   </reporter-output>
-  <suite name="TheFreshGrocer" duration-ms="537604" started-at="2021-09-11T08:08:05Z" finished-at="2021-09-11T08:17:02Z">
+  <suite name="TheFreshGrocer" duration-ms="963052" started-at="2021-09-13T17:43:22Z" finished-at="2021-09-13T17:59:25Z">
     <groups>
     </groups>
-    <test name="Chrome test" duration-ms="218387" started-at="2021-09-11T08:08:05Z" finished-at="2021-09-11T08:11:43Z">
-      <class name="myAccountPageTests.VerifyPersonalInformation">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyPersonalInformation@53b32d7]" name="openBrowser" is-config="true" duration-ms="1626" started-at="2021-09-11T13:40:57Z" finished-at="2021-09-11T13:40:59Z">
+    <test name="Chrome test" duration-ms="449180" started-at="2021-09-13T17:43:22Z" finished-at="2021-09-13T17:50:51Z">
+      <class name="myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook@49fc609f]" name="openBrowser" is-config="true" duration-ms="5830" started-at="2021-09-13T23:13:22Z" finished-at="2021-09-13T23:13:28Z">
           <params>
             <param index="0">
               <value>
@@ -18,7 +18,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="verifyPersonalInformationByEditing(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyPersonalInformation@53b32d7]" name="verifyPersonalInformationByEditing" duration-ms="43906" started-at="2021-09-11T13:40:59Z" finished-at="2021-09-11T13:41:43Z">
+        <test-method status="PASS" signature="verifyAllStatesWithErrorsInAddressBook(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook@49fc609f]" name="verifyAllStatesWithErrorsInAddressBook" duration-ms="442851" started-at="2021-09-13T23:13:28Z" finished-at="2021-09-13T23:20:51Z">
           <params>
             <param index="0">
               <value>
@@ -28,100 +28,16 @@
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verifyPersonalInformationByEditing -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.VerifyPersonalInformation@53b32d7]" name="closeAllTheBrowser" is-config="true" duration-ms="140" started-at="2021-09-11T13:41:43Z" finished-at="2021-09-11T13:41:43Z">
+        </test-method> <!-- verifyAllStatesWithErrorsInAddressBook -->
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook@49fc609f]" name="closeAllTheBrowser" is-config="true" duration-ms="482" started-at="2021-09-13T23:20:51Z" finished-at="2021-09-13T23:20:51Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeAllTheBrowser -->
-      </class> <!-- myAccountPageTests.VerifyPersonalInformation -->
-      <class name="myAccountPageTests.ValidateMessageForInvalidContactType">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.ValidateMessageForInvalidContactType@42e26948]" name="openBrowser" is-config="true" duration-ms="3177" started-at="2021-09-11T13:38:05Z" finished-at="2021-09-11T13:38:08Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[chrome]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="validateMessageForInvalidPreferredContactType(java.lang.String)[pri:0, instance:myAccountPageTests.ValidateMessageForInvalidContactType@42e26948]" name="validateMessageForInvalidPreferredContactType" duration-ms="55421" started-at="2021-09-11T13:38:08Z" finished-at="2021-09-11T13:39:03Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[staging]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- validateMessageForInvalidPreferredContactType -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.ValidateMessageForInvalidContactType@42e26948]" name="closeAllTheBrowser" is-config="true" duration-ms="111" started-at="2021-09-11T13:39:03Z" finished-at="2021-09-11T13:39:03Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- closeAllTheBrowser -->
-      </class> <!-- myAccountPageTests.ValidateMessageForInvalidContactType -->
-      <class name="myAccountPageTests.ValidateMessageForValidContactType">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.ValidateMessageForValidContactType@57baeedf]" name="openBrowser" is-config="true" duration-ms="1601" started-at="2021-09-11T13:39:03Z" finished-at="2021-09-11T13:39:05Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[chrome]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="validateMessageForValidPreferredContactType(java.lang.String)[pri:0, instance:myAccountPageTests.ValidateMessageForValidContactType@57baeedf]" name="validateMessageForValidPreferredContactType" duration-ms="47808" started-at="2021-09-11T13:39:05Z" finished-at="2021-09-11T13:39:53Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[staging]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- validateMessageForValidPreferredContactType -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.ValidateMessageForValidContactType@57baeedf]" name="closeAllTheBrowser" is-config="true" duration-ms="127" started-at="2021-09-11T13:39:53Z" finished-at="2021-09-11T13:39:53Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- closeAllTheBrowser -->
-      </class> <!-- myAccountPageTests.ValidateMessageForValidContactType -->
-      <class name="myAccountPageTests.VerifyAddressProfile">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAddressProfile@343f4d3d]" name="openBrowser" is-config="true" duration-ms="1739" started-at="2021-09-11T13:39:53Z" finished-at="2021-09-11T13:39:55Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[chrome]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="verifyAddressBookByAddingNewAddress(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAddressProfile@343f4d3d]" name="verifyAddressBookByAddingNewAddress" duration-ms="62591" started-at="2021-09-11T13:39:55Z" finished-at="2021-09-11T13:40:57Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[staging]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- verifyAddressBookByAddingNewAddress -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.VerifyAddressProfile@343f4d3d]" name="closeAllTheBrowser" is-config="true" duration-ms="97" started-at="2021-09-11T13:40:57Z" finished-at="2021-09-11T13:40:57Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- closeAllTheBrowser -->
-      </class> <!-- myAccountPageTests.VerifyAddressProfile -->
+      </class> <!-- myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook -->
     </test> <!-- Chrome test -->
-    <test name="Firefox test" duration-ms="319170" started-at="2021-09-11T08:11:43Z" finished-at="2021-09-11T08:17:02Z">
-      <class name="myAccountPageTests.VerifyPersonalInformation">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyPersonalInformation@59ec2012]" name="openBrowser" is-config="true" duration-ms="3997" started-at="2021-09-11T13:45:48Z" finished-at="2021-09-11T13:45:52Z">
+    <test name="Firefox test" duration-ms="513845" started-at="2021-09-13T17:50:51Z" finished-at="2021-09-13T17:59:25Z">
+      <class name="myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook@2a17b7b6]" name="openBrowser" is-config="true" duration-ms="5114" started-at="2021-09-13T23:20:51Z" finished-at="2021-09-13T23:20:56Z">
           <params>
             <param index="0">
               <value>
@@ -132,7 +48,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="verifyPersonalInformationByEditing(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyPersonalInformation@59ec2012]" name="verifyPersonalInformationByEditing" duration-ms="69265" started-at="2021-09-11T13:45:52Z" finished-at="2021-09-11T13:47:01Z">
+        <test-method status="PASS" signature="verifyAllStatesWithErrorsInAddressBook(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook@2a17b7b6]" name="verifyAllStatesWithErrorsInAddressBook" duration-ms="507218" started-at="2021-09-13T23:20:56Z" finished-at="2021-09-13T23:29:24Z">
           <params>
             <param index="0">
               <value>
@@ -142,96 +58,12 @@
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verifyPersonalInformationByEditing -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.VerifyPersonalInformation@59ec2012]" name="closeAllTheBrowser" is-config="true" duration-ms="1304" started-at="2021-09-11T13:47:01Z" finished-at="2021-09-11T13:47:02Z">
+        </test-method> <!-- verifyAllStatesWithErrorsInAddressBook -->
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook@2a17b7b6]" name="closeAllTheBrowser" is-config="true" duration-ms="1507" started-at="2021-09-13T23:29:24Z" finished-at="2021-09-13T23:29:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeAllTheBrowser -->
-      </class> <!-- myAccountPageTests.VerifyPersonalInformation -->
-      <class name="myAccountPageTests.ValidateMessageForInvalidContactType">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.ValidateMessageForInvalidContactType@42dafa95]" name="openBrowser" is-config="true" duration-ms="6738" started-at="2021-09-11T13:41:43Z" finished-at="2021-09-11T13:41:50Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[firefox]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="validateMessageForInvalidPreferredContactType(java.lang.String)[pri:0, instance:myAccountPageTests.ValidateMessageForInvalidContactType@42dafa95]" name="validateMessageForInvalidPreferredContactType" duration-ms="78577" started-at="2021-09-11T13:41:50Z" finished-at="2021-09-11T13:43:08Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[staging]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- validateMessageForInvalidPreferredContactType -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.ValidateMessageForInvalidContactType@42dafa95]" name="closeAllTheBrowser" is-config="true" duration-ms="1178" started-at="2021-09-11T13:43:08Z" finished-at="2021-09-11T13:43:10Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- closeAllTheBrowser -->
-      </class> <!-- myAccountPageTests.ValidateMessageForInvalidContactType -->
-      <class name="myAccountPageTests.ValidateMessageForValidContactType">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.ValidateMessageForValidContactType@6500df86]" name="openBrowser" is-config="true" duration-ms="4007" started-at="2021-09-11T13:43:10Z" finished-at="2021-09-11T13:43:14Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[firefox]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="validateMessageForValidPreferredContactType(java.lang.String)[pri:0, instance:myAccountPageTests.ValidateMessageForValidContactType@6500df86]" name="validateMessageForValidPreferredContactType" duration-ms="67698" started-at="2021-09-11T13:43:14Z" finished-at="2021-09-11T13:44:21Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[staging]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- validateMessageForValidPreferredContactType -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.ValidateMessageForValidContactType@6500df86]" name="closeAllTheBrowser" is-config="true" duration-ms="1249" started-at="2021-09-11T13:44:21Z" finished-at="2021-09-11T13:44:23Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- closeAllTheBrowser -->
-      </class> <!-- myAccountPageTests.ValidateMessageForValidContactType -->
-      <class name="myAccountPageTests.VerifyAddressProfile">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAddressProfile@402a079c]" name="openBrowser" is-config="true" duration-ms="3984" started-at="2021-09-11T13:44:23Z" finished-at="2021-09-11T13:44:27Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[firefox]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="verifyAddressBookByAddingNewAddress(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAddressProfile@402a079c]" name="verifyAddressBookByAddingNewAddress" duration-ms="79895" started-at="2021-09-11T13:44:27Z" finished-at="2021-09-11T13:45:46Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[staging]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- verifyAddressBookByAddingNewAddress -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.VerifyAddressProfile@402a079c]" name="closeAllTheBrowser" is-config="true" duration-ms="1272" started-at="2021-09-11T13:45:46Z" finished-at="2021-09-11T13:45:48Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- closeAllTheBrowser -->
-      </class> <!-- myAccountPageTests.VerifyAddressProfile -->
+      </class> <!-- myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook -->
     </test> <!-- Firefox test -->
   </suite> <!-- TheFreshGrocer -->
 </testng-results>

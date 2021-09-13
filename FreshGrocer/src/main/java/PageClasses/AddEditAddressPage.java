@@ -1,6 +1,10 @@
 package PageClasses;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import utilities.RandomUtil;
+import utilities.ReadExcelDataFile;
 import baseClasses.PageBaseClass;
 
 public class AddEditAddressPage extends PageBaseClass {
@@ -29,6 +34,8 @@ public class AddEditAddressPage extends PageBaseClass {
 	public By alternatePhoneTextBox;
 	public By alternatePhoneCheckBox;
 	public By saveAddressBtn;
+	public By cancelAddressBtn;
+	public By addressValidationText;
 
 	public AddEditAddressPage(WebDriver driver) {
 
@@ -50,6 +57,10 @@ public class AddEditAddressPage extends PageBaseClass {
 		zipcodeTextBox = getByLocator(locators, "zipcodeTextBox_id");
 		primaryPhoneTextBox = getByLocator(locators, "primaryPhoneTextBox_id");
 		saveAddressBtn = getByLocator(locators, "saveAddressBtn_id");
+		cancelAddressBtn = getByLocator(locators, "cancelAddressBtn_id");
+
+		addressValidationText = getByLocator(locators,
+				"addressValidationText_id");
 
 	}
 
@@ -58,8 +69,10 @@ public class AddEditAddressPage extends PageBaseClass {
 
 		boolean isPresent = false;
 		try {
-			WebElement addEditAddress = waitUntil("visibilityOfElementLocated",
-					addEditAddressTitle, 30);
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+
+			WebElement addEditAddress = wait.until(ExpectedConditions
+					.visibilityOfElementLocated(addEditAddressTitle));
 
 			scrollToElement(addEditAddress);
 			String expectedText = "Add/Edit Address";
@@ -67,17 +80,17 @@ public class AddEditAddressPage extends PageBaseClass {
 
 			if (actualText.equals(expectedText)) {
 
-				System.out.print("Page is Loaded. " + actualText
+				System.out.print("Address Page is Loaded. " + actualText
 						+ " is present ");
 				isPresent = true;
 			} else {
 
-				System.out.print("Page is NOT Loaded. " + actualText
+				System.out.print("Address Page is NOT Loaded. " + actualText
 						+ " is present ");
 				isPresent = false;
 			}
 		} catch (Exception e) {
-
+			System.out.print("Address Page is NOT Loaded. ");
 			isPresent = false;
 		}
 		return isPresent;
@@ -85,15 +98,19 @@ public class AddEditAddressPage extends PageBaseClass {
 	}
 
 	/**** Enter a random First Name *****/
-	public void enterFirstName() {
+	public String enterFirstName() {
 
+		String randomFirstName = null;
 		try {
 
-			WebElement firstName = waitUntil("visibilityOfElementLocated",
-					firstNameTextBox, 10);
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+
+			WebElement firstName = wait.until(ExpectedConditions
+					.visibilityOfElementLocated(firstNameTextBox));
 
 			scrollToElement(firstName);
-			String randomFirstName = RandomUtil.getRandomStringOfLength(10);
+			randomFirstName = RandomUtil.getRandomUpperCaseLettersOfLength(1)
+					+ RandomUtil.getRandomLowerCaseLettersOfLength(9);
 
 			firstName.clear();
 			firstName.sendKeys(randomFirstName);
@@ -104,19 +121,24 @@ public class AddEditAddressPage extends PageBaseClass {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
 		}
+		return randomFirstName;
 	}
 
 	/**** Enter a random Last Name *****/
-	public void enterLastName() {
+	public String enterLastName() {
 
+		String randomLastName = null;
 		try {
 
-			WebElement lastName = waitUntil("visibilityOfElementLocated",
-					lastNameTextBox, 10);
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+
+			WebElement lastName = wait.until(ExpectedConditions
+					.visibilityOfElementLocated(lastNameTextBox));
 
 			scrollToElement(lastName);
 
-			String randomLastName = RandomUtil.getRandomStringOfLength(10);
+			randomLastName = RandomUtil.getRandomUpperCaseLettersOfLength(1)
+					+ RandomUtil.getRandomLowerCaseLettersOfLength(9);
 
 			lastName.clear();
 			lastName.sendKeys(randomLastName);
@@ -127,19 +149,24 @@ public class AddEditAddressPage extends PageBaseClass {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
 		}
+		return randomLastName;
 	}
 
 	/**** Enter a random Address *****/
-	public void enterAddress() {
+	public String enterAddress() {
 
+		String randomAddress = null;
 		try {
 
-			WebElement address = waitUntil("visibilityOfElementLocated",
-					addressTextBox, 10);
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+
+			WebElement address = wait.until(ExpectedConditions
+					.visibilityOfElementLocated(addressTextBox));
 
 			scrollToElement(address);
 
-			String randomAddress = RandomUtil.getRandomStringOfLength(10);
+			randomAddress = RandomUtil.getRandomUpperCaseLettersOfLength(1)
+					+ RandomUtil.getRandomLowerCaseLettersOfLength(9);
 
 			address.clear();
 			address.sendKeys(randomAddress);
@@ -150,19 +177,22 @@ public class AddEditAddressPage extends PageBaseClass {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
 		}
+		return randomAddress;
 	}
 
 	/**** Enter a random City *****/
-	public void enterCity() {
+	public String enterCity() {
 
+		String randomCity = null;
 		try {
+			WebDriverWait wait = new WebDriverWait(driver, 10);
 
-			WebElement city = waitUntil("visibilityOfElementLocated",
-					cityTextBox, 10);
-
+			WebElement city = wait.until(ExpectedConditions
+					.visibilityOfElementLocated(cityTextBox));
 			scrollToElement(city);
 
-			String randomCity = RandomUtil.getRandomStringOfLength(10);
+			randomCity = RandomUtil.getRandomUpperCaseLettersOfLength(1)
+					+ RandomUtil.getRandomLowerCaseLettersOfLength(9);
 
 			city.clear();
 			city.sendKeys(randomCity);
@@ -173,13 +203,18 @@ public class AddEditAddressPage extends PageBaseClass {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
 		}
+		return randomCity;
 	}
 
 	/*** Select A State from the DropDown ***/
-	public void selectStateDropDown() {
+	public String selectStateDropDown() {
 
+		String selectedState = null;
 		try {
-			WebElement state = driver.findElement(stateDropDown);
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			WebElement state = wait.until(ExpectedConditions
+					.elementToBeClickable(stateDropDown));
+
 			Select dropDown = new Select(state);
 
 			int numberOfOptions = dropDown.getOptions().size();
@@ -189,7 +224,7 @@ public class AddEditAddressPage extends PageBaseClass {
 
 			dropDown.selectByIndex(randomNumber);
 
-			String selectedState = dropDown.getFirstSelectedOption().getText();
+			selectedState = dropDown.getFirstSelectedOption().getText();
 			System.out.println("Success: Random State '" + selectedState
 					+ "' is selected");
 
@@ -197,19 +232,51 @@ public class AddEditAddressPage extends PageBaseClass {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
 		}
+		return selectedState;
 	}
 
-	/**** Enter a random ZipCode *****/
-	public void enterZipcode() {
+	/*** Select A State from the DropDown ***/
+	public String selectStateDropDown(String stateToBeSelected) {
 
+		String selectedState = null;
 		try {
 
-			WebElement zipcode = waitUntil("visibilityOfElementLocated",
-					zipcodeTextBox, 10);
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			WebElement state = wait.until(ExpectedConditions
+					.elementToBeClickable(stateDropDown));
+
+			Select dropDown = new Select(state);
+
+			dropDown.selectByVisibleText(stateToBeSelected);
+
+			selectedState = dropDown.getFirstSelectedOption().getText();
+			System.out.println("Success: State '" + selectedState
+					+ "' is selected");
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			reportFail(e.getMessage());
+		}
+		return selectedState;
+	}
+
+	/****
+	 * Enter a random ZipCode
+	 *****/
+	public String enterZipcode() {
+
+		String randomZipcode = null;
+		try {
+
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+
+			WebElement zipcode = wait.until(ExpectedConditions
+					.visibilityOfElementLocated(zipcodeTextBox));
 
 			scrollToElement(zipcode);
 
-			String randomZipcode = RandomUtil.getRandomNumberOfLength(5);
+			randomZipcode = ""
+					+ RandomUtil.getRandomNumberBetween(10001, 99999);
 
 			zipcode.clear();
 			zipcode.sendKeys(randomZipcode);
@@ -220,73 +287,74 @@ public class AddEditAddressPage extends PageBaseClass {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
 		}
+		return randomZipcode;
 	}
 
-	/**** Enter Primary Phone Number ****/
-	public void enterPrimaryPhone() {
+	/****
+	 * Enter Primary Phone Number
+	 ****/
+	public String enterPrimaryPhone() {
 
+		String randomPhoneNumber = null;
 		try {
 
-			String phoneNumber = "732732"
+			randomPhoneNumber = "732732"
 					+ RandomUtil.getRandomNumberOfLength(4);
 
-			WebElement primaryPhone = waitUntil("visibilityOfElementLocated",
-					primaryPhoneTextBox, 10);
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+
+			WebElement primaryPhone = wait.until(ExpectedConditions
+					.visibilityOfElementLocated(primaryPhoneTextBox));
 
 			scrollToElement(primaryPhone);
 
 			primaryPhone.clear();
-			primaryPhone.sendKeys(phoneNumber);
+			primaryPhone.sendKeys(randomPhoneNumber);
 
-			System.out.println("Success: The Phone Number '" + phoneNumber
-					+ "' has been Entered");
+			System.out.println("Success: The Phone Number '"
+					+ randomPhoneNumber + "' has been Entered");
 
 		} catch (Exception e) {
 
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
 		}
+		return randomPhoneNumber;
 	}
 
 	/**** Click Save Address Button ****/
 	public void clickSaveAddressBtn() {
 
 		try {
-			
+
 			int count = 0, maxAttempts = 3;
 			do {
-				WebDriverWait wait = new WebDriverWait(driver, 10);
-				WebElement save = wait.until(ExpectedConditions
-						.elementToBeClickable(saveAddressBtn));
+				try {
+					WebDriverWait wait = new WebDriverWait(driver, 10);
+					WebElement save = wait.until(ExpectedConditions
+							.elementToBeClickable(saveAddressBtn));
 
-				scrollToElement(save);
-				save.click();
+					scrollToElement(save);
+					save.click();
 
-				System.out.println("Success: Save Address Button Clicked");
+					System.out.println("Success: Save Address Button Clicked");
 
-				wait = new WebDriverWait(driver, 10);
-				boolean homePageLoaded = wait.until(ExpectedConditions
-						.invisibilityOf(save));
-
-				if (homePageLoaded) {
-
-					System.out.println("Sucess: Page Loaded in attempt no. "
-							+ (count + 1));
+					// wait = new WebDriverWait(driver, 10);
+					// wait.until(ExpectedConditions.invisibilityOf(save));
 					break;
-				} else {
-					
-					System.out
-							.println("Sucess: Page Loaded did NOT in attempt no. "
-									+ (count + 1));
+
+				} catch (Exception e) {
+					System.out.println("Save NOT clicked in attempt no. "
+							+ (count + 1));
 
 				}
+
 				count++;
 				if (count == maxAttempts) {
-					System.out.println("Success: Page NOT loaded even after "
-							+ count
+					System.out.println("Save NOT clicked even after " + count
 							+ " attempts for 10 seconds in each attempt");
 
-					reportFail("Success: Page NOT loaded even after " + count
+					reportFail("Save NOT clicked even after " + count
 							+ " attempts for 10 seconds in each attempt");
 				}
 
@@ -296,6 +364,163 @@ public class AddEditAddressPage extends PageBaseClass {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());
 		}
+
+	}
+
+	/**** Click Cancel Address Button ****/
+	public void clickCancelAddressBtn() {
+
+		try {
+
+			int count = 0, maxAttempts = 3;
+			do {
+				try {
+					WebDriverWait wait = new WebDriverWait(driver, 10);
+					WebElement cancel = wait.until(ExpectedConditions
+							.elementToBeClickable(cancelAddressBtn));
+
+					scrollToElement(cancel);
+					cancel.click();
+
+					System.out
+							.println("Success: Cancel Address Button Clicked");
+
+					wait = new WebDriverWait(driver, 10);
+					wait.until(ExpectedConditions.invisibilityOf(cancel));
+					break;
+
+				} catch (Exception e) {
+					System.out.println("Cancel NOT clicked in attempt no. "
+							+ (count + 1));
+
+				}
+
+				count++;
+				if (count == maxAttempts) {
+					System.out.println("Cancel NOT clicked even after " + count
+							+ " attempts for 10 seconds in each attempt");
+
+					reportFail("Cancel NOT clicked even after " + count
+							+ " attempts for 10 seconds in each attempt");
+				}
+
+			} while (count <= maxAttempts);
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			reportFail(e.getMessage());
+		}
+
+	}
+
+	/**** Validating field for Address *******/
+	public String getValidationTextForAddress() {
+
+		String errorMessage = "";
+		try {
+
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			WebElement addressErrorMessage = wait.until(ExpectedConditions
+					.visibilityOfElementLocated(addressValidationText));
+
+			errorMessage = addressErrorMessage.getText();
+		} catch (Exception e) {
+			System.out.println("Error Message NOT Found");
+			errorMessage = "";
+		}
+		return errorMessage;
+	}
+
+	/*** Getting All States in the DropDown with Error in Address Book Form *****/
+	public List<WebElement> getAllStates() {
+
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		WebElement states = wait.until(ExpectedConditions
+				.visibilityOfElementLocated(stateDropDown));
+		Select dropDown = new Select(states);
+		List<WebElement> statesList = dropDown.getOptions();
+
+		return statesList;
+
+	}
+
+	/**** Extracting the Texts from All the States in DropDown ***/
+	public List<String> extractingTextFromStatesDropDown(
+			List<WebElement> statesList) {
+
+		List<String> states = new ArrayList<String>();
+
+		statesList.remove(0);
+		for (int index = 0; index < statesList.size(); index++) {
+			states.add(statesList.get(index).getText());
+		}
+		return states;
+
+	}
+
+	/**** Finding the Duplicates in the States DropDown ***/
+	public List<String> findDuplicatesInStatesDropDown(List<String> states) {
+
+		List<String> listWithDuplicates = new ArrayList<String>();
+
+		final Set<String> setWithUniqueStates = new HashSet<String>();
+
+		for (String state : states) {
+
+			if (!setWithUniqueStates.add(state)) {
+
+				listWithDuplicates.add(state);
+			}
+		}
+		return listWithDuplicates;
+
+	}
+
+	public void updatingInExcel(String fileNamePrefix, String sheetName,
+			String colName, int fromRowNum, List<String> data) {
+		System.out.println("*****Updating the " + sheetName + "******");
+		try {
+			String dir = System.getProperty("user.dir")
+					+ "/src/main/resources/TestData";
+
+			String path = readFileWithPrefix(dir, fileNamePrefix);
+
+			ReadExcelDataFile readData = new ReadExcelDataFile(path);
+
+			readData.clearExistingDataInSheet(sheetName, fromRowNum);
+
+			for (int index = 0; index < data.size(); index++) {
+
+				readData.setCellData(sheetName, "S.No", index + 2, ""
+						+ (index + 1));
+
+				boolean flag = readData.setCellData(sheetName, colName,
+						index + 2, data.get(index));
+				Assert.assertEquals(true, flag);
+				System.out.println(data.get(index) + " updated in Excel");
+			}
+
+			renameFileWithDateTime(path);
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			reportFail(e.getMessage());
+		}
+	}
+
+	/**** Updating the States with Error in Excel ***/
+	public void updateStatesWithErrorInExcel(List<String> statesWithError) {
+
+		updatingInExcel("erroneousStates", "states_with_error", "States", 2,
+				statesWithError);
+
+	}
+
+	/**** Updating the Duplicate States in Excel ***/
+	public void updateDuplicateStatesInExcel(List<String> duplicateStates) {
+
+		updatingInExcel("erroneousStates", "duplicate_states", "States", 2,
+				duplicateStates);
 
 	}
 }

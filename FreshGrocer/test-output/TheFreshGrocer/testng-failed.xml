@@ -3,43 +3,19 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [TheFreshGrocer]">
   <parameter name="environment" value="staging"/>
   <parameter name="browser" value="firefox"/>
-  <test name="Chrome test(failed)">
+  <test name="Firefox test(failed)">
     <parameter name="environment" value="staging"/>
-    <parameter name="browser" value="chrome"/>
+    <parameter name="browser" value="firefox"/>
     <classes>
-      <class name="myAccountPageTests.VerifyAddressProfile">
+      <class name="myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook">
         <methods>
           <include name="closeAllTheBrowser"/>
           <include name="closeAllTheBrowser"/>
           <include name="openBrowser"/>
           <include name="openBrowser"/>
+          <include name="verifyAllStatesWithErrorsInAddressBook" invocation-numbers="0"/>
         </methods>
-      </class> <!-- myAccountPageTests.VerifyAddressProfile -->
-      <class name="myAccountPageTests.VerifyPersonalInformation">
-        <methods>
-          <include name="openBrowser"/>
-          <include name="openBrowser"/>
-          <include name="closeAllTheBrowser"/>
-          <include name="closeAllTheBrowser"/>
-        </methods>
-      </class> <!-- myAccountPageTests.VerifyPersonalInformation -->
-      <class name="myAccountPageTests.ValidateMessageForValidContactType">
-        <methods>
-          <include name="openBrowser"/>
-          <include name="openBrowser"/>
-          <include name="closeAllTheBrowser"/>
-          <include name="closeAllTheBrowser"/>
-        </methods>
-      </class> <!-- myAccountPageTests.ValidateMessageForValidContactType -->
-      <class name="myAccountPageTests.ValidateMessageForInvalidContactType">
-        <methods>
-          <include name="validateMessageForInvalidPreferredContactType" invocation-numbers="0"/>
-          <include name="openBrowser"/>
-          <include name="openBrowser"/>
-          <include name="closeAllTheBrowser"/>
-          <include name="closeAllTheBrowser"/>
-        </methods>
-      </class> <!-- myAccountPageTests.ValidateMessageForInvalidContactType -->
+      </class> <!-- myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook -->
     </classes>
-  </test> <!-- Chrome test(failed) -->
+  </test> <!-- Firefox test(failed) -->
 </suite> <!-- Failed suite [TheFreshGrocer] -->

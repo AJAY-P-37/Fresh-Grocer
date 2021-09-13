@@ -3,11 +3,11 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="myAccountPageTests.ValidateMessageForValidContactType">
+      <class name="myAccountPageTests.ValidateErronicStatesInDropDown">
         <methods>
-          <include name="validateMessageForValidPreferredContactType"/>
+          <include name="verifyAllStatesWithErrorsInAddressBook"/>
         </methods>
-      </class> <!-- myAccountPageTests.ValidateMessageForValidContactType -->
+      </class> <!-- myAccountPageTests.ValidateErronicStatesInDropDown -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

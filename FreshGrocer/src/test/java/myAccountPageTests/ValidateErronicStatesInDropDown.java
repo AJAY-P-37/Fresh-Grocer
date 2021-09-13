@@ -1,5 +1,11 @@
 package myAccountPageTests;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -12,13 +18,15 @@ import PageClasses.MyAccountPage;
 import baseClasses.BaseTestClass;
 import baseClasses.PageBaseClass;
 
-public class VerifyAddressProfile extends BaseTestClass {
+public class ValidateErronicStatesInDropDown extends BaseTestClass {
 
 	PageBaseClass basePage;
 	LoginPage logPage;
 	LandingPage landPage;
 	MyAccountPage myAccountPage;
 	AddEditAddressPage addressPage;
+
+	int addressIndex = 0;
 
 	@BeforeClass
 	@Parameters("browser")
@@ -35,7 +43,7 @@ public class VerifyAddressProfile extends BaseTestClass {
 
 	@Test
 	@Parameters("environment")
-	public void verifyAddressBookByAddingNewAddress(String environment) {
+	public void verifyAllStatesWithErrorsInAddressBook(String environment) {
 
 		basePage.openApplication(environment);
 
@@ -78,25 +86,12 @@ public class VerifyAddressProfile extends BaseTestClass {
 
 		myAccountPage.clickAddNewAddressBtn();
 
-		addressPage.enterFirstName();
+		List<WebElement> statesList = addressPage.getAllStates();
 
-		addressPage.enterLastName();
+		List<String> states = addressPage
+				.extractingTextFromStatesDropDown(statesList);
 
-		addressPage.enterAddress();
-
-		addressPage.enterCity();
-
-		addressPage.selectStateDropDown();
-
-		addressPage.enterZipcode();
-		
-		addressPage.enterPrimaryPhone();
-
-		addressPage.clickSaveAddressBtn();
-
-		myAccountPage.validateAdrressUpdatedSuccessMessage();
-		
-		myAccountPage.clickAddressDeleteBtn();
+		addressPage.clickCancelAddressBtn();
 
 		myAccountPage.clickHomeLink();
 
@@ -105,6 +100,21 @@ public class VerifyAddressProfile extends BaseTestClass {
 		landPage.clickAccountHeaderButton();
 
 		landPage.clickSignOutButton();
+
+		List<String> duplicateStates = addressPage
+				.findDuplicatesInStatesDropDown(states);
+
+		if (duplicateStates.size() > 0) {
+			System.out.println("States which are duplicated : "
+					+ duplicateStates);
+
+			addressPage.updateDuplicateStatesInExcel(duplicateStates);
+
+			reportFail("States which are duplicated : " + duplicateStates);
+		} else {
+			
+			System.out.println("No States are Duplicated");
+		}
 
 	}
 

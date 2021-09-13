@@ -1,12 +1,12 @@
 package PageClasses;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -38,6 +38,9 @@ public class MyAccountPage extends PageBaseClass {
 	public By addressBookEditBtn;
 	public By addNewAddressBtn;
 	public By addressValidationText;
+	public By addressesList;
+	public By addressLines;
+	public By addressEditBtn;
 	public By addressDeleteBtn;
 	public By personalInformationEditBtn;
 	public By personalInformationValidationText;
@@ -85,6 +88,9 @@ public class MyAccountPage extends PageBaseClass {
 		addNewAddressBtn = getByLocator(locators, "addNewAddressBtn_id");
 		addressValidationText = getByLocator(locators,
 				"addressValidationText_id");
+		addressesList = getByLocator(locators, "addressesList_xpath");
+		addressLines = getByLocator(locators, "addressLines_xpath");
+		addressEditBtn = getByLocator(locators, "addressEditBtn_xpath");
 		addressDeleteBtn = getByLocator(locators, "addressDeleteBtn_xpath");
 		personalInformationEditBtn = getByLocator(locators,
 				"personalInformationEditBtn_id");
@@ -310,6 +316,103 @@ public class MyAccountPage extends PageBaseClass {
 	}
 
 	/****
+	 * Select a State in Profile where Number of Home Stores is at least 1
+	 ******/
+	public String selectState() {
+
+		String selectedState = null;
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			WebElement state = wait.until(ExpectedConditions
+					.elementToBeClickable(stateDropdown));
+			Select stateDropDown = new Select(state);
+
+			List<WebElement> stateOptions = stateDropDown.getOptions();
+
+			int totalOptions = stateOptions.size();
+			int randomNumber = RandomUtil.getRandomNumberBetween(1,
+					totalOptions - 1);
+
+			stateDropDown.selectByIndex(randomNumber);
+
+			selectedState = stateDropDown.getFirstSelectedOption().getText();
+
+			System.out.println("Sucess: State '" + selectedState
+					+ "' is selected");
+
+		} catch (Exception e) {
+
+			System.out.println(e.getMessage());
+			reportFail(e.getMessage());
+		}
+		return selectedState;
+	}
+
+	/****
+	 * Get All the Home Store and Select a Home Store for state
+	 ****/
+	public String selectHomeStore() {
+
+		String selectedHomeStore = null;
+		try {
+
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			WebElement homeStore = wait.until(ExpectedConditions
+					.elementToBeClickable(homeStoreDropdown));
+
+			homeStore.click();
+
+			Select homeStoreDropDown = new Select(homeStore);
+
+			List<WebElement> homeStoreOptions = homeStoreDropDown.getOptions();
+
+			List<WebElement> availableOptions = new ArrayList<WebElement>();
+			for (int index = 0; index < homeStoreOptions.size(); index++) {
+
+				WebElement option = homeStoreOptions.get(index);
+
+				String displayAttribute = option.getCssValue("display");
+
+				if (displayAttribute.equals("block")) {
+					availableOptions.add(option);
+				}
+			}
+			availableOptions.remove(0);
+
+			int totalAvailableOptions = availableOptions.size();
+
+			System.out.println(totalAvailableOptions + " Home Stores found");
+
+			if (totalAvailableOptions >= 1) {
+
+				int randomNumber = RandomUtil.getRandomNumberBetween(0,
+						totalAvailableOptions - 1);
+
+				String randomOption = availableOptions.get(randomNumber)
+						.getText();
+
+				homeStoreDropDown.selectByVisibleText(randomOption);
+
+				selectedHomeStore = homeStoreDropDown.getFirstSelectedOption()
+						.getText();
+
+				System.out.println("Success: Home Store '" + selectedHomeStore
+						+ "' is selected");
+
+			} else {
+				selectedHomeStore = null;
+			}
+
+		} catch (Exception e) {
+
+			System.out.println(e.getMessage());
+			reportFail(e.getMessage());
+		}
+
+		return selectedHomeStore;
+	}
+
+	/****
 	 * Click Update Button for Invalid Scenario (Not checking Page Load
 	 * Condition)
 	 ****/
@@ -378,6 +481,16 @@ public class MyAccountPage extends PageBaseClass {
 
 			int count = 0, maxAttempts = 3;
 			do {
+				WebElement primaryPhone = driver
+						.findElement(primaryPhoneTextBox);
+				String validation = primaryPhone.getAttribute("class");
+
+				if (validation.contains("input-validation-error")) {
+					System.out
+							.println("Primary Phone field consists of Invalid Phone Number. Entering it again");
+					takeScreenShotOnFailure();
+					enterRandomPrimaryPhone();
+				}
 				WebDriverWait wait = new WebDriverWait(driver, 10);
 				WebElement updateProfile = wait.until(ExpectedConditions
 						.elementToBeClickable(updateProfileBtn));
@@ -455,6 +568,51 @@ public class MyAccountPage extends PageBaseClass {
 		return validated;
 	}
 
+	/*** Check if Edit Address Button is Present ****/
+	public boolean checkIfAddressBookEditBtnIsPresent() {
+
+		boolean isPresent = false;
+
+		try {
+
+			int count = 0, maxAttempts = 3;
+			do {
+				try {
+					WebDriverWait wait = new WebDriverWait(driver, 20);
+					WebElement addressBookEdit = wait.until(ExpectedConditions
+							.visibilityOfElementLocated(addressBookEditBtn));
+
+					System.out
+							.println("Success: Address Book Edit Button is Present");
+					isPresent = true;
+					break;
+
+				} catch (Exception e) {
+
+					System.out
+							.println("Address Book Button Edit is NOT Present in attempt no. "
+									+ (count + 1) + "Refreshing the Page Again");
+					isPresent = false;
+					refreshPage();
+
+				}
+				count++;
+				if (count == maxAttempts) {
+					System.out
+							.println("Address Book Edit Button is NOT Present even after "
+									+ count + " attempts");
+					isPresent = false;
+				}
+			} while (count <= maxAttempts);
+
+		} catch (Exception e) {
+
+			System.out.println(e.getMessage());
+			isPresent = false;
+		}
+		return isPresent;
+	}
+
 	/**** Click Address Book Edit Button ****/
 	public void clickAddressBookEditBtn() {
 
@@ -462,9 +620,9 @@ public class MyAccountPage extends PageBaseClass {
 
 			int count = 0, maxAttempts = 3;
 			do {
-
-				WebElement addressBookEdit = driver
-						.findElement(addressBookEditBtn);
+				WebDriverWait wait = new WebDriverWait(driver, 20);
+				WebElement addressBookEdit = wait.until(ExpectedConditions
+						.visibilityOfElementLocated(addressBookEditBtn));
 
 				scrollToElement(addressBookEdit);
 				clickWithJSExecutor(addressBookEdit);
@@ -472,7 +630,7 @@ public class MyAccountPage extends PageBaseClass {
 				System.out.println("Success: Clicked Address Book Edit Button");
 
 				try {
-					WebDriverWait wait = new WebDriverWait(driver, 10);
+
 					WebElement addNewAddress = wait.until(ExpectedConditions
 							.visibilityOfElementLocated(addNewAddressBtn));
 					System.out
@@ -541,8 +699,9 @@ public class MyAccountPage extends PageBaseClass {
 	}
 
 	/**** Validating Success Message after Entering valid Details for Address *****/
-	public void validateAdrressUpdatedSuccessMessage() {
+	public boolean validateAdrressUpdatedSuccessMessage() {
 
+		boolean validated = false;
 		try {
 
 			WebDriverWait wait = new WebDriverWait(driver, 20);
@@ -556,6 +715,7 @@ public class MyAccountPage extends PageBaseClass {
 			if (actualText.equals(expectedText)) {
 				System.out.println("Success: Success msg for address updated '"
 						+ actualText + "' is correct");
+				validated = true;
 			} else {
 
 				System.out.println("Success msg for address updated '"
@@ -565,23 +725,182 @@ public class MyAccountPage extends PageBaseClass {
 			}
 		} catch (Exception e) {
 
-			System.out.println(e.getMessage());
-			reportFail(e.getMessage());
+			System.out.println("Success msg for address updated is NOT found");
+			validated = false;
 		}
+		return validated;
 
 	}
 
-	/**** Click Delete Button for the Latest Updated Address ****/
-	public void clickAddressDeleteBtn() {
+	/*** Validate Address Details in Address Lines ***/
+	public int validateAddressLines(String firstName, String lastName,
+			String address, String city, String state, String zipcode,
+			String primaryPhone) {
+
+		System.out.println("***********Address Validation*************");
+		int addressIndex = -1;
+		try {
+
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			List<WebElement> addresses = wait.until(ExpectedConditions
+					.visibilityOfAllElementsLocatedBy(addressesList));
+
+			int lastAddressIndex = addresses.size() - 1;
+
+			WebElement thisAddress = addresses.get(lastAddressIndex);
+
+			scrollToElement(thisAddress);
+
+			List<WebElement> thisAddressLines = thisAddress
+					.findElements(addressLines);
+
+			String expectedName = firstName + " " + lastName;
+			String actualName = thisAddressLines.get(0).getText();
+			if (actualName.equalsIgnoreCase(expectedName)) {
+
+				System.out.println("Actual Name '" + actualName
+						+ "' and Expected Name is Correct");
+			} else {
+				System.out.println("Actual Name '" + actualName
+						+ "' and Expected Name is NOT Correct");
+				Assert.assertEquals(actualName, expectedName, "Actual Name '"
+						+ actualName + "' and Expected Name is NOT Correct");
+			}
+
+			String expectedAddress = address;
+			String actualAddress = thisAddressLines.get(1).getText();
+			if (actualAddress.equalsIgnoreCase(expectedAddress)) {
+
+				System.out.println("Actual Address '" + actualAddress
+						+ "' and Expected Address is Correct");
+			} else {
+				System.out.println("Actual Address '" + actualAddress
+						+ "' and Expected Address is NOT Correct");
+				Assert.assertEquals(actualAddress, expectedAddress,
+						"Actual Address '" + actualAddress
+								+ "' and Expected Address is NOT Correct");
+			}
+
+			String expectedAddressLine3 = city + ", " + state + " " + zipcode;
+			String actualAddressLine3 = thisAddressLines.get(3).getText();
+			if (actualAddressLine3.equalsIgnoreCase(expectedAddressLine3)) {
+
+				System.out.println("Actual Address line 3 '"
+						+ actualAddressLine3
+						+ "' and Expected Address line 3 is Correct");
+			} else {
+				System.out.println("Actual Address line 3 '"
+						+ actualAddressLine3
+						+ "' and Expected Address line 3 is NOT Correct");
+				Assert.assertEquals(
+						actualAddressLine3,
+						expectedAddressLine3,
+						"Actual Address line 3 '"
+								+ actualAddressLine3
+								+ "' and Expected Address line 3 is NOT Correct");
+			}
+
+			String expectedPrimaryPhone = primaryPhone;
+			String actualPrimaryPhone = thisAddressLines.get(4).getText();
+			actualPrimaryPhone = actualPrimaryPhone.substring(15);
+
+			if (actualPrimaryPhone.equalsIgnoreCase(expectedPrimaryPhone)) {
+
+				System.out.println("Actual Primary Phone '"
+						+ actualPrimaryPhone
+						+ "' and Expected Primary Phone is Correct");
+			} else {
+				System.out.println("Actual Primary Phone '"
+						+ actualPrimaryPhone
+						+ "' and Expected Primary Phone is NOT Correct");
+				Assert.assertEquals(actualPrimaryPhone, expectedPrimaryPhone,
+						"Actual Primary Phone '" + actualPrimaryPhone
+								+ "' and Expected Primary Phone is NOT Correct");
+			}
+
+			addressIndex = lastAddressIndex;
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			reportFail(e.getMessage());
+		}
+		return addressIndex;
+	}
+
+	/**** Click Edit Button for the Latest Updated Address ****/
+	public void clickLastAddressEditBtn() {
 
 		try {
 
 			WebDriverWait wait = new WebDriverWait(driver, 10);
-			List<WebElement> allDeleteButtons = wait.until(ExpectedConditions
-					.visibilityOfAllElementsLocatedBy(addressDeleteBtn));
+			List<WebElement> addresses = wait.until(ExpectedConditions
+					.visibilityOfAllElementsLocatedBy(addressesList));
 
-			WebElement latestUpdatedAddressDeleteBtn = allDeleteButtons
-					.get(allDeleteButtons.size() - 1);
+			int lastAddressIndex = addresses.size() - 1;
+
+			WebElement addressToBeEdited = addresses.get(lastAddressIndex);
+
+			scrollToElement(addressToBeEdited);
+			WebElement latestUpdatedAddressEditBtn = addressToBeEdited
+					.findElement(addressEditBtn);
+
+			int count = 0, maxAttempts = 3;
+			do {
+				wait.until(ExpectedConditions
+						.elementToBeClickable(latestUpdatedAddressEditBtn));
+
+				scrollToElement(latestUpdatedAddressEditBtn);
+				latestUpdatedAddressEditBtn.click();
+
+				System.out
+						.println("Success: Clicked Edit Button for the Latest Updated Address");
+
+				boolean isPresent = addressPage
+						.checkIfAddEditAddressTitleIsPresent();
+
+				System.out.println("in attempt no. " + (count + 1));
+				if (isPresent) {
+					break;
+				}
+
+				count++;
+				if (count == maxAttempts) {
+
+					System.out
+							.println("Latest Updated Address NOT Clicked Edit even after"
+									+ count + " attempts");
+					reportFail("Latest Updated Address NOT Clicked Edit even after"
+							+ count + " attempts");
+				}
+			} while (count <= maxAttempts);
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			if (checkIfAddressBookEditBtnIsPresent()) {
+				clickAddressBookEditBtn();
+				clickLastAddressEditBtn();
+			} else {
+				reportFail(e.getMessage());
+			}
+		}
+	}
+
+	/**** Click Delete Button for the Latest Updated Address ****/
+	public void clickLastAddressDeleteBtn() {
+
+		try {
+
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			List<WebElement> addresses = wait.until(ExpectedConditions
+					.visibilityOfAllElementsLocatedBy(addressesList));
+
+			int lastAddressIndex = addresses.size() - 1;
+
+			WebElement addressToBeDeleted = addresses.get(lastAddressIndex);
+
+			scrollToElement(addressToBeDeleted);
+			WebElement latestUpdatedAddressDeleteBtn = addressToBeDeleted
+					.findElement(addressDeleteBtn);
 
 			int count = 0, maxAttempts = 3;
 			do {
@@ -675,8 +994,9 @@ public class MyAccountPage extends PageBaseClass {
 	 * Validating Success Message after Entering valid Details for Personal
 	 * Information
 	 *****/
-	public void validatePersonalInfoUpdatedSuccessMessage() {
+	public boolean validatePersonalInfoUpdatedSuccessMessage() {
 
+		boolean validated = false;
 		try {
 
 			WebDriverWait wait = new WebDriverWait(driver, 20);
@@ -692,6 +1012,7 @@ public class MyAccountPage extends PageBaseClass {
 				System.out
 						.println("Success: Success msg for perosnal info updated '"
 								+ actualText + "' is correct");
+				validated = true;
 			} else {
 
 				System.out.println("Success msg for personal info updated '"
@@ -701,10 +1022,10 @@ public class MyAccountPage extends PageBaseClass {
 			}
 		} catch (Exception e) {
 
-			System.out.println(e.getMessage());
-			reportFail(e.getMessage());
+			System.out.println("Success message for Personal info NOT found");
+			validated = false;
 		}
-
+		return validated;
 	}
 
 	/*** Waiting for AJAX Loading Spinner ****/

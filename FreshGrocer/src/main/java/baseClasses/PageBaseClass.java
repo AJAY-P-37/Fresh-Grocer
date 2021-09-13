@@ -164,7 +164,7 @@ public class PageBaseClass extends BaseTestClass {
 		System.out.println("Waiting for " + duration
 				+ " seconds for CSS transition to complete");
 		try {
-			Thread.sleep((long) (Double.valueOf(duration) * 1000));
+			Thread.sleep((long) ((1 + Double.valueOf(duration)) * 1000));
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {

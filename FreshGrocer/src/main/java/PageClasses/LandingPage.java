@@ -154,10 +154,32 @@ public class LandingPage extends PageBaseClass {
 	public void clickSignIn() {
 
 		try {
-			WebDriverWait wait = new WebDriverWait(driver, 10);
-			wait.until(ExpectedConditions.elementToBeClickable(signInBtn));
-			driver.findElement(signInBtn).click();
-			System.out.println("Success: Sign in Button is clicked");
+			int count = 0, maxAttempts = 3;
+			do {
+				WebDriverWait wait = new WebDriverWait(driver, 20);
+				WebElement signIn = wait.until(ExpectedConditions
+						.elementToBeClickable(signInBtn));
+
+				signIn.click();
+				System.out.println("Success: Sign in Button is clicked");
+
+				try {
+					wait.until(ExpectedConditions.invisibilityOf(signIn));
+					System.out.println("Page Loaded in  attempt no."
+							+ (count + 1) + ". SignIn Button is Invisible");
+					break;
+				} catch (Exception e) {
+					System.out.println("Page NOT Loaded in  attempt no. "
+							+ (count + 1) + ". Clicking again");
+				}
+				count++;
+				if (count == maxAttempts) {
+					System.out.println("Page NOT Loaded even after " + count
+							+ " attempts for 20 seconds in each attempt");
+					reportFail("Page NOT Loaded even after " + count
+							+ " attempts for 20 seconds in each attempt");
+				}
+			} while (count <= maxAttempts);
 		} catch (Exception e) {
 
 			System.out.println(e.getMessage());
@@ -218,11 +240,35 @@ public class LandingPage extends PageBaseClass {
 	/*********** Click Digital Coupons Link **********/
 	public void clickDigitalCouponsButton() {
 		try {
-			WebDriverWait wait = new WebDriverWait(driver, 10);
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(digitalCouponsLink));
-			driver.findElement(digitalCouponsLink).click();
-			System.out.println("Success: Digital Coupons Clicked");
+
+			int count = 0, maxAttempts = 3;
+			do {
+				WebDriverWait wait = new WebDriverWait(driver, 20);
+				WebElement digitalCoupons = wait.until(ExpectedConditions
+						.visibilityOfElementLocated(digitalCouponsLink));
+
+				digitalCoupons.click();
+				System.out.println("Success: digitalCoupons Button is clicked");
+
+				try {
+					wait.until(ExpectedConditions
+							.presenceOfElementLocated(couponsFrame));
+
+					System.out.println("Page Loaded in  attempt no."
+							+ (count + 1) + ". Coupons Frame available");
+					break;
+				} catch (Exception e) {
+					System.out.println("Page NOT Loaded in  attempt no. "
+							+ (count + 1) + ". Clicking again");
+				}
+				count++;
+				if (count == maxAttempts) {
+					System.out.println("Page NOT Loaded even after " + count
+							+ " attempts for 20 seconds in each attempt");
+					reportFail("Page NOT Loaded even after " + count
+							+ " attempts for 20 seconds in each attempt");
+				}
+			} while (count <= maxAttempts);
 
 		} catch (Exception e) {
 			reportFail(e.getMessage());
@@ -251,7 +297,7 @@ public class LandingPage extends PageBaseClass {
 					wait.until(ExpectedConditions
 							.invisibilityOfElementLocated(loadingCouponsText));
 					System.out
-							.println("Success: Loading Coupons... is invisible and the coupons are being visiblein attempt no. "
+							.println("Success: Loading Coupons... is invisible and the coupons are being visible in attempt no. "
 									+ (count + 1));
 					break;
 
@@ -330,13 +376,37 @@ public class LandingPage extends PageBaseClass {
 	public void clickMyAccountSettingLink() {
 
 		try {
-			WebDriverWait wait = new WebDriverWait(driver, 10);
-			WebElement myAccountSettings = wait.until(ExpectedConditions
-					.elementToBeClickable(myAccountSettingsLink));
 
-			myAccountSettings.click();
-			System.out
-					.println("Success: My Account Settings link clicked Successfully");
+			int count = 0, maxAttempts = 3;
+			do {
+				WebDriverWait wait = new WebDriverWait(driver, 20);
+				WebElement myAccountSettings = wait.until(ExpectedConditions
+						.elementToBeClickable(myAccountSettingsLink));
+
+				myAccountSettings.click();
+				System.out
+						.println("Success: My Account Settings link clicked Successfully");
+
+				try {
+					wait.until(ExpectedConditions
+							.invisibilityOf(myAccountSettings));
+					System.out.println("Page Loaded in  attempt no."
+							+ (count + 1)
+							+ ". myAccountSettings Button is Invisible");
+					break;
+					
+				} catch (Exception e) {
+					System.out.println("Page NOT Loaded in  attempt no. "
+							+ (count + 1) + ". Clicking again");
+				}
+				count++;
+				if (count == maxAttempts) {
+					System.out.println("Page NOT Loaded even after " + count
+							+ " attempts for 20 seconds in each attempt");
+					reportFail("Page NOT Loaded even after " + count
+							+ " attempts for 20 seconds in each attempt");
+				}
+			} while (count <= maxAttempts);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			reportFail(e.getMessage());

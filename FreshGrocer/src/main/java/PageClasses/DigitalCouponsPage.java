@@ -493,6 +493,7 @@ public class DigitalCouponsPage extends PageBaseClass {
 						Actions act = new Actions(driver);
 						act.moveToElement(clipped).click().build().perform();
 						break;
+
 					} catch (Exception e1) {
 						System.out
 								.println("Clipped Link is NOT clicked due to the following reason");

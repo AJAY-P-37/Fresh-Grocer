@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
-  <test name="Default test(failed)">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [TheFreshGrocer]">
+  <parameter name="environment" value="staging"/>
+  <parameter name="browser" value="firefox"/>
+  <test name="Firefox test(failed)">
+    <parameter name="environment" value="staging"/>
+    <parameter name="browser" value="firefox"/>
     <classes>
-      <class name="myAccountPageTests.ValidateMessageForValidContactType">
+      <class name="myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook">
         <methods>
-          <include name="validateMessageForValidPreferredContactType"/>
+          <include name="closeAllTheBrowser"/>
+          <include name="closeAllTheBrowser"/>
+          <include name="openBrowser"/>
+          <include name="openBrowser"/>
+          <include name="verifyAllStatesWithErrorsInAddressBook" invocation-numbers="0"/>
         </methods>
-      </class> <!-- myAccountPageTests.ValidateMessageForValidContactType -->
+      </class> <!-- myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook -->
     </classes>
-  </test> <!-- Default test(failed) -->
-</suite> <!-- Failed suite [Default suite] -->
+  </test> <!-- Firefox test(failed) -->
+</suite> <!-- Failed suite [TheFreshGrocer] -->

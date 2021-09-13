@@ -20,7 +20,6 @@ public class VerifyPersonalInformation extends BaseTestClass {
 	LandingPage landPage;
 	MyAccountPage myAccountPage;
 	PersonalInformationForm personalInfoForm;
-	
 
 	@BeforeClass
 	@Parameters("browser")
@@ -76,25 +75,49 @@ public class VerifyPersonalInformation extends BaseTestClass {
 
 		myAccountPage.checkIfMyAccountTitleIsPresent();
 
-		myAccountPage.clickPersonalInformationEditBtn();
+		boolean successValidated = false;
+		int count = 0, maxAttempts = 3;
+		do {
+			myAccountPage.clickPersonalInformationEditBtn();
 
-		personalInfoForm.selectMembersInHousehold();
-		
-		personalInfoForm.enterBirthDate();
-		
-		personalInfoForm.selectGenderRadioBtn();
-		
-		personalInfoForm.selectReceiveTextMessagesRadioBtn();
-		
-		personalInfoForm.selectReceivePromotionalMailingsRadioBtn();
-		
-		personalInfoForm.selectReceiveDigitalReceiptsRadioBtn();
-		
-		personalInfoForm.selectReceiveEmailForDigitalReceiptsRadioBtn();
-		
-		personalInfoForm.clickUpdatePersonalInfoBtn();
+			personalInfoForm.selectMembersInHousehold();
 
-		myAccountPage.validatePersonalInfoUpdatedSuccessMessage();
+			personalInfoForm.enterBirthDate();
+
+			personalInfoForm.selectGenderRadioBtn();
+
+			personalInfoForm.selectReceiveTextMessagesRadioBtn();
+
+			personalInfoForm.selectReceivePromotionalMailingsRadioBtn();
+
+			personalInfoForm.selectReceiveDigitalReceiptsRadioBtn();
+
+			personalInfoForm.selectReceiveEmailForDigitalReceiptsRadioBtn();
+
+			personalInfoForm.clickUpdatePersonalInfoBtn();
+
+			successValidated = myAccountPage.validatePersonalInfoUpdatedSuccessMessage();
+			
+			if (successValidated) {
+
+				System.out.println("Sucess Message Validated in attempt no. "
+						+ (count + 1));
+				break;
+			} else {
+				System.out
+						.println("Sucess Message is NOT Validated in attempt no. "
+								+ (count + 1));
+			}
+			count++;
+			if (count == maxAttempts) {
+
+				System.out.println("Sucess Message NOT Validated even after "
+						+ count + " attempts");
+				reportFail("Sucess Message NOT Validated even after " + count
+						+ " attempts");
+			}
+			
+		} while (count <= maxAttempts);
 
 		myAccountPage.clickHomeLink();
 

@@ -125,7 +125,7 @@ public class PersonalInformationForm extends PageBaseClass {
 			String month = String.format("%02d", randomDate.getMonthValue());
 			String year = String.format("%04d", randomDate.getYear());
 
-			String dob = date + "/" + month + "/" + year;
+			String dob = month + "/" + date + "/" + year;
 
 			birthDate.clear();
 			birthDate.sendKeys(dob);
@@ -145,23 +145,35 @@ public class PersonalInformationForm extends PageBaseClass {
 		try {
 
 			int randomNumber = RandomUtil.getRandomNumberBetween(1, 2);
+			WebElement male = driver.findElement(maleRadioBtn);
+			WebElement female = driver.findElement(femaleRadioBtn);
 
-			if (randomNumber == 1) {
-				WebElement male = driver.findElement(maleRadioBtn);
-				scrollToElement(male);
+			scrollToElement(male);
 
-				clickWithJSExecutor(male);
-
-				System.out.println("Success: Male Clicked for Gender");
-
-			} else if (randomNumber == 2) {
-				WebElement female = driver.findElement(femaleRadioBtn);
-				scrollToElement(female);
+			if (male.isSelected()) {
 
 				clickWithJSExecutor(female);
-
 				System.out.println("Success: Female Clicked for Gender");
 
+			} else if (female.isSelected()) {
+
+				clickWithJSExecutor(male);
+				System.out.println("Success: Male Clicked for Gender");
+			} else {
+
+				if (randomNumber == 1) {
+
+					clickWithJSExecutor(male);
+
+					System.out.println("Success: Male Clicked for Gender");
+
+				} else if (randomNumber == 2) {
+
+					clickWithJSExecutor(female);
+
+					System.out.println("Success: Female Clicked for Gender");
+
+				}
 			}
 
 		} catch (Exception e) {
@@ -178,24 +190,39 @@ public class PersonalInformationForm extends PageBaseClass {
 
 			int randomNumber = RandomUtil.getRandomNumberBetween(1, 2);
 
-			if (randomNumber == 1) {
-				WebElement yes = driver.findElement(textYesRadioBtn);
-				scrollToElement(yes);
+			WebElement yes = driver.findElement(textYesRadioBtn);
+
+			WebElement no = driver.findElement(textNoRadioBtn);
+
+			scrollToElement(yes);
+			if (yes.isSelected()) {
+				clickWithJSExecutor(no);
+
+				System.out
+						.println("Success: No Clicked for Receive Text Messages Radio Button");
+
+			} else if (no.isSelected()) {
 
 				clickWithJSExecutor(yes);
 
 				System.out
 						.println("Success: Yes Clicked for Receive Text Messages Radio Button");
 
-			} else if (randomNumber == 2) {
-				WebElement no = driver.findElement(textNoRadioBtn);
-				scrollToElement(no);
+			} else {
+				if (randomNumber == 1) {
 
-				clickWithJSExecutor(no);
+					clickWithJSExecutor(yes);
 
-				System.out
-						.println("Success: No Clicked for Receive Text Messages Radio Button");
+					System.out
+							.println("Success: Yes Clicked for Receive Text Messages Radio Button");
 
+				} else if (randomNumber == 2) {
+					clickWithJSExecutor(no);
+
+					System.out
+							.println("Success: No Clicked for Receive Text Messages Radio Button");
+
+				}
 			}
 
 		} catch (Exception e) {
@@ -212,24 +239,39 @@ public class PersonalInformationForm extends PageBaseClass {
 
 			int randomNumber = RandomUtil.getRandomNumberBetween(1, 2);
 
-			if (randomNumber == 1) {
-				WebElement yes = driver.findElement(promotionYesRadioBtn);
-				scrollToElement(yes);
+			WebElement yes = driver.findElement(promotionYesRadioBtn);
+			scrollToElement(yes);
 
-				clickWithJSExecutor(yes);
+			WebElement no = driver.findElement(promotionNoRadioBtn);
 
-				System.out
-						.println("Success: Yes Clicked for Receive Promotional Mailings Radio Button");
-
-			} else if (randomNumber == 2) {
-				WebElement no = driver.findElement(promotionNoRadioBtn);
-				scrollToElement(no);
-
+			if (yes.isSelected()) {
 				clickWithJSExecutor(no);
 
 				System.out
 						.println("Success: No Clicked for Receive Promotional Mailings Radio Button");
 
+			} else if (no.isSelected()) {
+				clickWithJSExecutor(yes);
+
+				System.out
+						.println("Success: Yes Clicked for Receive Promotional Mailings Radio Button");
+
+			} else {
+				if (randomNumber == 1) {
+
+					clickWithJSExecutor(yes);
+
+					System.out
+							.println("Success: Yes Clicked for Receive Promotional Mailings Radio Button");
+
+				} else if (randomNumber == 2) {
+
+					clickWithJSExecutor(no);
+
+					System.out
+							.println("Success: No Clicked for Receive Promotional Mailings Radio Button");
+
+				}
 			}
 
 		} catch (Exception e) {
@@ -246,9 +288,26 @@ public class PersonalInformationForm extends PageBaseClass {
 
 			int randomNumber = RandomUtil.getRandomNumberBetween(1, 2);
 
+			WebElement yes = driver.findElement(receiptYesRadioBtn);
+			scrollToElement(yes);
+			WebElement no = driver.findElement(receiptNoRadioBtn);
+
+			if (yes.isSelected()) {
+
+				clickWithJSExecutor(no);
+
+				System.out
+						.println("Success: No Clicked for Receive Digital Receipts Radio Button");
+
+			} else if (no.isSelected()) {
+
+				clickWithJSExecutor(yes);
+
+				System.out
+						.println("Success: Yes Clicked for Receive Digital Receipts Radio Button");
+
+			}
 			if (randomNumber == 1) {
-				WebElement yes = driver.findElement(receiptYesRadioBtn);
-				scrollToElement(yes);
 
 				clickWithJSExecutor(yes);
 
@@ -256,8 +315,6 @@ public class PersonalInformationForm extends PageBaseClass {
 						.println("Success: Yes Clicked for Receive Digital Receipts Radio Button");
 
 			} else if (randomNumber == 2) {
-				WebElement no = driver.findElement(receiptNoRadioBtn);
-				scrollToElement(no);
 
 				clickWithJSExecutor(no);
 
@@ -283,10 +340,28 @@ public class PersonalInformationForm extends PageBaseClass {
 
 			int randomNumber = RandomUtil.getRandomNumberBetween(1, 2);
 
-			if (randomNumber == 1) {
-				WebElement yes = driver.findElement(emailYesRadioBtn);
+			WebElement yes = driver.findElement(emailYesRadioBtn);
 
-				scrollToElement(yes);
+			scrollToElement(yes);
+
+			WebElement no = driver.findElement(emailNoRadioBtn);
+
+			if (yes.isSelected()) {
+
+				clickWithJSExecutor(no);
+
+				System.out
+						.println("Success: No Clicked for Receive Email Notification when Digital Receipts available Radio Button");
+
+			} else if (no.isSelected()) {
+
+				clickWithJSExecutor(yes);
+
+				System.out
+						.println("Success: Yes Clicked for Receive Email Notification when Digital Receipts available Radio Button");
+
+			}
+			if (randomNumber == 1) {
 
 				clickWithJSExecutor(yes);
 
@@ -294,8 +369,6 @@ public class PersonalInformationForm extends PageBaseClass {
 						.println("Success: Yes Clicked for Receive Email Notification when Digital Receipts available Radio Button");
 
 			} else if (randomNumber == 2) {
-				WebElement no = driver.findElement(emailNoRadioBtn);
-				scrollToElement(no);
 
 				clickWithJSExecutor(no);
 
