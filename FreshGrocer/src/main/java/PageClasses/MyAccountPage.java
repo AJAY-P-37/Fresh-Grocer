@@ -44,10 +44,12 @@ public class MyAccountPage extends PageBaseClass {
 	public By addressDeleteBtn;
 	public By personalInformationEditBtn;
 	public By personalInformationValidationText;
+	public By emailSubscriptionsEditBtn;
 	public By ajaxLoadingSpinner;
 
 	AddEditAddressPage addressPage;
 	PersonalInformationForm personalInfoPage;
+	EmailSubscriptionForm emailSubscriptionPage;
 
 	public MyAccountPage(WebDriver driver) {
 
@@ -56,6 +58,7 @@ public class MyAccountPage extends PageBaseClass {
 
 		addressPage = new AddEditAddressPage(driver);
 		personalInfoPage = new PersonalInformationForm(driver);
+		emailSubscriptionPage = new EmailSubscriptionForm(driver);
 
 		assignValuesForLocatorsFromExcel();
 	}
@@ -96,6 +99,8 @@ public class MyAccountPage extends PageBaseClass {
 				"personalInformationEditBtn_id");
 		personalInformationValidationText = getByLocator(locators,
 				"personalInformationValidationText_id");
+		emailSubscriptionsEditBtn = getByLocator(locators,
+				"emailSubscriptionsEditBtn_id");
 		ajaxLoadingSpinner = getByLocator(locators, "ajaxLoadingSpinner_xpath");
 	}
 
@@ -305,8 +310,8 @@ public class MyAccountPage extends PageBaseClass {
 
 			String selectedContactType = contactTypeDropDown
 					.getFirstSelectedOption().getText();
-			System.out.println("Success: " + selectedContactType
-					+ " selected from the Contact Type DropDown");
+			System.out.println("Success: '" + selectedContactType
+					+ "' selected from the Contact Type DropDown");
 		} catch (Exception e) {
 
 			System.out.println(e.getMessage());
@@ -337,7 +342,7 @@ public class MyAccountPage extends PageBaseClass {
 
 			selectedState = stateDropDown.getFirstSelectedOption().getText();
 
-			System.out.println("Sucess: State '" + selectedState
+			System.out.println("Success: State '" + selectedState
 					+ "' is selected");
 
 		} catch (Exception e) {
@@ -426,7 +431,7 @@ public class MyAccountPage extends PageBaseClass {
 			scrollToElement(updateProfile);
 			updateProfile.click();
 
-			System.out.println("Update profile Clicked");
+			System.out.println("Success: Update profile Clicked");
 		} catch (Exception e) {
 
 			System.out.println(e.getMessage());
@@ -591,7 +596,7 @@ public class MyAccountPage extends PageBaseClass {
 
 					System.out
 							.println("Address Book Button Edit is NOT Present in attempt no. "
-									+ (count + 1) + "Refreshing the Page Again");
+									+ (count + 1) + ". Refreshing the Page Again");
 					isPresent = false;
 					refreshPage();
 
@@ -1028,6 +1033,52 @@ public class MyAccountPage extends PageBaseClass {
 		return validated;
 	}
 
+	/*** Click Edit Button for Email Subscription ***/
+	public void clickEmailSubscriptionEditBtn() {
+
+		try {
+
+			int count = 0, maxAttempts = 3;
+			do {
+
+				WebDriverWait wait = new WebDriverWait(driver, 10);
+				WebElement emailSubscriptionsEdit = wait
+						.until(ExpectedConditions
+								.elementToBeClickable(emailSubscriptionsEditBtn));
+
+				scrollToElement(emailSubscriptionsEdit);
+				clickWithJSExecutor(emailSubscriptionsEdit);
+				System.out
+						.println("Success: Clicked Email Subscription Edit Button in attempt no. "
+								+ (count + 1));
+
+				try {
+					wait.until(ExpectedConditions
+							.invisibilityOf(emailSubscriptionsEdit));
+					break;
+				} catch (Exception e) {
+					System.out
+							.println("Email Subscription Edit Button NOT clicked in attempt no. "
+									+ (count + 1) + ". Clicking Again");
+
+				}
+				count++;
+				if (count == maxAttempts) {
+					System.out
+							.println("Email Subscription Edit Button is NOT clicked even after "
+									+ count + " attempts");
+					reportFail("Email Subscription Edit Button is NOT clicked even after "
+							+ count + " attempts");
+				}
+			} while (count <= maxAttempts);
+
+		} catch (Exception e) {
+
+			System.out.println(e.getMessage());
+			reportFail(e.getMessage());
+		}
+	}
+
 	/*** Waiting for AJAX Loading Spinner ****/
 	public void waitForAjaxLoadingSpinner() {
 
@@ -1066,12 +1117,12 @@ public class MyAccountPage extends PageBaseClass {
 					wait = new WebDriverWait(driver, 10);
 					wait.until(ExpectedConditions.invisibilityOf(home));
 
-					System.out.println("Sucess: Page Loaded in attempt no. "
+					System.out.println("Success: Home Page Loaded in attempt no. "
 							+ (count + 1));
 					break;
 				} catch (Exception e) {
 
-					System.out.println("Page Loaded did NOT in attempt no. "
+					System.out.println("Home Page Loaded did NOT in attempt no. "
 							+ (count + 1));
 
 				}

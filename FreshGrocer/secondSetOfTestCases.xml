@@ -8,21 +8,29 @@
 
 	<test name="Chrome test">
 
-		<!-- <class name="myAccountPageTests.ValidateMessageForInvalidContactType" 
-			/> <class name="myAccountPageTests.ValidateMessageForValidContactType" /> 
-			<class name="myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook" /> 
-			<class name="myAccountPageTests.VerifyAddressBookByAddingNewAddress" /> <class 
-			name="myAccountPageTests.VerifyAddressBookByDeletingAddress" /> <class name="myAccountPageTests.ValidateErronicStatesInDropDown" 
-			/><class name="myAccountPageTests.VerifyPersonalInformation" /> -->
+		<!-- <class name="myAccountPageTests.ValidateMessageForInvalidContactType" />
+			<class name="myAccountPageTests.ValidateMessageForValidContactType" />
+			<class name="myAccountPageTests.VerifyStateWithHomeTown" />
+			<class name="myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook" />
+			<class name="myAccountPageTests.ValidateDuplicateStatesInDropDown" />
+			<class name="myAccountPageTests.VerifyAddressBookByAddingNewAddress" />
+			<class name="myAccountPageTests.VerifyAddressBookByDeletingAddress" />
+			<class name="myAccountPageTests.VerifyPersonalInformation" />
+			<class name="myAccountPageTests.VerifyEmailSubscriptions" /> -->
 
 		<parameter name="browser" value="chrome"></parameter>
 		<parameter name="environment" value="staging"></parameter>
 
 		<classes>
-
-			<class name="myAccountPageTests.ValidateErronicStatesInDropDown" />
-
-
+			<class name="myAccountPageTests.ValidateMessageForInvalidContactType" />
+			<class name="myAccountPageTests.ValidateMessageForValidContactType" />
+			<class name="myAccountPageTests.VerifyStateWithHomeTown" />
+			<class name="myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook" />
+			<class name="myAccountPageTests.ValidateDuplicateStatesInDropDown" />
+			<class name="myAccountPageTests.VerifyAddressBookByAddingNewAddress" />
+			<class name="myAccountPageTests.VerifyAddressBookByDeletingAddress" />
+			<class name="myAccountPageTests.VerifyPersonalInformation" />
+			<class name="myAccountPageTests.VerifyEmailSubscriptions" />
 		</classes>
 
 
@@ -34,9 +42,15 @@
 		<parameter name="environment" value="staging"></parameter>
 
 		<classes>
-
-			<class name="myAccountPageTests.ValidateErronicStatesInDropDown" />
-
+			<class name="myAccountPageTests.ValidateMessageForInvalidContactType" />
+			<class name="myAccountPageTests.ValidateMessageForValidContactType" />
+			<class name="myAccountPageTests.VerifyStateWithHomeTown" />
+			<class name="myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook" />
+			<class name="myAccountPageTests.ValidateDuplicateStatesInDropDown" />
+			<class name="myAccountPageTests.VerifyAddressBookByAddingNewAddress" />
+			<class name="myAccountPageTests.VerifyAddressBookByDeletingAddress" />
+			<class name="myAccountPageTests.VerifyPersonalInformation" />
+			<class name="myAccountPageTests.VerifyEmailSubscriptions" />
 		</classes>
 
 

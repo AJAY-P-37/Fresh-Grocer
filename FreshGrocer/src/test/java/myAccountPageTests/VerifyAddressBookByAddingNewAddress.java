@@ -78,7 +78,7 @@ public class VerifyAddressBookByAddingNewAddress extends BaseTestClass {
 
 		String firstName = null, lastName = null, address = null, city = null, state = null, zipcode = null, primaryPhone = null;
 
-		boolean successValidated = false;
+		boolean successValidated = false, readyForAddressLineValidation = false;
 		int count = 0, maxAttempts = 3;
 		do {
 			myAccountPage.clickAddressBookEditBtn();
@@ -104,37 +104,44 @@ public class VerifyAddressBookByAddingNewAddress extends BaseTestClass {
 			do {
 				addressPage.clickSaveAddressBtn();
 
-				expectedErrorMessageForState = "The following fields are in error: State";
-				actualErrorMessageForState = addressPage
-						.getValidationTextForAddress();
+				successValidated = myAccountPage
+						.validateAdrressUpdatedSuccessMessage();
 
-				if (expectedErrorMessageForState
-						.equals(actualErrorMessageForState)) {
+				if (successValidated) {
 
-					System.out.println("Error Occured for selecting the State "
-							+ state + ". Selecting another state");
-					state = addressPage.selectStateDropDown();
+					System.out
+							.println("Sucess Message Validated in attempt no. "
+									+ (count + 1));
+					readyForAddressLineValidation = true;
+					break;
 				} else {
 					System.out
-							.println("NO Error Occured for selecting the State "
-									+ state);
-					break;
+							.println("Sucess Message is NOT Validated in attempt no. "
+									+ (count + 1));
+
+					expectedErrorMessageForState = "The following fields are in error: State";
+					actualErrorMessageForState = addressPage
+							.getValidationTextForAddress();
+
+					if (expectedErrorMessageForState
+							.equals(actualErrorMessageForState)) {
+
+						System.out
+								.println("Error Occured for selecting the State "
+										+ state + ". Selecting another state");
+						state = addressPage.selectStateDropDown();
+					} else {
+						System.out
+								.println("NO Error Occured for selecting the State "
+										+ state);
+						break;
+					}
 				}
 			} while (expectedErrorMessageForState
 					.equals(actualErrorMessageForState));
 
-			successValidated = myAccountPage
-					.validateAdrressUpdatedSuccessMessage();
-
-			if (successValidated) {
-
-				System.out.println("Sucess Message Validated in attempt no. "
-						+ (count + 1));
+			if(readyForAddressLineValidation){
 				break;
-			} else {
-				System.out
-						.println("Sucess Message is NOT Validated in attempt no. "
-								+ (count + 1));
 			}
 			count++;
 			if (count == maxAttempts) {

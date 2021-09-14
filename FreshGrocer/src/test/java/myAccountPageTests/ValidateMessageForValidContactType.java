@@ -1,6 +1,5 @@
 package myAccountPageTests;
 
-import org.openqa.selenium.TakesScreenshot;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -9,6 +8,7 @@ import org.testng.annotations.Test;
 import PageClasses.LandingPage;
 import PageClasses.LoginPage;
 import PageClasses.MyAccountPage;
+import PageClasses.MyProfileForm;
 import baseClasses.BaseTestClass;
 import baseClasses.PageBaseClass;
 
@@ -18,6 +18,7 @@ public class ValidateMessageForValidContactType extends BaseTestClass {
 	LoginPage logPage;
 	LandingPage landPage;
 	MyAccountPage myAccountPage;
+	MyProfileForm profilePage;
 
 	@BeforeClass
 	@Parameters("browser")
@@ -29,6 +30,7 @@ public class ValidateMessageForValidContactType extends BaseTestClass {
 		basePage = new PageBaseClass(driver);
 		landPage = new LandingPage(driver);
 		myAccountPage = new MyAccountPage(driver);
+		profilePage = new MyProfileForm(driver);
 	}
 
 	@Test
@@ -77,31 +79,32 @@ public class ValidateMessageForValidContactType extends BaseTestClass {
 		do {
 			myAccountPage.clickEditProfileBtn();
 
-			myAccountPage.enterRandomPrimaryPhone();
+			profilePage.enterRandomPrimaryPhone();
 
-			myAccountPage.checkMobileIfUnChecked();
+			profilePage.checkMobileIfUnChecked();
 
-			myAccountPage.selectPreferredContactType("Text");
+			profilePage.selectPreferredContactType("Text");
 
-			myAccountPage.clickUpdateProfileBtnForValidScenario();
+			profilePage.clickUpdateProfileBtnForValidScenario();
 
 			successValidated = myAccountPage
 					.validateProfileUpdatedSuccessMessage();
 
 			if (successValidated) {
 
-				System.out.println("Sucess Message Validated in attempt no. "
+				System.out.println("Success Message Validated in attempt no. "
 						+ (count + 1));
 				break;
 			} else {
 				System.out
-						.println("Sucess Message is NOT Validated in attempt no. "
+						.println("Success Message is NOT Validated in attempt no. "
 								+ (count + 1));
+				refreshPage();
 			}
 			count++;
 			if (count == maxAttempts) {
 
-				System.out.println("Sucess Message NOT Validated even after "
+				System.out.println("Success Message NOT Validated even after "
 						+ count + " attempts");
 				reportFail("Sucess Message NOT Validated even after " + count
 						+ " attempts");

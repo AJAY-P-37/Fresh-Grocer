@@ -46,7 +46,7 @@ public class PageBaseClass extends BaseTestClass {
 					driver.get(websiteURL);
 
 					if (expectedTitle.equals(getTitle())) {
-						System.out.println("Page Loaded in the attempt no. "
+						System.out.println("Landing Page Loaded in the attempt no. "
 								+ (count + 1));
 						break;
 					}

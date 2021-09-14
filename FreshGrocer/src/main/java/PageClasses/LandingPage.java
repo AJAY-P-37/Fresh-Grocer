@@ -165,11 +165,11 @@ public class LandingPage extends PageBaseClass {
 
 				try {
 					wait.until(ExpectedConditions.invisibilityOf(signIn));
-					System.out.println("Page Loaded in  attempt no."
+					System.out.println("Sign In Page Loaded in  attempt no."
 							+ (count + 1) + ". SignIn Button is Invisible");
 					break;
 				} catch (Exception e) {
-					System.out.println("Page NOT Loaded in  attempt no. "
+					System.out.println("Sign In Page NOT Loaded in  attempt no. "
 							+ (count + 1) + ". Clicking again");
 				}
 				count++;
@@ -216,7 +216,7 @@ public class LandingPage extends PageBaseClass {
 
 				} catch (Exception e) {
 					System.out
-							.println("Page did NOT load properly. Refreshing");
+							.println("Landing Page after sign In did NOT load properly. Refreshing");
 					refreshPage();
 				}
 				count++;
@@ -254,18 +254,18 @@ public class LandingPage extends PageBaseClass {
 					wait.until(ExpectedConditions
 							.presenceOfElementLocated(couponsFrame));
 
-					System.out.println("Page Loaded in  attempt no."
+					System.out.println("Digital Coupons Page Loaded in  attempt no."
 							+ (count + 1) + ". Coupons Frame available");
 					break;
 				} catch (Exception e) {
-					System.out.println("Page NOT Loaded in  attempt no. "
+					System.out.println("Digital Coupons Page NOT Loaded in  attempt no. "
 							+ (count + 1) + ". Clicking again");
 				}
 				count++;
 				if (count == maxAttempts) {
-					System.out.println("Page NOT Loaded even after " + count
+					System.out.println("Digital Coupons Page NOT Loaded even after " + count
 							+ " attempts for 20 seconds in each attempt");
-					reportFail("Page NOT Loaded even after " + count
+					reportFail("Digital Coupons Page NOT Loaded even after " + count
 							+ " attempts for 20 seconds in each attempt");
 				}
 			} while (count <= maxAttempts);
@@ -329,6 +329,9 @@ public class LandingPage extends PageBaseClass {
 	public void clickAccountHeaderButton() {
 
 		try {
+			
+			closePopUp();
+			
 			WebDriverWait wait = new WebDriverWait(driver, 10);
 			WebElement accountHeader = wait.until(ExpectedConditions
 					.elementToBeClickable(accountHeaderBtn));
@@ -418,6 +421,7 @@ public class LandingPage extends PageBaseClass {
 	public void clickSignOutButton() {
 
 		try {
+			
 			WebDriverWait wait = new WebDriverWait(driver, 10);
 			WebElement signOut = wait.until(ExpectedConditions
 					.elementToBeClickable(signOutBtn));

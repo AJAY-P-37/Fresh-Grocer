@@ -424,8 +424,10 @@ public class AddEditAddressPage extends PageBaseClass {
 					.visibilityOfElementLocated(addressValidationText));
 
 			errorMessage = addressErrorMessage.getText();
+			System.out.println("Error Message '" + errorMessage
+					+ "' for selected state found");
 		} catch (Exception e) {
-			System.out.println("Error Message NOT Found");
+			System.out.println("Error Message for selected state NOT found");
 			errorMessage = "";
 		}
 		return errorMessage;
@@ -434,14 +436,21 @@ public class AddEditAddressPage extends PageBaseClass {
 	/*** Getting All States in the DropDown with Error in Address Book Form *****/
 	public List<WebElement> getAllStates() {
 
-		WebDriverWait wait = new WebDriverWait(driver, 10);
-		WebElement states = wait.until(ExpectedConditions
-				.visibilityOfElementLocated(stateDropDown));
-		Select dropDown = new Select(states);
-		List<WebElement> statesList = dropDown.getOptions();
+		List<WebElement> statesList = null;
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			WebElement states = wait.until(ExpectedConditions
+					.visibilityOfElementLocated(stateDropDown));
+			Select dropDown = new Select(states);
+			statesList = dropDown.getOptions();
 
-		return statesList;
+			System.out.println("Success: All States are retrieved and Stored");
+			
 
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			reportFail(e.getMessage());
+		}return statesList;
 	}
 
 	/**** Extracting the Texts from All the States in DropDown ***/
@@ -449,10 +458,18 @@ public class AddEditAddressPage extends PageBaseClass {
 			List<WebElement> statesList) {
 
 		List<String> states = new ArrayList<String>();
+		try {
 
-		statesList.remove(0);
-		for (int index = 0; index < statesList.size(); index++) {
-			states.add(statesList.get(index).getText());
+			statesList.remove(0);
+			for (int index = 0; index < statesList.size(); index++) {
+				states.add(statesList.get(index).getText());
+			}
+			System.out
+					.println("Sucess: Extracted List of states from State DropDown =>"
+							+ states);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			reportFail(e.getMessage());
 		}
 		return states;
 
@@ -472,6 +489,8 @@ public class AddEditAddressPage extends PageBaseClass {
 				listWithDuplicates.add(state);
 			}
 		}
+		System.out.println("List of Duplicate States are => "
+				+ listWithDuplicates);
 		return listWithDuplicates;
 
 	}

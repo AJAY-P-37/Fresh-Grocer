@@ -3,10 +3,26 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [TheFreshGrocer]">
   <parameter name="environment" value="staging"/>
   <parameter name="browser" value="firefox"/>
-  <test name="Firefox test(failed)">
+  <test name="Chrome test(failed)">
     <parameter name="environment" value="staging"/>
-    <parameter name="browser" value="firefox"/>
+    <parameter name="browser" value="chrome"/>
     <classes>
+      <class name="myAccountPageTests.ValidateMessageForInvalidContactType">
+        <methods>
+          <include name="openBrowser"/>
+          <include name="openBrowser"/>
+          <include name="closeAllTheBrowser"/>
+          <include name="closeAllTheBrowser"/>
+        </methods>
+      </class> <!-- myAccountPageTests.ValidateMessageForInvalidContactType -->
+      <class name="myAccountPageTests.VerifyEmailSubscriptions">
+        <methods>
+          <include name="openBrowser"/>
+          <include name="openBrowser"/>
+          <include name="closeAllTheBrowser"/>
+          <include name="closeAllTheBrowser"/>
+        </methods>
+      </class> <!-- myAccountPageTests.VerifyEmailSubscriptions -->
       <class name="myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook">
         <methods>
           <include name="closeAllTheBrowser"/>
@@ -16,6 +32,135 @@
           <include name="verifyAllStatesWithErrorsInAddressBook" invocation-numbers="0"/>
         </methods>
       </class> <!-- myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook -->
+      <class name="myAccountPageTests.VerifyAddressBookByDeletingAddress">
+        <methods>
+          <include name="openBrowser"/>
+          <include name="openBrowser"/>
+          <include name="closeAllTheBrowser"/>
+          <include name="closeAllTheBrowser"/>
+        </methods>
+      </class> <!-- myAccountPageTests.VerifyAddressBookByDeletingAddress -->
+      <class name="myAccountPageTests.ValidateMessageForValidContactType">
+        <methods>
+          <include name="openBrowser"/>
+          <include name="openBrowser"/>
+          <include name="closeAllTheBrowser"/>
+          <include name="closeAllTheBrowser"/>
+        </methods>
+      </class> <!-- myAccountPageTests.ValidateMessageForValidContactType -->
+      <class name="myAccountPageTests.VerifyAddressBookByAddingNewAddress">
+        <methods>
+          <include name="openBrowser"/>
+          <include name="openBrowser"/>
+          <include name="closeAllTheBrowser"/>
+          <include name="closeAllTheBrowser"/>
+        </methods>
+      </class> <!-- myAccountPageTests.VerifyAddressBookByAddingNewAddress -->
+      <class name="myAccountPageTests.ValidateDuplicateStatesInDropDown">
+        <methods>
+          <include name="closeAllTheBrowser"/>
+          <include name="closeAllTheBrowser"/>
+          <include name="verifyAllStatesWithErrorsInAddressBook" invocation-numbers="0"/>
+          <include name="openBrowser"/>
+          <include name="openBrowser"/>
+        </methods>
+      </class> <!-- myAccountPageTests.ValidateDuplicateStatesInDropDown -->
+      <class name="myAccountPageTests.VerifyPersonalInformation">
+        <methods>
+          <include name="openBrowser"/>
+          <include name="openBrowser"/>
+          <include name="closeAllTheBrowser"/>
+          <include name="closeAllTheBrowser"/>
+        </methods>
+      </class> <!-- myAccountPageTests.VerifyPersonalInformation -->
+      <class name="myAccountPageTests.VerifyStateWithHomeTown">
+        <methods>
+          <include name="closeAllTheBrowser"/>
+          <include name="closeAllTheBrowser"/>
+          <include name="openBrowser"/>
+          <include name="openBrowser"/>
+        </methods>
+      </class> <!-- myAccountPageTests.VerifyStateWithHomeTown -->
+    </classes>
+  </test> <!-- Chrome test(failed) -->
+  <test name="Firefox test(failed)">
+    <parameter name="environment" value="staging"/>
+    <parameter name="browser" value="firefox"/>
+    <classes>
+      <class name="myAccountPageTests.ValidateMessageForInvalidContactType">
+        <methods>
+          <include name="openBrowser"/>
+          <include name="openBrowser"/>
+          <include name="closeAllTheBrowser"/>
+          <include name="closeAllTheBrowser"/>
+        </methods>
+      </class> <!-- myAccountPageTests.ValidateMessageForInvalidContactType -->
+      <class name="myAccountPageTests.VerifyEmailSubscriptions">
+        <methods>
+          <include name="openBrowser"/>
+          <include name="openBrowser"/>
+          <include name="closeAllTheBrowser"/>
+          <include name="closeAllTheBrowser"/>
+        </methods>
+      </class> <!-- myAccountPageTests.VerifyEmailSubscriptions -->
+      <class name="myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook">
+        <methods>
+          <include name="closeAllTheBrowser"/>
+          <include name="closeAllTheBrowser"/>
+          <include name="openBrowser"/>
+          <include name="openBrowser"/>
+          <include name="verifyAllStatesWithErrorsInAddressBook" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook -->
+      <class name="myAccountPageTests.VerifyAddressBookByDeletingAddress">
+        <methods>
+          <include name="openBrowser"/>
+          <include name="openBrowser"/>
+          <include name="closeAllTheBrowser"/>
+          <include name="closeAllTheBrowser"/>
+        </methods>
+      </class> <!-- myAccountPageTests.VerifyAddressBookByDeletingAddress -->
+      <class name="myAccountPageTests.ValidateMessageForValidContactType">
+        <methods>
+          <include name="openBrowser"/>
+          <include name="openBrowser"/>
+          <include name="closeAllTheBrowser"/>
+          <include name="closeAllTheBrowser"/>
+        </methods>
+      </class> <!-- myAccountPageTests.ValidateMessageForValidContactType -->
+      <class name="myAccountPageTests.VerifyAddressBookByAddingNewAddress">
+        <methods>
+          <include name="openBrowser"/>
+          <include name="openBrowser"/>
+          <include name="closeAllTheBrowser"/>
+          <include name="closeAllTheBrowser"/>
+        </methods>
+      </class> <!-- myAccountPageTests.VerifyAddressBookByAddingNewAddress -->
+      <class name="myAccountPageTests.ValidateDuplicateStatesInDropDown">
+        <methods>
+          <include name="closeAllTheBrowser"/>
+          <include name="closeAllTheBrowser"/>
+          <include name="verifyAllStatesWithErrorsInAddressBook" invocation-numbers="0"/>
+          <include name="openBrowser"/>
+          <include name="openBrowser"/>
+        </methods>
+      </class> <!-- myAccountPageTests.ValidateDuplicateStatesInDropDown -->
+      <class name="myAccountPageTests.VerifyPersonalInformation">
+        <methods>
+          <include name="openBrowser"/>
+          <include name="openBrowser"/>
+          <include name="closeAllTheBrowser"/>
+          <include name="closeAllTheBrowser"/>
+        </methods>
+      </class> <!-- myAccountPageTests.VerifyPersonalInformation -->
+      <class name="myAccountPageTests.VerifyStateWithHomeTown">
+        <methods>
+          <include name="closeAllTheBrowser"/>
+          <include name="closeAllTheBrowser"/>
+          <include name="openBrowser"/>
+          <include name="openBrowser"/>
+        </methods>
+      </class> <!-- myAccountPageTests.VerifyStateWithHomeTown -->
     </classes>
   </test> <!-- Firefox test(failed) -->
 </suite> <!-- Failed suite [TheFreshGrocer] -->

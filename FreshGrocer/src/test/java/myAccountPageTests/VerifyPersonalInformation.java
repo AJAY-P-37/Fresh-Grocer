@@ -5,7 +5,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import PageClasses.AddEditAddressPage;
 import PageClasses.LandingPage;
 import PageClasses.LoginPage;
 import PageClasses.MyAccountPage;
@@ -107,6 +106,7 @@ public class VerifyPersonalInformation extends BaseTestClass {
 				System.out
 						.println("Sucess Message is NOT Validated in attempt no. "
 								+ (count + 1));
+				refreshPage();
 			}
 			count++;
 			if (count == maxAttempts) {

@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="2" passed="2">
+<testng-results skipped="0" failed="4" total="18" passed="14">
   <reporter-output>
   </reporter-output>
-  <suite name="TheFreshGrocer" duration-ms="963052" started-at="2021-09-13T17:43:22Z" finished-at="2021-09-13T17:59:25Z">
+  <suite name="TheFreshGrocer" duration-ms="2190651" started-at="2021-09-14T16:10:33Z" finished-at="2021-09-14T16:47:04Z">
     <groups>
+      <group name="addingAddress">
+        <method signature="VerifyAddressBookByAddingNewAddress.verifyAddressBookByAddingNewAddress(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAddressBookByAddingNewAddress@7494e528]" name="verifyAddressBookByAddingNewAddress" class="myAccountPageTests.VerifyAddressBookByAddingNewAddress"/>
+        <method signature="VerifyAddressBookByAddingNewAddress.verifyAddressBookByAddingNewAddress(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAddressBookByAddingNewAddress@5a1c0542]" name="verifyAddressBookByAddingNewAddress" class="myAccountPageTests.VerifyAddressBookByAddingNewAddress"/>
+      </group> <!-- addingAddress -->
     </groups>
-    <test name="Chrome test" duration-ms="449180" started-at="2021-09-13T17:43:22Z" finished-at="2021-09-13T17:50:51Z">
-      <class name="myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook@49fc609f]" name="openBrowser" is-config="true" duration-ms="5830" started-at="2021-09-13T23:13:22Z" finished-at="2021-09-13T23:13:28Z">
+    <test name="Chrome test" duration-ms="1005260" started-at="2021-09-14T16:10:33Z" finished-at="2021-09-14T16:27:18Z">
+      <class name="myAccountPageTests.VerifyStateWithHomeTown">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyStateWithHomeTown@a7e666]" name="openBrowser" is-config="true" duration-ms="2134" started-at="2021-09-14T21:42:35Z" finished-at="2021-09-14T21:42:37Z">
           <params>
             <param index="0">
               <value>
@@ -18,7 +22,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="verifyAllStatesWithErrorsInAddressBook(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook@49fc609f]" name="verifyAllStatesWithErrorsInAddressBook" duration-ms="442851" started-at="2021-09-13T23:13:28Z" finished-at="2021-09-13T23:20:51Z">
+        <test-method status="PASS" signature="validateMessageForInvalidPreferredContactType(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyStateWithHomeTown@a7e666]" name="validateMessageForInvalidPreferredContactType" duration-ms="49932" started-at="2021-09-14T21:42:37Z" finished-at="2021-09-14T21:43:27Z">
           <params>
             <param index="0">
               <value>
@@ -28,16 +32,342 @@
           </params>
           <reporter-output>
           </reporter-output>
+        </test-method> <!-- validateMessageForInvalidPreferredContactType -->
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.VerifyStateWithHomeTown@a7e666]" name="closeAllTheBrowser" is-config="true" duration-ms="180" started-at="2021-09-14T21:43:27Z" finished-at="2021-09-14T21:43:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeAllTheBrowser -->
+      </class> <!-- myAccountPageTests.VerifyStateWithHomeTown -->
+      <class name="myAccountPageTests.VerifyPersonalInformation">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyPersonalInformation@9660f4e]" name="openBrowser" is-config="true" duration-ms="1794" started-at="2021-09-14T21:54:27Z" finished-at="2021-09-14T21:54:29Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openBrowser -->
+        <test-method status="PASS" signature="verifyPersonalInformationByEditing(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyPersonalInformation@9660f4e]" name="verifyPersonalInformationByEditing" duration-ms="50340" started-at="2021-09-14T21:54:29Z" finished-at="2021-09-14T21:55:19Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[staging]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyPersonalInformationByEditing -->
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.VerifyPersonalInformation@9660f4e]" name="closeAllTheBrowser" is-config="true" duration-ms="164" started-at="2021-09-14T21:55:19Z" finished-at="2021-09-14T21:55:19Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeAllTheBrowser -->
+      </class> <!-- myAccountPageTests.VerifyPersonalInformation -->
+      <class name="myAccountPageTests.VerifyEmailSubscriptions">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyEmailSubscriptions@5a8806ef]" name="openBrowser" is-config="true" duration-ms="1753" started-at="2021-09-14T21:55:19Z" finished-at="2021-09-14T21:55:21Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openBrowser -->
+        <test-method status="PASS" signature="verifyPersonalInformationByEditing(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyEmailSubscriptions@5a8806ef]" name="verifyPersonalInformationByEditing" duration-ms="63661" started-at="2021-09-14T21:55:21Z" finished-at="2021-09-14T21:56:25Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[staging]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyPersonalInformationByEditing -->
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.VerifyEmailSubscriptions@5a8806ef]" name="closeAllTheBrowser" is-config="true" duration-ms="153" started-at="2021-09-14T21:56:25Z" finished-at="2021-09-14T21:56:25Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeAllTheBrowser -->
+      </class> <!-- myAccountPageTests.VerifyEmailSubscriptions -->
+      <class name="myAccountPageTests.ValidateMessageForInvalidContactType">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.ValidateMessageForInvalidContactType@6737fd8f]" name="openBrowser" is-config="true" duration-ms="5508" started-at="2021-09-14T21:40:33Z" finished-at="2021-09-14T21:40:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openBrowser -->
+        <test-method status="PASS" signature="validateMessageForInvalidPreferredContactType(java.lang.String)[pri:0, instance:myAccountPageTests.ValidateMessageForInvalidContactType@6737fd8f]" name="validateMessageForInvalidPreferredContactType" duration-ms="53038" started-at="2021-09-14T21:40:39Z" finished-at="2021-09-14T21:41:32Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[staging]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateMessageForInvalidPreferredContactType -->
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.ValidateMessageForInvalidContactType@6737fd8f]" name="closeAllTheBrowser" is-config="true" duration-ms="101" started-at="2021-09-14T21:41:32Z" finished-at="2021-09-14T21:41:32Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeAllTheBrowser -->
+      </class> <!-- myAccountPageTests.ValidateMessageForInvalidContactType -->
+      <class name="myAccountPageTests.VerifyAddressBookByDeletingAddress">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAddressBookByDeletingAddress@4bbfb90a]" name="openBrowser" is-config="true" duration-ms="2243" started-at="2021-09-14T21:56:25Z" finished-at="2021-09-14T21:56:27Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openBrowser -->
+        <test-method status="PASS" signature="verifyAddressBookByDeletingLatestUpdatedAddress(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAddressBookByDeletingAddress@4bbfb90a]" name="verifyAddressBookByDeletingLatestUpdatedAddress" duration-ms="51324" depends-on-groups="addingAddress" started-at="2021-09-14T21:56:27Z" finished-at="2021-09-14T21:57:18Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[staging]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyAddressBookByDeletingLatestUpdatedAddress -->
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.VerifyAddressBookByDeletingAddress@4bbfb90a]" name="closeAllTheBrowser" is-config="true" duration-ms="148" started-at="2021-09-14T21:57:18Z" finished-at="2021-09-14T21:57:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeAllTheBrowser -->
+      </class> <!-- myAccountPageTests.VerifyAddressBookByDeletingAddress -->
+      <class name="myAccountPageTests.ValidateMessageForValidContactType">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.ValidateMessageForValidContactType@72b6cbcc]" name="openBrowser" is-config="true" duration-ms="2188" started-at="2021-09-14T21:41:32Z" finished-at="2021-09-14T21:41:34Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openBrowser -->
+        <test-method status="PASS" signature="validateMessageForValidPreferredContactType(java.lang.String)[pri:0, instance:myAccountPageTests.ValidateMessageForValidContactType@72b6cbcc]" name="validateMessageForValidPreferredContactType" duration-ms="61118" started-at="2021-09-14T21:41:34Z" finished-at="2021-09-14T21:42:35Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[staging]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateMessageForValidPreferredContactType -->
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.ValidateMessageForValidContactType@72b6cbcc]" name="closeAllTheBrowser" is-config="true" duration-ms="91" started-at="2021-09-14T21:42:35Z" finished-at="2021-09-14T21:42:35Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeAllTheBrowser -->
+      </class> <!-- myAccountPageTests.ValidateMessageForValidContactType -->
+      <class name="myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook@68bbe345]" name="openBrowser" is-config="true" duration-ms="1890" started-at="2021-09-14T21:43:27Z" finished-at="2021-09-14T21:43:29Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openBrowser -->
+        <test-method status="FAIL" signature="verifyAllStatesWithErrorsInAddressBook(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook@68bbe345]" name="verifyAllStatesWithErrorsInAddressBook" duration-ms="459478" started-at="2021-09-14T21:43:29Z" finished-at="2021-09-14T21:51:09Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[staging]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[timeout: Timed out receiving message from renderer: 30.000
+  (Session info: chrome=93.0.4577.63)
+Build info: version: '4.0.0-rc-1', revision: 'bc5511cbda'
+System info: host: 'LAPTOP-RG5BBFG9', ip: '192.168.1.6', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_291'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [c8e11a858167c342e808faaa6d83232e, clickElement {id=d97fd826-45de-4af5-86ab-cba9b11e000c}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 93.0.4577.63, chrome: {chromedriverVersion: 93.0.4577.15 (660fc11082ba5..., userDataDir: C:\Users\AJAY\AppData\Local...}, goog:chromeOptions: {debuggerAddress: localhost:51132}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:51132/devtoo..., se:cdpVersion: 93.0.4577.63, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on WINDOWS (c8e11a858167c342e808faaa6d83232e)] -> xpath: //*[@id='BreadcrumbTopContainer']//a[contains(text(),'Home')]]
+Session ID: c8e11a858167c342e808faaa6d83232e]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: timeout: Timed out receiving message from renderer: 30.000
+  (Session info: chrome=93.0.4577.63)
+Build info: version: '4.0.0-rc-1', revision: 'bc5511cbda'
+System info: host: 'LAPTOP-RG5BBFG9', ip: '192.168.1.6', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_291'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [c8e11a858167c342e808faaa6d83232e, clickElement {id=d97fd826-45de-4af5-86ab-cba9b11e000c}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 93.0.4577.63, chrome: {chromedriverVersion: 93.0.4577.15 (660fc11082ba5..., userDataDir: C:\Users\AJAY\AppData\Local...}, goog:chromeOptions: {debuggerAddress: localhost:51132}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:51132/devtoo..., se:cdpVersion: 93.0.4577.63, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on WINDOWS (c8e11a858167c342e808faaa6d83232e)] -> xpath: //*[@id='BreadcrumbTopContainer']//a[contains(text(),'Home')]]
+Session ID: c8e11a858167c342e808faaa6d83232e
+	at org.testng.Assert.fail(Assert.java:94)
+	at baseClasses.BaseTestClass.reportFail(BaseTestClass.java:154)
+	at PageClasses.MyAccountPage.clickHomeLink(MyAccountPage.java:1143)
+	at myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook.verifyAllStatesWithErrorsInAddressBook(VerifyAllStatesWithErrorsInAddressBook.java:198)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:100)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:646)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:811)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1129)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:746)
+	at org.testng.TestRunner.run(TestRunner.java:600)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:366)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:361)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:319)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:268)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1264)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1189)
+	at org.testng.TestNG.runSuites(TestNG.java:1104)
+	at org.testng.TestNG.run(TestNG.java:1076)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:152)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:57)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
         </test-method> <!-- verifyAllStatesWithErrorsInAddressBook -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook@49fc609f]" name="closeAllTheBrowser" is-config="true" duration-ms="482" started-at="2021-09-13T23:20:51Z" finished-at="2021-09-13T23:20:51Z">
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook@68bbe345]" name="closeAllTheBrowser" is-config="true" duration-ms="104" started-at="2021-09-14T21:51:09Z" finished-at="2021-09-14T21:51:09Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeAllTheBrowser -->
       </class> <!-- myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook -->
+      <class name="myAccountPageTests.ValidateDuplicateStatesInDropDown">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.ValidateDuplicateStatesInDropDown@30b8a058]" name="openBrowser" is-config="true" duration-ms="1854" started-at="2021-09-14T21:51:09Z" finished-at="2021-09-14T21:51:11Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openBrowser -->
+        <test-method status="FAIL" signature="verifyAllStatesWithErrorsInAddressBook(java.lang.String)[pri:0, instance:myAccountPageTests.ValidateDuplicateStatesInDropDown@30b8a058]" name="verifyAllStatesWithErrorsInAddressBook" duration-ms="136080" started-at="2021-09-14T21:51:11Z" finished-at="2021-09-14T21:53:27Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[staging]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Expected condition failed: waiting for element to be clickable: By.id: main-signOutLink (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: '4.0.0-rc-1', revision: 'bc5511cbda'
+System info: host: 'LAPTOP-RG5BBFG9', ip: '192.168.1.6', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_291'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 93.0.4577.63, chrome: {chromedriverVersion: 93.0.4577.15 (660fc11082ba5..., userDataDir: C:\Users\AJAY\AppData\Local...}, goog:chromeOptions: {debuggerAddress: localhost:57495}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:57495/devtoo..., se:cdpVersion: 93.0.4577.63, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: eb6b692c840f99f55357a5bbe3b87483]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Expected condition failed: waiting for element to be clickable: By.id: main-signOutLink (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: '4.0.0-rc-1', revision: 'bc5511cbda'
+System info: host: 'LAPTOP-RG5BBFG9', ip: '192.168.1.6', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_291'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 93.0.4577.63, chrome: {chromedriverVersion: 93.0.4577.15 (660fc11082ba5..., userDataDir: C:\Users\AJAY\AppData\Local...}, goog:chromeOptions: {debuggerAddress: localhost:57495}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:57495/devtoo..., se:cdpVersion: 93.0.4577.63, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: eb6b692c840f99f55357a5bbe3b87483
+	at org.testng.Assert.fail(Assert.java:94)
+	at baseClasses.BaseTestClass.reportFail(BaseTestClass.java:154)
+	at PageClasses.LandingPage.clickSignOutButton(LandingPage.java:429)
+	at myAccountPageTests.ValidateDuplicateStatesInDropDown.verifyAllStatesWithErrorsInAddressBook(ValidateDuplicateStatesInDropDown.java:99)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:100)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:646)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:811)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1129)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:746)
+	at org.testng.TestRunner.run(TestRunner.java:600)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:366)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:361)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:319)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:268)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1264)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1189)
+	at org.testng.TestNG.runSuites(TestNG.java:1104)
+	at org.testng.TestNG.run(TestNG.java:1076)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:152)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:57)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyAllStatesWithErrorsInAddressBook -->
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.ValidateDuplicateStatesInDropDown@30b8a058]" name="closeAllTheBrowser" is-config="true" duration-ms="134" started-at="2021-09-14T21:53:27Z" finished-at="2021-09-14T21:53:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeAllTheBrowser -->
+      </class> <!-- myAccountPageTests.ValidateDuplicateStatesInDropDown -->
+      <class name="myAccountPageTests.VerifyAddressBookByAddingNewAddress">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAddressBookByAddingNewAddress@7494e528]" name="openBrowser" is-config="true" duration-ms="1836" started-at="2021-09-14T21:53:27Z" finished-at="2021-09-14T21:53:29Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openBrowser -->
+        <test-method status="PASS" signature="verifyAddressBookByAddingNewAddress(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAddressBookByAddingNewAddress@7494e528]" name="verifyAddressBookByAddingNewAddress" duration-ms="57830" started-at="2021-09-14T21:53:29Z" finished-at="2021-09-14T21:54:27Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[staging]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyAddressBookByAddingNewAddress -->
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.VerifyAddressBookByAddingNewAddress@7494e528]" name="closeAllTheBrowser" is-config="true" duration-ms="142" started-at="2021-09-14T21:54:27Z" finished-at="2021-09-14T21:54:27Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeAllTheBrowser -->
+      </class> <!-- myAccountPageTests.VerifyAddressBookByAddingNewAddress -->
     </test> <!-- Chrome test -->
-    <test name="Firefox test" duration-ms="513845" started-at="2021-09-13T17:50:51Z" finished-at="2021-09-13T17:59:25Z">
-      <class name="myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook">
-        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook@2a17b7b6]" name="openBrowser" is-config="true" duration-ms="5114" started-at="2021-09-13T23:20:51Z" finished-at="2021-09-13T23:20:56Z">
+    <test name="Firefox test" duration-ms="1185355" started-at="2021-09-14T16:27:18Z" finished-at="2021-09-14T16:47:04Z">
+      <class name="myAccountPageTests.VerifyStateWithHomeTown">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyStateWithHomeTown@184f6be2]" name="openBrowser" is-config="true" duration-ms="4857" started-at="2021-09-14T21:59:53Z" finished-at="2021-09-14T21:59:58Z">
           <params>
             <param index="0">
               <value>
@@ -48,7 +378,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- openBrowser -->
-        <test-method status="PASS" signature="verifyAllStatesWithErrorsInAddressBook(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook@2a17b7b6]" name="verifyAllStatesWithErrorsInAddressBook" duration-ms="507218" started-at="2021-09-13T23:20:56Z" finished-at="2021-09-13T23:29:24Z">
+        <test-method status="PASS" signature="validateMessageForInvalidPreferredContactType(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyStateWithHomeTown@184f6be2]" name="validateMessageForInvalidPreferredContactType" duration-ms="83933" started-at="2021-09-14T21:59:58Z" finished-at="2021-09-14T22:01:22Z">
           <params>
             <param index="0">
               <value>
@@ -58,12 +388,310 @@
           </params>
           <reporter-output>
           </reporter-output>
+        </test-method> <!-- validateMessageForInvalidPreferredContactType -->
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.VerifyStateWithHomeTown@184f6be2]" name="closeAllTheBrowser" is-config="true" duration-ms="2174" started-at="2021-09-14T22:01:22Z" finished-at="2021-09-14T22:01:24Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeAllTheBrowser -->
+      </class> <!-- myAccountPageTests.VerifyStateWithHomeTown -->
+      <class name="myAccountPageTests.VerifyPersonalInformation">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyPersonalInformation@27a5f880]" name="openBrowser" is-config="true" duration-ms="5210" started-at="2021-09-14T22:13:15Z" finished-at="2021-09-14T22:13:20Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[firefox]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openBrowser -->
+        <test-method status="PASS" signature="verifyPersonalInformationByEditing(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyPersonalInformation@27a5f880]" name="verifyPersonalInformationByEditing" duration-ms="60900" started-at="2021-09-14T22:13:20Z" finished-at="2021-09-14T22:14:21Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[staging]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyPersonalInformationByEditing -->
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.VerifyPersonalInformation@27a5f880]" name="closeAllTheBrowser" is-config="true" duration-ms="1874" started-at="2021-09-14T22:14:21Z" finished-at="2021-09-14T22:14:23Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeAllTheBrowser -->
+      </class> <!-- myAccountPageTests.VerifyPersonalInformation -->
+      <class name="myAccountPageTests.VerifyEmailSubscriptions">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyEmailSubscriptions@1d29cf23]" name="openBrowser" is-config="true" duration-ms="4829" started-at="2021-09-14T22:14:23Z" finished-at="2021-09-14T22:14:28Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[firefox]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openBrowser -->
+        <test-method status="PASS" signature="verifyPersonalInformationByEditing(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyEmailSubscriptions@1d29cf23]" name="verifyPersonalInformationByEditing" duration-ms="65543" started-at="2021-09-14T22:14:28Z" finished-at="2021-09-14T22:15:34Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[staging]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyPersonalInformationByEditing -->
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.VerifyEmailSubscriptions@1d29cf23]" name="closeAllTheBrowser" is-config="true" duration-ms="1782" started-at="2021-09-14T22:15:34Z" finished-at="2021-09-14T22:15:35Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeAllTheBrowser -->
+      </class> <!-- myAccountPageTests.VerifyEmailSubscriptions -->
+      <class name="myAccountPageTests.ValidateMessageForInvalidContactType">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.ValidateMessageForInvalidContactType@48503868]" name="openBrowser" is-config="true" duration-ms="5018" started-at="2021-09-14T21:57:18Z" finished-at="2021-09-14T21:57:23Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[firefox]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openBrowser -->
+        <test-method status="PASS" signature="validateMessageForInvalidPreferredContactType(java.lang.String)[pri:0, instance:myAccountPageTests.ValidateMessageForInvalidContactType@48503868]" name="validateMessageForInvalidPreferredContactType" duration-ms="75621" started-at="2021-09-14T21:57:23Z" finished-at="2021-09-14T21:58:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[staging]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateMessageForInvalidPreferredContactType -->
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.ValidateMessageForInvalidContactType@48503868]" name="closeAllTheBrowser" is-config="true" duration-ms="2072" started-at="2021-09-14T21:58:39Z" finished-at="2021-09-14T21:58:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeAllTheBrowser -->
+      </class> <!-- myAccountPageTests.ValidateMessageForInvalidContactType -->
+      <class name="myAccountPageTests.VerifyAddressBookByDeletingAddress">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAddressBookByDeletingAddress@396f6598]" name="openBrowser" is-config="true" duration-ms="4986" started-at="2021-09-14T22:15:35Z" finished-at="2021-09-14T22:15:40Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[firefox]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openBrowser -->
+        <test-method status="PASS" signature="verifyAddressBookByDeletingLatestUpdatedAddress(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAddressBookByDeletingAddress@396f6598]" name="verifyAddressBookByDeletingLatestUpdatedAddress" duration-ms="81576" depends-on-groups="addingAddress" started-at="2021-09-14T22:15:40Z" finished-at="2021-09-14T22:17:02Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[staging]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyAddressBookByDeletingLatestUpdatedAddress -->
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.VerifyAddressBookByDeletingAddress@396f6598]" name="closeAllTheBrowser" is-config="true" duration-ms="1841" started-at="2021-09-14T22:17:02Z" finished-at="2021-09-14T22:17:04Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeAllTheBrowser -->
+      </class> <!-- myAccountPageTests.VerifyAddressBookByDeletingAddress -->
+      <class name="myAccountPageTests.ValidateMessageForValidContactType">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.ValidateMessageForValidContactType@6895a785]" name="openBrowser" is-config="true" duration-ms="4950" started-at="2021-09-14T21:58:41Z" finished-at="2021-09-14T21:58:46Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[firefox]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openBrowser -->
+        <test-method status="PASS" signature="validateMessageForValidPreferredContactType(java.lang.String)[pri:0, instance:myAccountPageTests.ValidateMessageForValidContactType@6895a785]" name="validateMessageForValidPreferredContactType" duration-ms="64734" started-at="2021-09-14T21:58:46Z" finished-at="2021-09-14T21:59:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[staging]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateMessageForValidPreferredContactType -->
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.ValidateMessageForValidContactType@6895a785]" name="closeAllTheBrowser" is-config="true" duration-ms="2016" started-at="2021-09-14T21:59:51Z" finished-at="2021-09-14T21:59:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeAllTheBrowser -->
+      </class> <!-- myAccountPageTests.ValidateMessageForValidContactType -->
+      <class name="myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook@56aac163]" name="openBrowser" is-config="true" duration-ms="5486" started-at="2021-09-14T22:01:24Z" finished-at="2021-09-14T22:01:29Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[firefox]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openBrowser -->
+        <test-method status="FAIL" signature="verifyAllStatesWithErrorsInAddressBook(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook@56aac163]" name="verifyAllStatesWithErrorsInAddressBook" duration-ms="537282" started-at="2021-09-14T22:01:29Z" finished-at="2021-09-14T22:10:27Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[staging]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Fail: There are States with error:[AA, AE, AP, AS, AE, GU, MP, UM]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Fail: There are States with error:[AA, AE, AP, AS, AE, GU, MP, UM]
+	at org.testng.Assert.fail(Assert.java:94)
+	at baseClasses.BaseTestClass.reportFail(BaseTestClass.java:154)
+	at myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook.verifyAllStatesWithErrorsInAddressBook(VerifyAllStatesWithErrorsInAddressBook.java:212)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:100)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:646)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:811)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1129)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:746)
+	at org.testng.TestRunner.run(TestRunner.java:600)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:366)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:361)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:319)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:268)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1264)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1189)
+	at org.testng.TestNG.runSuites(TestNG.java:1104)
+	at org.testng.TestNG.run(TestNG.java:1076)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:152)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:57)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
         </test-method> <!-- verifyAllStatesWithErrorsInAddressBook -->
-        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook@2a17b7b6]" name="closeAllTheBrowser" is-config="true" duration-ms="1507" started-at="2021-09-13T23:29:24Z" finished-at="2021-09-13T23:29:25Z">
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook@56aac163]" name="closeAllTheBrowser" is-config="true" duration-ms="1349" started-at="2021-09-14T22:10:27Z" finished-at="2021-09-14T22:10:28Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeAllTheBrowser -->
       </class> <!-- myAccountPageTests.VerifyAllStatesWithErrorsInAddressBook -->
+      <class name="myAccountPageTests.ValidateDuplicateStatesInDropDown">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.ValidateDuplicateStatesInDropDown@1f7030a6]" name="openBrowser" is-config="true" duration-ms="5078" started-at="2021-09-14T22:10:28Z" finished-at="2021-09-14T22:10:33Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[firefox]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openBrowser -->
+        <test-method status="FAIL" signature="verifyAllStatesWithErrorsInAddressBook(java.lang.String)[pri:0, instance:myAccountPageTests.ValidateDuplicateStatesInDropDown@1f7030a6]" name="verifyAllStatesWithErrorsInAddressBook" duration-ms="75940" started-at="2021-09-14T22:10:33Z" finished-at="2021-09-14T22:11:49Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[staging]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Fail: States which are duplicated : [AE, DC]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Fail: States which are duplicated : [AE, DC]
+	at org.testng.Assert.fail(Assert.java:94)
+	at baseClasses.BaseTestClass.reportFail(BaseTestClass.java:154)
+	at myAccountPageTests.ValidateDuplicateStatesInDropDown.verifyAllStatesWithErrorsInAddressBook(ValidateDuplicateStatesInDropDown.java:110)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:100)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:646)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:811)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1129)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:746)
+	at org.testng.TestRunner.run(TestRunner.java:600)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:366)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:361)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:319)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:268)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1264)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1189)
+	at org.testng.TestNG.runSuites(TestNG.java:1104)
+	at org.testng.TestNG.run(TestNG.java:1076)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:152)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:57)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyAllStatesWithErrorsInAddressBook -->
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.ValidateDuplicateStatesInDropDown@1f7030a6]" name="closeAllTheBrowser" is-config="true" duration-ms="1803" started-at="2021-09-14T22:11:49Z" finished-at="2021-09-14T22:11:51Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeAllTheBrowser -->
+      </class> <!-- myAccountPageTests.ValidateDuplicateStatesInDropDown -->
+      <class name="myAccountPageTests.VerifyAddressBookByAddingNewAddress">
+        <test-method status="PASS" signature="openBrowser(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAddressBookByAddingNewAddress@5a1c0542]" name="openBrowser" is-config="true" duration-ms="4902" started-at="2021-09-14T22:11:51Z" finished-at="2021-09-14T22:11:56Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[firefox]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openBrowser -->
+        <test-method status="PASS" signature="verifyAddressBookByAddingNewAddress(java.lang.String)[pri:0, instance:myAccountPageTests.VerifyAddressBookByAddingNewAddress@5a1c0542]" name="verifyAddressBookByAddingNewAddress" duration-ms="77233" started-at="2021-09-14T22:11:56Z" finished-at="2021-09-14T22:13:13Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[staging]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyAddressBookByAddingNewAddress -->
+        <test-method status="PASS" signature="closeAllTheBrowser()[pri:0, instance:myAccountPageTests.VerifyAddressBookByAddingNewAddress@5a1c0542]" name="closeAllTheBrowser" is-config="true" duration-ms="2342" started-at="2021-09-14T22:13:13Z" finished-at="2021-09-14T22:13:15Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeAllTheBrowser -->
+      </class> <!-- myAccountPageTests.VerifyAddressBookByAddingNewAddress -->
     </test> <!-- Firefox test -->
   </suite> <!-- TheFreshGrocer -->
 </testng-results>

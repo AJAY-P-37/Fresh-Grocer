@@ -1,9 +1,6 @@
 package myAccountPageTests;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterClass;
@@ -18,7 +15,7 @@ import PageClasses.MyAccountPage;
 import baseClasses.BaseTestClass;
 import baseClasses.PageBaseClass;
 
-public class ValidateErronicStatesInDropDown extends BaseTestClass {
+public class ValidateDuplicateStatesInDropDown extends BaseTestClass {
 
 	PageBaseClass basePage;
 	LoginPage logPage;
@@ -105,15 +102,15 @@ public class ValidateErronicStatesInDropDown extends BaseTestClass {
 				.findDuplicatesInStatesDropDown(states);
 
 		if (duplicateStates.size() > 0) {
-			System.out.println("States which are duplicated : "
+			System.out.println("Fail: States which are duplicated : "
 					+ duplicateStates);
 
 			addressPage.updateDuplicateStatesInExcel(duplicateStates);
 
-			reportFail("States which are duplicated : " + duplicateStates);
+			reportFail("Fail: States which are duplicated : " + duplicateStates);
 		} else {
 			
-			System.out.println("No States are Duplicated");
+			System.out.println("Sucess: No States are Duplicated");
 		}
 
 	}

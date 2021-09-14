@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import PageClasses.LandingPage;
 import PageClasses.LoginPage;
 import PageClasses.MyAccountPage;
+import PageClasses.MyProfileForm;
 import baseClasses.BaseTestClass;
 import baseClasses.PageBaseClass;
 
@@ -17,6 +18,7 @@ public class VerifyStateWithHomeTown extends BaseTestClass {
 	LoginPage logPage;
 	LandingPage landPage;
 	MyAccountPage myAccountPage;
+	MyProfileForm profilePage;
 
 	@BeforeClass
 	@Parameters("browser")
@@ -28,6 +30,7 @@ public class VerifyStateWithHomeTown extends BaseTestClass {
 		basePage = new PageBaseClass(driver);
 		landPage = new LandingPage(driver);
 		myAccountPage = new MyAccountPage(driver);
+		profilePage = new MyProfileForm(driver);
 	}
 
 	@Test
@@ -77,15 +80,35 @@ public class VerifyStateWithHomeTown extends BaseTestClass {
 		int count = 0, maxAttempts = 100;
 		do {
 
-			state = myAccountPage.selectState();
+			state = profilePage.selectState();
 
-			homeStore = myAccountPage.selectHomeStore();
+			homeStore = profilePage.selectHomeStore();
 
-			if (homeStore!=null) {
+			if (homeStore != null) {
 				System.out.println("Success: Home Store " + homeStore
 						+ " is selected. for State " + state
 						+ " in attempt no. " + (count + 1));
-				break;
+
+				profilePage.clickUpdateProfileBtnForValidScenario();
+
+				boolean successValidated = myAccountPage
+						.validateProfileUpdatedSuccessMessage();
+
+				if (successValidated) {
+
+					System.out
+							.println("Success Message Validated in attempt no. "
+									+ (count + 1));
+					break;
+				} else {
+					System.out
+							.println("Success Message is NOT Validated in attempt no. "
+									+ (count + 1));
+					refreshPage();
+					
+					myAccountPage.clickEditProfileBtn();
+				}
+
 			} else {
 				System.out.println("Home Store is NOT found for State " + state
 						+ " in attempt no. " + (count + 1) + ". Trying again");

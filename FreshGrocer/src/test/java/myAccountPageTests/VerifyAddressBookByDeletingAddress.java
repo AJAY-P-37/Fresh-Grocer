@@ -87,12 +87,12 @@ public class VerifyAddressBookByDeletingAddress extends BaseTestClass {
 
 			if (successValidated) {
 
-				System.out.println("Sucess Message Validated in attempt no. "
+				System.out.println("Success Message Validated in attempt no. "
 						+ (count + 1));
 				break;
 			} else {
 				System.out
-						.println("Sucess Message is NOT Validated in attempt no. "
+						.println("Success Message is NOT Validated in attempt no. "
 								+ (count + 1));
 			}
 			count++;

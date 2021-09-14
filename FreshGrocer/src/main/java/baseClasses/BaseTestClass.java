@@ -142,9 +142,11 @@ public class BaseTestClass {
 	/****** Do a refresh *****/
 	public void refreshPage() {
 
+		System.out.println("Refreshing the Page");
 		driver.navigate().refresh();
+		System.out.println("Page Refreshed");
 	}
-	
+
 	/****************** Reporting Functions ***********************/
 	public void reportFail(String reportString) {
 

@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import PageClasses.LandingPage;
 import PageClasses.LoginPage;
 import PageClasses.MyAccountPage;
+import PageClasses.MyProfileForm;
 import baseClasses.BaseTestClass;
 import baseClasses.PageBaseClass;
 
@@ -17,6 +18,7 @@ public class ValidateMessageForInvalidContactType extends BaseTestClass {
 	LoginPage logPage;
 	LandingPage landPage;
 	MyAccountPage myAccountPage;
+	MyProfileForm profilePage;
 
 	@BeforeClass
 	@Parameters("browser")
@@ -28,6 +30,7 @@ public class ValidateMessageForInvalidContactType extends BaseTestClass {
 		basePage = new PageBaseClass(driver);
 		landPage = new LandingPage(driver);
 		myAccountPage = new MyAccountPage(driver);
+		profilePage = new MyProfileForm(driver);
 	}
 
 	@Test
@@ -79,13 +82,13 @@ public class ValidateMessageForInvalidContactType extends BaseTestClass {
 		int count = 0, maxAttempts = 3;
 		do {
 			
-			myAccountPage.enterRandomPrimaryPhone();
+			profilePage.enterRandomPrimaryPhone();
 
-			myAccountPage.unCheckMobileIfChecked();
+			profilePage.unCheckMobileIfChecked();
 
-			myAccountPage.selectPreferredContactType("Text");
+			profilePage.selectPreferredContactType("Text");
 
-			myAccountPage.clickUpdateProfileBtnForInvalidScenario();
+			profilePage.clickUpdateProfileBtnForInvalidScenario();
 
 			errorValidated = myAccountPage.validateContactMethodErrorMessage();
 

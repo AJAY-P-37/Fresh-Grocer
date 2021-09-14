@@ -99,7 +99,7 @@ public class VerifyAllStatesWithErrorsInAddressBook extends BaseTestClass {
 
 		myAccountPage.checkIfMyAccountTitleIsPresent();
 
-		String firstName = null, lastName = null, address = null, city = null, state = null, zipcode = null, primaryPhone = null;
+		String state = null;
 		boolean successValidated = false;
 		List<WebElement> statesList = null;
 
@@ -107,7 +107,6 @@ public class VerifyAllStatesWithErrorsInAddressBook extends BaseTestClass {
 		int count = 0;
 		do {
 
-			System.out.println("Checking for State no. : " + (count + 1));
 			if (count == 0) {
 
 				fillAddressBook();
@@ -118,6 +117,8 @@ public class VerifyAllStatesWithErrorsInAddressBook extends BaseTestClass {
 						.extractingTextFromStatesDropDown(statesList);
 
 			}
+
+			System.out.println("Checking for State no. : " + (count + 1));
 
 			state = addressPage.selectStateDropDown(states.get(count));
 
@@ -158,6 +159,7 @@ public class VerifyAllStatesWithErrorsInAddressBook extends BaseTestClass {
 						if (count == states.size()) {
 							break;
 						}
+						System.out.println("Checking for State no. : " + (count+1));
 						state = addressPage.selectStateDropDown(states
 								.get(count));
 					} else {
@@ -168,6 +170,7 @@ public class VerifyAllStatesWithErrorsInAddressBook extends BaseTestClass {
 						if (addressEditBtnIsPresent) {
 
 							fillAddressBook();
+							break;
 
 						} else {
 							System.out
@@ -182,9 +185,13 @@ public class VerifyAllStatesWithErrorsInAddressBook extends BaseTestClass {
 			} while (expectedErrorMessageForState
 					.equals(actualErrorMessageForState));
 
-			System.out.println("states with error:" + statesWithError);
+			System.out.println("List of states with error:"
+					+ statesWithError);
 
 		} while (++count < states.size());
+		
+		System.out.println("****Final List of states with error:"
+				+ statesWithError + " *****");
 
 		myAccountPage.clickLastAddressDeleteBtn();
 
@@ -198,13 +205,13 @@ public class VerifyAllStatesWithErrorsInAddressBook extends BaseTestClass {
 
 		if (statesWithError.size() > 0) {
 
-			System.out.println("States with error:" + statesWithError);
+			System.out.println("Fail: States with error:" + statesWithError);
 
 			addressPage.updateStatesWithErrorInExcel(statesWithError);
 
-			reportFail("states with error:" + statesWithError);
+			reportFail("Fail: There are States with error:" + statesWithError);
 		} else {
-			System.out.println("No states are with error");
+			System.out.println("Sucess: No states are with error");
 		}
 
 	}
